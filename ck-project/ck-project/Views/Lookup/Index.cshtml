@@ -1,0 +1,18 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+    Html.Partial("_AdminMenu");
+}
+
+<h2>Lookup List</h2>
+<table>
+    @foreach (string lookupName in ViewBag.LookupList)
+    {
+        <tr>
+            <td><a href="/Lookup/@lookupName.Replace(" ", "")">@lookupName</a></td>
+        </tr>
+    }
+
+
+
+</table>

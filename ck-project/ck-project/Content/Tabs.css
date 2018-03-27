@@ -1,0 +1,140 @@
+﻿#printBtn {
+    width:190px;
+}
+
+#tabBtn {
+    width: 100px;
+}
+
+/* Summary Tab */
+.item_price {
+    padding-right: 5px;
+    text-align:right;
+}
+
+.section_total {
+    border-top: 1px solid black;
+    padding-right: 5px;
+    font-weight: bold;
+    text-align: right;
+}
+
+.main_item_data {
+    width:600px;
+}
+
+#total {
+    width: 100px;
+    border-top: solid black;
+    padding-right: 5px;
+    font-weight: bolder;
+    text-align: right;
+}
+
+.le_title {
+    width: 250px;
+    height: 35px;
+    text-align: right;
+}
+
+.le_data {
+    width: 400px;
+    padding-left: 10px;
+    height: 35px;
+}
+
+.le_section {
+    height: 60px;
+    font-size: 16px;
+}
+
+.sBtn {
+    width:100px;
+}
+
+.prod_item_header {
+    border: 1px solid gray;
+    font-weight: bolder;
+    text-align: center;
+}
+
+.prod_item_text {
+    border: 1px solid gray;
+    padding-left: 3px;
+}
+
+.prod_item_price {
+    border: 1px solid gray;
+    text-align: right;
+    padding-right: 3px;
+}
+
+.prod_item_number {
+    border: 1px solid gray;
+    text-align: center;
+}
+
+.install_item_price {
+    border: 1px solid gray;
+    text-align: right;
+    padding-right: 3px;
+    height: 19px;
+    width: 100px;
+}
+
+.install_item_number {
+    border: 1px solid gray;
+    text-align: center;
+    height: 19px;
+    width: 100px;
+}
+
+.install_item_text {
+    border: 1px solid gray;
+    padding-left: 3px;
+    height: 19px;
+    width: 100px;
+}
+
+.install_item_price_subcattotal {
+    border: 1px solid gray;
+    text-align: right;
+    padding-right: 3px;
+    font-weight: bold;
+    height: 19px;
+    width: 100px;
+}
+
+.install_item_price_subcatnumber {
+    border: 1px solid gray;
+    text-align: center;
+    font-weight: bold;
+    height: 19px;
+    width: 100px;
+}
+
+.install_item_subcat {
+    padding-left: 3px;
+    font-weight: bold;
+    height: 19px;
+    width: 600px;
+}
+
+.install_item_cat {
+    padding-left: 3px;
+    font-weight: bolder;
+    height: 19px;
+    width: 100px;
+}
+
+.install_top_text {
+    width: 300px;
+    text-align:right;
+    padding-right: 5px;
+    font-weight: bold;
+}
+
+.install_top_data {
+    width: 300px;
+    padding-left: 5px;
+}

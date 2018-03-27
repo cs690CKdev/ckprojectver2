@@ -1,0 +1,100 @@
+﻿
+@{
+    <link href="~/Content/Tabs.css" rel="stylesheet" type="text/css" />
+    if (HttpContext.Current.User.IsInRole("Administrator"))
+    {
+        @Html.Partial("_AdminMenu")
+    }
+    else
+    {
+        @Html.Partial("_MainMenu")
+    }
+}
+
+<style>
+    .column {
+        padding-top: 1%;
+    }
+</style>
+
+<div class="container">
+    <table>
+        @{
+            if (ViewBag.lead != null && ViewBag.lead.project_status.project_status_name.Equals("Closed"))
+            {
+                <tr>
+                    <td colspan"5" style="width:1150px"><h2>Print Portal</h2></td>
+                    <td style="width:50px">
+                        <input type="button" value="Summary" onclick="location.href='@Url.Action("ProjSummary", "Home", new { id = ViewBag.leadNumber })'" class="btn btn-default" id="tabBtn" />
+                    </td>
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <td style="width:947px"><h2>Print Portal</h2></td>
+                    <td style="width:50px">
+                        <input type="button" value="Customer" onclick="location.href='@Url.Action("Edit", "Customers", new { id = @ViewBag.lead.customer_number })'" class="btn btn-default" id="tabBtn" />
+                    </td>
+                    <td style="width:50px">
+                        <input type="button" value="Lead" onclick="location.href='@Url.Action("Edit", "Lead", new { id = ViewBag.leadNumber })'" class="btn btn-default" id="tabBtn" />
+                    </td>
+                    <td style="width:50px">
+                        <input type="button" value="Products" onclick="location.href='@Url.Action("View", "Product", new { id = ViewBag.leadNumber })'" class="btn btn-default" id="tabBtn" />
+                    </td>
+                    <td style="width:100px">
+                        <input type="button" value="Installation" onclick="location.href='@Url.Action("Lis", "Install", new { lid = ViewBag.leadNumber })'" class="btn btn-default" id="tabBtn" />
+                    </td>
+                    <td style="width:50px">
+                        <input type="button" value="Summary" onclick="location.href='@Url.Action("ProjSummary", "Home", new { id = ViewBag.leadNumber })'" class="btn btn-default" id="tabBtn" />
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+    <hr />
+
+    <div class="row top-buffer">
+        <label class="col-md-4 text-center">FOR CUSTOMER</label>
+        <label class="col-md-4 text-center">FOR INSTALLER</label>
+        <label class="col-md-4 text-center">FOR INTERNAL</label>
+        <div class="col-md-4 column" align="center">
+            <input type="button" value="Proposal" onclick="location.href='@Url.Action("Convert", "Print", new { documentName = "Proposal", id = ViewBag.leadNumber, str = "Proposal" })'" class="btn btn-default" id="printBtn" />
+        </div>
+        <div class="col-md-4 column" align="center">
+            <input type="button" value="Installation Details" onclick="location.href='@Url.Action("Convert", "Print", new { documentName = "Installation Details (Installers)", id = ViewBag.leadNumber, str = "InstallationDetailsForInstallers" })'" class="btn btn-default" id="printBtn" />
+        </div>
+        <div class="col-md-4 column" align="center">
+            <input type="button" value="Lead Entry" onclick="location.href='@Url.Action("Convert", "Print", new { documentName = "Lead Entry", id = ViewBag.leadNumber, str = "LeadEntry" })'" class="btn btn-default" id="printBtn" />
+        </div>
+        <div class="col-md-4 column" align="center">
+            <input type="button" value="Products (Exhibit A)" onclick="location.href='@Url.Action("Convert", "Print", new { documentName = "Products (Exhibit A)", id = ViewBag.leadNumber, str = "ProductsExternal" })'" class="btn btn-default" id="printBtn" />
+        </div>
+        <div class="col-md-4 col-md-offset-4 column" align="center">
+            <input type="button" value="Products Ordering" onclick="location.href='@Url.Action("Convert", "Print", new { documentName = "Products Ordering", id = ViewBag.leadNumber, str = "ProductsInternal" })'" class="btn btn-default" id="printBtn" />
+        </div>
+        <div class="col-md-4 column" align="center">
+            <input type="button" value="Scope of Work (Exhibit B)" onclick="location.href='@Url.Action("Convert", "Print", new { documentName = "Scope of Work (Exhibit B)", id = ViewBag.leadNumber, str = "ScopeOfWork" })'" class="btn btn-default" id="printBtn" />
+        </div>
+        <div class="col-md-4 col-md-offset-4 column" align="center">
+            <input type="button" value="Installation Details" onclick="location.href='@Url.Action("Convert", "Print", new { documentName = "Installation Details (Internal)", id = ViewBag.leadNumber, str = "InstallationDetailsInternal" })'" class="btn btn-default" id="printBtn" />
+        </div>
+        <div class="col-md-4 column" align="center">
+            <input type="button" value="Owner Product Agreement" onclick="location.href='@Url.Action("Convert", "Print", new { documentName = "Owner Product Agreement", id = ViewBag.leadNumber, str = "OwnerProductAgreement" })'" class="btn btn-default" id="printBtn" />
+        </div>
+        <div class="col-md-4 col-md-offset-4 column" align="center">
+            <input type="button" value="Sold Job Notice" onclick="location.href='@Url.Action("Convert", "Print", new { documentName = "Sold Job Notice", id = ViewBag.leadNumber, str = "SoldJobNotice" })'" class="btn btn-default" id="printBtn" />
+        </div>
+    </div>
+</div>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".navbar-nav li").removeClass("active");//this will remove the active class from
+            //previously active menu item
+            $('#lead').addClass('active');
+        });
+    </script>
+}

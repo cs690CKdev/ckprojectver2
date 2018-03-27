@@ -1,0 +1,77 @@
+﻿@model ck_project.Models.ProjectSummary
+
+<hr style="border:1px solid; border-color: darkgray"/>
+<table style="border: 1px solid black">
+    @{
+        if (Model.ProductMapList1 != null || Model.ProductMapList2 != null)
+        {
+            <tr style="background-color: rgb(51,51,51); color: white; border-right: 1px solid gray">
+                <td style="width:350px" class="prod_item_header">Category</td>
+                <td style="width:100px" class="prod_item_header">Mfg.</td>
+                <td style="width:100px" class="prod_item_header">Model</td>
+                <td style="width:100px" class="prod_item_header">Color</td>
+                <td style="width:230px" class="prod_item_header">Description</td>
+                <td style="width:150px" class="prod_item_header">Location</td>
+                <td style="width:100px" class="prod_item_header">Source</td>
+                <td style="width:50px" class="prod_item_header">Qty</td>
+                <td style="width:100px" class="prod_item_header">Unit Price</td>
+                <td style="width:120px" class="prod_item_header">Total</td>
+            </tr>
+            foreach (var key in Model.ProductMapList1.Keys)
+            {
+                var prodList = Model.ProductMapList1[key];
+                if (prodList.Count != 0)
+                {
+                    //category
+                    <tr style="background-color: rgb(128,128,128); color: white; border-right: 1px solid gray">
+                        <td colspan="5" class="install_item_cat">@key</td>
+                        <td colspan="5" style="padding-left: 100px;"></td>
+                    </tr>
+                    foreach (var prod in prodList)
+                    {
+                        <tr>
+                            <td></td>
+                            <td class="prod_item_text">@prod.manufacture</td>
+                            <td class="prod_item_text">@prod.model</td>
+                            <td class="prod_item_text">@prod.color</td>
+                            <td class="prod_item_text">@prod.Description</td>
+                            <td class="prod_item_text">@prod.location</td>
+                            <td class="prod_item_text">@prod.product_source</td>
+                            <td class="prod_item_number">@prod.quantity</td>
+                            <td class="prod_item_price">@String.Format("{0:C}", prod.price)</td>
+                            <td class="prod_item_price">@String.Format("{0:C}", prod.quantity * prod.price)</td>
+                        </tr>
+                    }
+                }
+            }
+
+            foreach (var key2 in Model.ProductMapList2.Keys)
+            {
+                var prodList2 = Model.ProductMapList2[key2];
+                if (prodList2.Count != 0)
+                {
+                    //category
+                    <tr style="background-color: rgb(128,128,128); color: white; border-right: 1px solid gray">
+                        <td colspan="5" class="install_item_cat">@key2</td>
+                        <td colspan="5" style="padding-left: 100px;"></td>
+                    </tr>
+                    foreach (var prod2 in prodList2)
+                    {
+                        <tr>
+                            <td></td>
+                            <td class="prod_item_text">@prod2.manufacture</td>
+                            <td class="prod_item_text">@prod2.model</td>
+                            <td class="prod_item_text">@prod2.color</td>
+                            <td class="prod_item_text">@prod2.Description</td>
+                            <td class="prod_item_text">@prod2.location</td>
+                            <td class="prod_item_text">@prod2.product_source</td>
+                            <td class="prod_item_number">@prod2.quantity</td>
+                            <td class="prod_item_price">@String.Format("{0:C}", prod2.price)</td>
+                            <td class="prod_item_price">@String.Format("{0:C}", prod2.quantity * prod2.price)</td>
+                        </tr>
+                    }
+                }
+            }
+        }
+    }
+</table>

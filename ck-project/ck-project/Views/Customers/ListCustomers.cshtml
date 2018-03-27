@@ -1,0 +1,156 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@model IPagedList<ck_project.customer>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @if (ViewBag.m != null)
+    {
+        <script type="text/javascript">
+ $(document).ready(function () {
+toastr.success('@ViewBag.m');
+ });
+            
+        </script>
+    }
+}
+
+@{
+    if (HttpContext.Current.User.IsInRole("Administrator"))
+    {
+        @Html.Partial("_AdminMenu")
+    }
+    else
+    {
+        @Html.Partial("_MainMenu")
+    }
+}
+<div class="container">
+
+
+    <table>
+        <tr>
+            <td style="width:1150px"><h3>Customers</h3></td>
+            <td style="width:50px">
+            </td>
+        </tr>
+    </table>
+    <div style="padding-bottom:10px"></div>
+
+    <h4> To create a new lead, you need to select customer from the list or create a new one</h4>
+ 
+
+    @using (Html.BeginForm("ListCustomers", "Customers", FormMethod.Get))
+    {
+
+        @*
+            <b>Search by:</b>@Html.RadioButton("searchBy", "customer_firstname", true)<text> customer_firstname</text>
+            @Html.RadioButton("searchBy", "customer_lastname")<text>customer_lastname</text><br />
+
+        *@
+
+
+        @Html.TextBox("Search", ViewData.TemplateInfo.FormattedModelValue,
+    new { placeholder = "Type customer last name" });<input type="submit" value="Search" />   @* @Html.ActionLink(" Or Add a New Customer", "AddCustomer")*@
+    }
+
+    <p>
+
+    </p>
+    <table class="table table-striped">
+        <thead class="mdb-color darken-3">
+            <tr>
+                @*<th>
+                        First Name
+                    </th>
+                    <th>
+                        Middle Name
+                    </th>*@
+                <th>
+                    Customer Name
+                </th>
+                <th>
+                    Phone Number1
+                </th>
+                <th>
+                    Phone Number2
+                </th>
+                <th> Email Address        </th>
+                <th>
+                    Billing Address
+                </th>
+                <th>
+                    City
+                </th>
+                <th>
+                    State
+                </th>
+                <th>
+                    Zipcode
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        @if (Model.Count() == 0)
+        {
+            <tr>
+                <td colspan="6"> Sorry, There are no cutomers with the entered last name
+                <td>
+            </tr>
+        }
+        else
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    @*<td>
+                            @item.customer_firstname
+                        </td>
+                        <td>
+                            @item.customer_middlename
+                        </td>*@
+                    <td>
+                        @item.customer_firstname
+                        @item.customer_middlename
+                        @item.customer_lastname
+                    </td>
+                    <td>
+                        @item.phone_number
+                    </td>
+                    <td>
+                        @item.second_phone_number
+                    </td>
+                    <td>
+                        @item.email
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.address.address1)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.address.city)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.address.state)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.address.zipcode)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Create Lead", "CreateLead", new { id = item.customer_number }) |
+                        @Html.ActionLink("Edit", "Edit", new { id = item.customer_number }) |
+                        @*@Html.ActionLink("Details", "Details", new { id = item.customer_number }) |*@
+                        @Html.ActionLink("Delete", "Delete", new { id = item.customer_number },
+                    new { onclick = "return confirm('Are you sure you wish to delete the customer?');" })
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+        @Html.PagedListPager(Model, page => Url.Action("ListCustomers",
+    new { page, search = Request.QueryString["Search"] }), new PagedListRenderOptions() { DisplayPageCountAndCurrentLocation = true })
+
+
+
+</div>
+

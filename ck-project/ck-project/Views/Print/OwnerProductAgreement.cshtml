@@ -1,0 +1,359 @@
+﻿@model ck_project.Models.ProjectSummary
+
+@{
+    ViewBag.Title = "OwnerProductAgreement";
+    Layout = null;
+
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    @*<meta name="viewport" content="initial-scale=1.0">*@
+    <title>Sale Contract Management System</title>
+    <link href="http://leadmanagealpha.apphb.com/Content/bootstrap.sandstone.css" rel="stylesheet" type="text/css" />
+    <link href="http://leadmanagealpha.apphb.com/Content/Print.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="pagebreak">
+        <div class="pic2" align="center"><img src="http://leadmanagealpha.apphb.com/Content/Images/proposal_pic2.png" /></div>
+        <div align="center" style="padding-bottom: 10%"><h2><b>NEW PRODUCT(S) BY OWNER AGREEMENT</b></h2></div>
+        <table style="margin-left:5px; font-weight:bold">
+            <tr>
+                <td style="width:40%" align ="right">Name:</td>
+                @{
+                    if (Model.Customer != null)
+                    {
+                        <td style="padding-left:10px">@Model.Customer.customer_firstname @Model.Customer.customer_lastname</td>
+                    }
+                    else
+                    {
+                        <td style="padding-left:10px"></td>
+                    }
+                }
+            </tr>
+            <tr>
+                <td style="width:40%" align="right">Address:</td>
+                @{
+                    if (Model.JobsiteAddress != null)
+                    {
+                        <td style="padding-left:10px">@Model.JobsiteAddress.address1</td>
+                    }
+                    else
+                    {
+                        <td style="padding-left:10px"></td>
+                    }
+                }
+            </tr>
+            <tr>
+                <td style="width:40%" align="right">City, State, Zip:</td>
+                @{
+                    if (Model.JobsiteAddress != null)
+                    {
+                        <td style="padding-left:10px">@Model.JobsiteAddress.city, @Model.JobsiteAddress.state @Model.JobsiteAddress.zipcode</td>
+                    }
+                    else
+                    {
+                        <td style="padding-left:10px"></td>
+                    }
+                }
+            </tr>
+        </table>
+        <div style="padding-top:50px">
+            <p class="wrapper">
+                There are several advantages of purchasing appliance(s) and product(s) from Creative Kitchens Incorporated
+                aside from the responsibilities listed below. All appliance(s) and product(s) purchased from Creative Kitchens
+                Incorporated additionally provide you with a warranty for the product(s), installation, service,
+                planning/coordinating and guarantees the correct product(s) will be provided for your project needs.
+            </p>
+        </div>
+        <div style="padding-top:30px">
+            <p class="wrapper">
+                We acknowledge that you have not purchased appliance(s) or selected particular product(s) for your project
+                from Creative Kitchens Incorporated. The following responsibilities outlined below will be the assumed
+                responsibilities of the Homeowner in regards to any appliance(s) and product(s) not purchased from Creative
+                Kitchens Incorporated:
+            </p>
+        </div>
+        <div style="padding-top:15px; padding-left:5px">
+            <ul class="a">
+                <li><span>Confirming that the appliance(s) or product(s) size will fit into the space as designed</span></li>
+                <li>Coordinating appliance(s) or selected product(s) color/finish</li>
+                <li>Providing manufacturers custom panel sizes for any required appliance(s) or product(s) prior to ordering</li>
+                <li>Providing appliance(s) or selected product(s) cut-outs in cabinets prior to cabinet ordering</li>
+                <li>Providing appliance(s) or selected product(s) electrical, gas and water specifications prior to installation</li>
+                <li>Providing all necessary parts or accessories for installation</li>
+                <li>Coordinating delivery of appliance(s) or selected product(s) with cabinetry and other trade installation</li>
+                <li>Receiving, opening, and removing packaging and checking for concealed/hidden damage</li>
+                <li>Coordinating exchanges or replacements of damaged or incorrect product(s)</li>
+                <li>Accept responsibility for any damage caused to appliance(s) or selected product(s) prior to installation</li>
+                <li>Resolving delays in job completion due to appliance(s) or selected product(s) availability</li>
+                <li>Obtaining warranty and/or service for appliance(s) or product(s)</li>
+            </ul>
+        </div>
+        @{
+            if (Model.Customer != null)
+            {
+                <div style="padding-top:30px">
+                    <p class="wrapper">
+                        <b>@Model.Customer.customer_firstname @Model.Customer.customer_lastname</b> agrees to have the product(s) available on installation start date. 
+                        Any delay due to availablity when installation is required may incure an additional charge for time, parts, materials and/or service call(s) required to
+                        complete the installation.
+                    </p>
+                </div>
+            }
+            else
+            {
+                <div style="padding-top:30px">
+                    <p class="wrapper">
+                        &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp&nbsp agrees to have the product(s) available on installation start date.
+                        Any delay due to availablity when installation is required may incure an additional charge for time, parts, materials and/or service call(s) required to
+                        complete the installation.
+                    </p>
+                </div>
+            }
+        }
+    </div>
+    <div>
+        <div align="center" style="padding-top:7%; padding-bottom: 3%"><h2><b>NEW PRODUCT(S) BY HANDLING CHARGES</b></h2></div>
+        <table style="margin-left:8%; width:80%">
+            <tr>
+                <td class="apa_hcharge_cat">Range</td>
+                <td class="apa_hcharge_price">90.00</td>
+                <td class="apa_hcharge_cat">Ice Maker</td>
+                <td class="apa_hcharge_price">90.00</td>
+                <td class="apa_hcharge_cat">Water Filtration</td>
+                <td class="apa_hcharge_price">90.00</td>
+            </tr>
+            <tr>
+                <td class="apa_hcharge_cat">Refrigerator</td>
+                <td class="apa_hcharge_price">90.00</td>
+                <td class="apa_hcharge_cat">Trash Compactor</td>
+                <td class="apa_hcharge_price">90.00</td>
+                <td class="apa_hcharge_cat">Sink</td>
+                <td class="apa_hcharge_price">90.00</td>
+            </tr>
+            <tr>
+                <td class="apa_hcharge_cat">Dishwasher</td>
+                <td class="apa_hcharge_price">90.00</td>
+                <td class="apa_hcharge_cat">Disposal</td>
+                <td class="apa_hcharge_price">90.00</td>
+                <td class="apa_hcharge_cat">Faucet</td>
+                <td class="apa_hcharge_price">90.00</td>
+            </tr>
+            <tr>
+                <td class="apa_hcharge_cat">Microwave</td>
+                <td class="apa_hcharge_price">90.00</td>
+                <td class="apa_hcharge_cat">Wine Refrigerator</td>
+                <td class="apa_hcharge_price">90.00</td>
+                <td class="apa_hcharge_cat">Toilet</td>
+                <td class="apa_hcharge_price">90.00</td>
+            </tr>
+            <tr>
+                <td class="apa_hcharge_cat">Hood</td>
+                <td class="apa_hcharge_price">90.00</td>
+                <td class="apa_hcharge_cat">Freezer</td>
+                <td class="apa_hcharge_price">90.00</td>
+                <td class="apa_hcharge_cat">Bath Accessories</td>
+                <td class="apa_hcharge_price">90.00</td>
+            </tr>
+            <tr>
+                <td class="apa_hcharge_cat">Oven</td>
+                <td class="apa_hcharge_price">90.00</td>
+                <td class="apa_hcharge_cat">Cooktop</td>
+                <td class="apa_hcharge_price">90.00</td>
+                <td class="apa_hcharge_cat">Countertop</td>
+                <td class="apa_hcharge_price">90.00</td>
+            </tr>
+            <tr>
+                <td class="apa_hcharge_cat">Warming Drawer</td>
+                <td class="apa_hcharge_price">90.00</td>
+                <td class="apa_hcharge_cat">Hot Water Tanks</td>
+                <td class="apa_hcharge_price">90.00</td>
+                <td class="apa_hcharge_cat">Lighting</td>
+                <td class="apa_hcharge_price">90.00</td>
+            </tr>
+        </table>
+        <div style="padding-bottom:20px"></div>
+        <div align="center" style="padding-bottom: 2%"><h2><b>NEW PRODUCT(S) BY OWNER LIST</b></h2></div>
+        <table id="apa_list">
+            <tr>
+                <th class="apa_list_th apa_list_cols">Manufacture</th>
+                <th class="apa_list_th apa_list_cols">Model Number</th>
+                <th class="apa_list_th apa_list_descCol">Description</th>
+            </tr>
+            <tr>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_descCol"></td>
+            </tr>
+            <tr>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_descCol"></td>
+            </tr>
+            <tr>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_descCol"></td>
+            </tr>
+            <tr>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_descCol"></td>
+            </tr>
+            <tr>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_descCol"></td>
+            </tr>
+            <tr>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_descCol"></td>
+            </tr>
+            <tr>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_descCol"></td>
+            </tr>
+            <tr>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_descCol"></td>
+            </tr>
+            <tr>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_descCol"></td>
+            </tr>
+            <tr>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_descCol"></td>
+            </tr>
+            <tr>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_descCol"></td>
+            </tr>
+            <tr>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_descCol"></td>
+            </tr>
+            <tr>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_descCol"></td>
+            </tr>
+            <tr>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_descCol"></td>
+            </tr>
+            <tr>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_descCol"></td>
+            </tr>
+            <tr>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_descCol"></td>
+            </tr>
+            <tr>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_descCol"></td>
+            </tr>
+            <tr>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_descCol"></td>
+            </tr>
+            <tr>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_descCol"></td>
+            </tr>
+            <tr>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_descCol"></td>
+            </tr>
+            <tr>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_descCol"></td>
+            </tr>
+            <tr>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_descCol"></td>
+            </tr>
+            <tr>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_descCol"></td>
+            </tr>
+            <tr>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_descCol"></td>
+            </tr>
+            <tr>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_descCol"></td>
+            </tr>
+            <tr>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_descCol"></td>
+            </tr>
+            <tr>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_descCol"></td>
+            </tr>
+            <tr>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_descCol"></td>
+            </tr>
+            <tr>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_descCol"></td>
+            </tr>
+            <tr>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_descCol"></td>
+            </tr>
+            <tr>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_cols"></td>
+                <td class="apa_list_tr apa_list_descCol"></td>
+            </tr>
+        </table>
+        <div style="padding-bottom:100px"></div>
+        <table cellpadding=0 style="width:90%; margin-left:5%">
+            <tr>
+                <td class ="signature" style="width:40%">Purchaser</td>
+                <td style="width:10%"></td>
+                <td class ="signature" style="width:40%">Creative Kitchens Incorporated</td>
+            </tr>
+            <tr style="height:80px"><td></td></tr>
+            <tr>
+                <td class ="signature" style="width:40%">Purchaser</td>
+                <td style="width:10%"></td>
+                <td class ="signature" style="width:40%">Date</td>
+            </tr>
+        </table>
+    </div>
+</body>
+</html>
+

@@ -1,0 +1,370 @@
+﻿@model ck_project.Models.ProjectSummary
+
+@{ 
+    ViewBag.Title = "Proposal";
+    Layout = null;
+
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <title>Sale Contract Management System</title>
+    <link href="http://leadmanagealpha.apphb.com/Content/bootstrap.sandstone.css" rel="stylesheet" type="text/css" />
+    <link href="http://leadmanagealpha.apphb.com/Content/Print.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="pagebreak">
+        <div class="row">
+            <div class="column" style="padding-top:30px; padding-left:40px; width: 40%"><img src="http://leadmanagealpha.apphb.com/Content/Images/proposal_pic1.png" /></div>
+            <div class="column" style="width:60%; vertical-align:middle">
+                <div style="padding-top:220px; font-size:38px; padding-left:50px">CREATIVE KITCHENS</div>
+                <div style="font-size:44px; padding-left:50px">PROPOSAL</div>
+                <div style="padding-top:50px; font-size:30px; padding-left:50px">with</div>
+                @{
+                    if (Model.Customer != null)
+                    {
+                        <div style="padding-top:150px; font-size:32px; padding-left:50px">@Model.Customer.customer_firstname @Model.Customer.customer_lastname</div>
+                    }
+                    else
+                    {
+                        <div style="padding-top:150px; font-size:32px; padding-left:50px"></div>
+                    }
+
+                    if (Model.JobsiteAddress != null)
+                    {
+                        <div style="font-size:32px; padding-left:50px">@Model.JobsiteAddress.address1</div>
+                        <div style="font-size:32px; padding-left:50px">@Model.JobsiteAddress.city, @Model.JobsiteAddress.state @Model.JobsiteAddress.zipcode</div>
+                    }
+                    else
+                    {
+                        <div style="font-size:32px; padding-left:50px">&nbsp</div>
+                        <div style="font-size:32px; padding-left:50px">&nbsp</div>
+                    }
+                }
+                
+                <div style="padding-top:100px; font-size:30px; padding-left:50px">@string.Format("{0:MMMM dd, yyyy}", DateTime.Now)</div>
+                <div style="padding-top:150px; font-size:16px">
+                    <table>
+                        <tr>
+                            <td style="padding-left:40px"><img src="http://leadmanagealpha.apphb.com/Content/Images/proposal_pic2.png"></td>
+                        </tr>
+                        @{
+                            if (Model.Branch != null)
+                            {
+                                foreach (var b in Model.Branch)
+                                {
+                                    <tr>
+                                        <td style="text-align:center; width:450px">@b.address.address1, @b.address.city, @b.address.state @b.address.zipcode</td>
+                                    </tr>
+                                }
+                            }
+                        }
+                    </table>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    <div class="pagebreak">
+        <div align="center" class="pic2"><img src="http://leadmanagealpha.apphb.com/Content/Images/proposal_pic2.png"></div>
+        <div align="center" style="padding-bottom: 50px"><h2><b>AGREEMENT</b></h2></div>
+        <div class="row">
+            <div class="column" style="width:40%; font-size:18px" align="right">BETWEEN PURCHASER: </div>
+            <div class="column">
+                @{
+                    if (Model.Customer != null)
+                    {
+                        <div style="padding-left:5px; font-size:18px">@Model.Customer.customer_firstname @Model.Customer.customer_lastname</div>
+                    }
+                    else
+                    {
+                        <div style="padding-left:5px; font-size:18px">&nbsp</div>
+                    }
+
+                    if (Model.JobsiteAddress != null)
+                    {
+                        <div style="padding-left:5px; font-size:18px">@Model.JobsiteAddress.address1</div>
+                        <div style="padding-left:5px; font-size:18px">@Model.JobsiteAddress.city, @Model.JobsiteAddress.state @Model.JobsiteAddress.zipcode</div>
+                    }
+                    else
+                    {
+                        <div style="padding-left:5px; font-size:18px">&nbsp</div>
+                        <div style="padding-left:5px; font-size:18px">&nbsp</div>
+                    }
+                }
+            </div>
+        </div>
+        <div class="row" style="padding-top:60px">
+            <div class="column" style="width:40%; font-size:18px" align="right">AND SELLER: </div>
+            <div class="column">
+                <div style="padding-left:5px; font-size:18px">Creative Kitchens Incorporated</div>
+                @{
+                    if (Model.Lead != null)
+                    {
+                        <div style="padding-left:5px; font-size:18px">@Model.Lead.branch.address.address1</div>
+                        <div style="padding-left:5px; font-size:18px">@Model.Lead.branch.address.city, @Model.Lead.branch.address.state @Model.Lead.branch.address.zipcode</div>
+                        <div style="padding-left:5px; font-size:18px">Phone: @Model.Lead.branch.phone_number</div>
+                        <div style="padding-left:5px; font-size:18px">Fax: @Model.Lead.branch.fax_number</div>
+                    }
+                    else
+                    {
+                        <div style="padding-left:5px; font-size:18px">&nbsp</div>
+                        <div style="padding-left:5px; font-size:18px">&nbsp</div>
+                        <div style="padding-left:5px; font-size:18px">&nbsp</div>
+                        <div style="padding-left:5px; font-size:18px">&nbsp</div>
+                    }
+                }
+            </div>
+        </div>
+        <div style="padding-top:50px">
+            <p class="wrapper">
+                Creative Kitchens agrees to furnish the materials and services set forth in the Products & Materials List (Exhibit A) and the Scope of
+                Work (Exhibit B) annexed hereto.
+            </p>
+        </div>
+        <div style="padding-top:20px; padding-left:5%; font-size:18px">The Purchaser agrees to make payment therefore in accordance with the following:</div>
+        <div class="row">
+            <div class="column" style="width:50%; font-size:18px; padding-left:10%" align="left">Total Purchase Price</div>
+            @{
+                if (Model.TotalCost != null)
+                {
+                    <div class="column" style="width:30%; font-size:18px" align="right"><u>@Model.TotalAmt</u></div>
+                }
+            }
+        </div>
+        <div style="padding-left:5%; font-size:18px">Schedule of Payment:</div>
+        <div class="row">
+            <div class="column" style="width:50%; font-size:18px; padding-left:10%" align="left">Upon signing of this Proposal  50%</div>
+            @{
+                if (Model.TotalCost != null)
+                {
+                    <div class="column" style="width:30%; font-size:18px" align="right"><u>@Model.AmtDueAtSignProposal</u></div>
+                }
+            }
+        </div>
+        <div class="row">
+            <div class="column" style="width:50%; font-size:18px; padding-left:10%" align="left">Upon Start Date of Work  40%</div>
+            @{
+                if (Model.TotalCost != null)
+                {
+                    <div class="column" style="width:30%; font-size:18px" align="right"><u>@Model.AmtDueUponStartWork</u></div>
+                }
+            }
+        </div>
+        <div class="row">
+            <div class="column" style="width:50%; font-size:18px; padding-left:10%" align="left">Upon Substantial Completion  10%</div>
+            @{
+                if (Model.TotalCost != null)
+                {
+                    <div class="column" style="width:30%; font-size:18px" align="right"><u>@Model.AmtDueUponCompletion</u></div>
+                }
+            }
+        </div>
+        <div style="padding-top:320px; font-size:11px" align="center">Page 1 of 3</div>
+    </div>
+    <div class="pagebreak">
+        <div style="padding-top:7%">
+            <p class="wrapper">
+                1. Purchaser may not change the drawings, plans, specifications, or items specified unless agreed to by Creative Kitchens in writing.
+                Creative Kitchens is not required to accept any such change to this Agreement. Should Purchaser request any changes or extra work,
+                Creative Kitchens shall determine the cost thereof and such work will only be included as part of this Agreement pursuant to a
+                written change to this Agreement signed by both parties. The Purchaser shall pay in advance to Creative Kitchens, the total cost of
+                each change order, which amounts are non-refundable to Purchaser.
+            </p>
+        </div>
+        <div style="padding-top:30px">
+            <p class="wrapper">
+                2. Upon completion of the work specified and payment in full by the Purchaser, Creative Kitchens shall deliver and assign to
+                Purchaser, without recourse, all manufacturers, installers, and suppliers warranties, if any, covering such material. AS TO SUCH
+                MATERIALS, CREATIVE KITCHENS NEITHER MAKES OR ADOPTS ANY SUCH MANUFACTURERS, INSTALLERS, OR SUPPLIERS WARRANTY AND SPECIFICALLY
+                EXCLUDES AND DISCLAIMS ANY EXPRESS OR IMPLIED WARRANTIES OF ANY NATURE RELATING THERETO, INCLUDING ANY IMPLIED WARRANTY OF
+                MERCHANTABILITY OR FITNESS FOR A PARTICULAR PURPOSE.
+            </p>
+        </div>
+        <div style="padding-top:30px">
+            <p class="wrapper">
+                3. The Purchaser agrees to accept delivery of the product or products when ready. The risk of loss, as to damage or destruction, shall
+                be upon the Purchaser upon the delivery and receipt of the product(s).
+            </p>
+        </div>
+        <div style="padding-top:30px">
+            <p class="wrapper">
+                4. The Purchaser understands that the products described are specially designed and custom built and that Creative Kitchens takes
+                immediate steps upon execution of this Agreement to design, order and construct those items set forth herein. Accordingly, this
+                Agreement is not subject to cancellation by the Purchaser for any reason. In the event that Purchaser attempts to cancel this
+                Agreement or otherwise defaults in the performance of Purchaser’s obligations hereunder, Creative Kitchens may, at Creative
+                Kitchens’ option, cancel this Agreement and retain as liquidated damages, and not as a penalty, all amounts paid by Purchaser.
+                Alternatively, Creative Kitchens shall have the right to pursue any legal and equitable remedies available to it, including specific
+                performance. Notwithstanding anything to the contrary set forth above, in the event of Purchaser’s default, Creative Kitchens shall
+                have the right to stop performance hereunder until such time as Purchaser cures the default.
+            </p>
+        </div>
+        <div style="padding-top:30px">
+            <p class="wrapper">
+                5. No installation, plumbing, electrical, flooring, decorating or other construction work is to be provided unless specifically set forth
+                herein. In the event Creative Kitchens is to perform the installation, it is understood that the price agreed upon herein does not
+                include the possible expense entailed in coping with hidden or unknown contingencies found at the job site. In the event such
+                contingencies arise and Creative Kitchens is required to furnish labor or materials or otherwise perform work not provided for or
+                contemplated by Creative Kitchens, the actual costs of materials and labor plus 35% thereof will be paid for by the Purchaser.
+                Contingencies include, but are not limited to, the following: inability to reuse existing water, vent, and waste pipes; air shafts, ducts,
+                grilles, louvers and registers; the relocation of concealed pipes, risers, wiring or conduits, the presence of which cannot be
+                determined until the work has started; or imperfections, rotting or decay in the structure or parts thereof necessitating replacement.
+            </p>
+        </div>
+        <div style="padding-top:30px">
+            <p class="wrapper">
+                6. Title to the item sold pursuant to this Agreement shall not pass to the Purchaser until the full price as set forth in this Agreement is
+                paid to Creative Kitchens.
+            </p>
+        </div>
+        <div style="padding-top:30px">
+            <p class="wrapper">
+                7. Delays in payment shall be subject to interest charges of 18% per annum, and in no event higher than the interest rate provided
+                by law. If Creative Kitchens is required to engage the services of a collection agency or an attorney, the Purchaser agrees to
+                reimburse Creative Kitchens for any amounts expended in order to collect the unpaid balance, including reasonable attorneys’ fees.
+            </p>
+        </div>
+        <div style="padding-top:30px">
+            <p class="wrapper">
+                8. Creative Kitchens retains the right, upon breach of this Agreement by the Purchaser, to sell those items in Creative Kitchens’
+                possession. In effecting any resale on breach of this Agreement by the Purchaser, Creative Kitchens shall be deemed to act in the
+                capacity of agent for the Purchaser. The purchaser shall be liable for any net deficiency on resale, plus the costs and expenses
+                incurred in reselling the items.
+            </p>
+        </div>
+        <div style="padding-top:30px">
+            <p class="wrapper">
+                9. Creative Kitchens agrees that it will perform this contract in conformity with customary industry practices. The Purchaser agrees
+                that any claim for adjustment shall not be reason or cause for failure to make payment of the purchase price in full. This Agreement
+                shall be governed by the laws of the State of West Virginia. Any unresolved controversy or claim arising from or under this contract
+                shall be settled by binding arbitration in accordance with the rules of the American Arbitration Association in the United States and
+                judgment upon the award rendered may be entered in any court of competent jurisdiction.
+            </p>
+        </div>
+        <div style="padding-top:110px; font-size:11px" align="center">Page 2 of 3</div>
+    </div>
+    <div>
+        <div style="padding-top:7%">
+            <p class="wrapper">
+                10. Creative Kitchens anticipates that the delivery date or the date upon which the installation, if appropriate, is to begin may change.
+                The Purchaser understands that these dates, when given, shall be deemed approximate, and performance is subject to delays caused by, but not limited to,
+                strikes, fires, availability of the product at the time of delivery, acts of God, completion of prior job, and/or other reasons not under the reasonable
+                control of Creative Kitchens. In the event delays do occur, Creative Kitchens shall give timely notice explaining the reasons for the delay along with
+                the new anticipated delivery, installation or completion dates to the Purchaser.
+            </p>
+        </div>
+        <div style="padding-top:30px">
+            <p class="wrapper">
+                11. This Agreement shall be binding upon and inure to the benefit of the parties, their heirs, personal representatives, successors
+                and assigns, providing however that Purchaser shall not have the right to assign the benefit of this Agreement without the express
+                consent of Creative Kitchens. Any notice required or permitted to be given under this Agreement shall be in writing and be deemed
+                given: (a) if by hand delivery, upon receipt thereof, or (b) if by mail, three (3) days after deposit in the U.S. mail, sent by registered or
+                certified mail, return receipt requested, postage prepaid, delivered or addressed to the addresses set forth herein, or to such other
+                address as provided in advance by written notice to the other party.
+            </p>
+        </div>
+        <div style="padding-top:30px">
+            <p class="wrapper">
+                12. This Agreement sets forth the entire agreement between the parties and any and all prior agreements, warranties or
+                representations made by either party are superseded by this Agreement. If any provision of this Agreement is declared invalid or
+                unenforceable by any tribunal, the remaining provisions of the Agreement shall not be affected thereby. All changes in this
+                Agreement shall be made by a separate document and executed by both parties. No agent of Creative Kitchens, unless authorized in
+                writing by Creative Kitchens, has any authority to waive, alter, or enlarge this contract, or to make any new or substituted or different
+                contracts, representations, or warranties.
+            </p>
+        </div>
+        <div style="padding-top:30px; padding-bottom:100px">
+            <p class="wrapper">
+                13. West Virginia State Law, as set forth in Chapter 21, Article 11A of the West Virginia Code, contains important requirements you
+                must follow before you may file a lawsuit for defective construction against the contractor who made residential improvements to
+                your property. At least ninety days before you file your lawsuit, you must deliver to the contractor a written notice of an construction
+                conditions you allege are defective and provide your contractor and any subcontractors, suppliers or design professionals the
+                opportunity to make an offer to repair or pay for the defects.
+            </p>
+        </div>
+        <table cellpadding=0 style="margin-left:5%; width:90%">
+            <tr>
+                <td style="width:3%">Accepted:</td>
+                <td style="width:30%"></td>
+                <td style="width:4%"></td>
+                <td style="width:3%">Accepted:</td>
+            </tr>
+            <tr>
+                <td style="width:4%"></td>
+                <td class ="signature" style="width:30%">Creative Kitchens Incorporated</td>
+                <td style="width:4%"></td>
+                <td style="width:3%"></td>
+                <td class ="signature" style="width:30%">Purchaser</td>
+            </tr>
+            <tr style="height:80px"><td></td></tr>
+            <tr>
+                <td style="width:3%"></td>
+                <td style="width:30%"></td>
+                <td style="width:4%"></td>
+                <td style="width:3%">Accepted:</td>
+            </tr>
+            <tr>
+                <td style="width:4%"></td>
+                <td class="signature" style="width:30%"></td>
+                <td style="width:4%"></td>
+                <td style="width:3%"></td>
+                <td class="signature" style="width:30%">Purchaser</td>
+            </tr>
+            <tr style="height:100px"><td></td></tr>
+            <tr>
+                <td style="width:4%"></td>
+                <td class="signature" style="width:30%">Date</td>
+                <td style="width:4%"></td>
+                <td style="width:3%"></td>
+                <td class="signature" style="width:30%">Date</td>
+            </tr>
+        </table>
+        <div style="padding-top:90px; padding-left:600px; color: rgb(31,78,120); font-size:16px; height:45px">Please indicate the Jobsite Location:</div>
+        <div style="padding-left:600px; height:24px; padding-top:20px">
+            @{
+                if (Model.Lead != null)
+                {
+                    if (Model.Lead.in_city)
+                    {
+                        <input type="checkbox" value="incity" onclick="return false;" checked />
+                    }
+                    else
+                    {
+                        <input type="checkbox" value="incity" onclick="return false;" />
+                    }
+                    <label style="font-size:12px; padding-top:3px; font-weight:normal">Jobsite is <u>within</u> the city limits of @Model.JobsiteAddress.city</label>
+                }
+                else
+                {
+                    <input type="checkbox" value="incity" onclick="return false;" />
+                    <label style="font-size:12px; padding-top:3px; font-weight:normal">Jobsite is <u>within</u> the city limits of </label>
+                }
+            }
+        </div>
+        <div style="padding-left:600px; height:24px; padding-top:20px">
+            @{
+                if (Model.Lead != null)
+                {
+                    if (Model.Lead.in_city)
+                    {
+                        <input type="checkbox" value="outofcity" onclick="return false;" />
+                    }
+                    else
+                    {
+                        <input type="checkbox" value="outofcity" onclick="return false;" checked />
+                    }
+                    <label style="font-size:12px; padding-top:3px; font-weight:normal">Jobsite is <u>outside</u> the city limits of @Model.JobsiteAddress.city</label>
+                }
+                else
+                {
+                    <input type="checkbox" value="incity" onclick="return false;" />
+                    <label style="font-size:12px; padding-top:3px; font-weight:normal">Jobsite is <u>outside</u> the city limits of </label>
+                }
+            }
+        </div>
+        <div style="padding-top:100px; font-size:11px" align="center">Page 3 of 3</div>
+    </div>
+</body>
+</html>

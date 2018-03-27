@@ -1,0 +1,123 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@model IPagedList<ck_project.employee>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @if (ViewBag.m != null)
+    {
+        <script type="text/javascript">
+ $(document).ready(function () {
+     toastr.success('@ViewBag.m');
+  
+
+ });
+
+        </script>
+    }
+}
+
+
+@Html.Partial("_AdminMenu")
+
+
+<div class="container">
+
+
+
+    <table>
+        <tr>
+            <td style="width:1150px"><h3>Employees</h3></td>
+            <td style="width:50px">
+            </td>
+        </tr>
+    </table>
+    <div style="padding-bottom:10px"></div>
+
+
+    @using (Html.BeginForm("ListEmp", "Emp", FormMethod.Get))
+    {
+
+
+
+
+
+        @Html.TextBox("Search", ViewData.TemplateInfo.FormattedModelValue,
+    new { placeholder = "Type employee last name" });<input type="submit" value="Search" />   @* @Html.ActionLink("Or Add a New Employee", "Add")*@
+
+
+    }
+
+    <p>
+
+    </p>
+    <table class="table table-striped">
+        <thead class="mdb-color darken-3">
+            <tr>
+
+                <th>
+                    Employee Name
+                </th>
+                <th>
+                    System UserName
+                </th>
+                <th>
+                    Phone Number
+                </th>
+                <th>
+                    Branch
+                </th>
+                <th>
+                    User Type
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        @if (Model.Count() == 0)
+        {
+            <tr>
+                <td colspan="6"> Sorry, There are no employees with the entered last name
+                <td>
+            </tr>
+        }
+        else
+        {
+
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.emp_firstname)
+                        @Html.DisplayFor(modelItem => item.emp_middlename)
+                        @Html.DisplayFor(modelItem => item.emp_lastname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.emp_username)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.phone_number)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.branch.branch_name)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.users_types.user_type_name)
+                    </td>
+
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.emp_number }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.emp_number },
+            new { onclick = "return confirm('Are you sure you wish to delete the employee?');" })
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+        @Html.PagedListPager(Model, page => Url.Action("ListEmp",
+    new { page, search = Request.QueryString["Search"] }), new PagedListRenderOptions() { DisplayPageCountAndCurrentLocation = true })
+
+
+
+</div>

@@ -1,0 +1,25 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sale Contract Management System</title>
+    <link href="@Url.Content("~/Content/bootstrap.sandstone.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/Login.css")" rel="stylesheet" type="text/css" />
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <h1>Sale Contract Management System</h1>
+    <div class="container body-content">
+        <hr />
+        @RenderBody()
+        <hr />
+        @Html.Partial("_Footer")
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+</body>
+</html>

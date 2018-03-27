@@ -1,0 +1,148 @@
+﻿@model ck_project.Models.ProjectSummary
+
+<hr style="border:1px solid; border-color: darkgray" />
+
+<table style="empty-cells:show">
+    <tr>
+        <td class="install_top_text">Estimated by:</td>
+        <td class="install_top_data">
+            @{
+                if (Model.Lead != null)
+                {
+                    @Model.Lead.employee.emp_firstname@:&nbsp;@Model.Lead.employee.emp_lastname
+                }
+            }
+        </td>
+        <td class="install_top_text">One way Mileage:</td>
+        <td class="install_top_data">
+            @{
+                if (Model.Lead != null && Model.Lead.installations != null)
+                {
+                    foreach (var item in Model.Lead.installations)
+                    {
+                        @item.oneway_mileages_to_destination
+                    }
+                }
+            }
+        </td>
+        <td class="install_top_text">Installation Day(s):</td>
+        <td class="install_top_data">@Model.TotalInstallationDays</td>
+    </tr>
+    <tr>
+        <td class="install_top_text">Date of Estimation:</td>
+        <td class="install_top_data">
+            @{
+                if (Model.Lead != null && Model.Lead.installations != null)
+                {
+                    foreach (var item in Model.Lead.installations)
+                    {
+                        @String.Format("{0:M/d/yyyy}", item.estimated_date)
+                    }
+                }
+            }
+        </td>
+        <td class="install_top_text">Tile Installation Total:</td>
+        <td class="install_top_data">
+            @{
+                if (Model.Lead != null && Model.Lead.installations != null)
+                {
+                    foreach (var item in Model.Lead.installations)
+                    {
+                        @item.total_tile_cost
+                    }
+                }
+            }
+        </td>
+        <td class="install_top_text">Hotel Night(s):</td>
+        <td class="install_top_data">
+            @{
+                if (Model.Lead != null && Model.Lead.installations != null)
+                {
+                    foreach (var item in Model.Lead.installations)
+                    {
+                        @item.required_hotel_nights
+                    }
+                }
+            }
+        </td>
+    </tr>
+    <tr>
+        <td class="install_top_text">Requested Start Date:</td>
+        <td class="install_top_data">
+            @{
+                if (Model.Lead != null && Model.Lead.installations != null)
+                {
+                    foreach (var item in Model.Lead.installations)
+                    {
+                        @String.Format("{0:M/d/yyyy}", item.statrt_date)
+                    }
+                }
+            }
+        </td>
+        <td colspan="4"></td>
+    </tr>
+ </table>
+<div style="padding-top:5px"></div>
+<table>
+    <tr style="background-color: rgb(51,51,51); color: white; border-right: 1px solid gray">
+        <td align="center" style="width:100px">Categories</td>
+        <td align="center" style="width:500px"></td>
+        <td align="center" style="width:100px">Hrs</td>
+        <td align="center" style="width:100px">Mat Cost</td>
+        <td align="center" style="width:100px">Labor</td>
+        <td align="center" style="width:100px">Mat Retail</td>
+        <td align="center" style="width:100px">Labor/Mat</td>
+    </tr>
+    @{
+        if (Model.InstallSubCategoryCostMap != null)
+        {
+            foreach (var key in Model.InstallSubCategoryCostMap.Keys)
+            {
+                //get category
+                <tr style="background-color: rgb(128,128,128); color: white; border-right: 1px solid gray">
+                    <td class="install_item_cat">@key</td>
+                    <td colspan="6" style="padding-left: 170px;">Job Descriptions</td>
+                </tr>
+
+                //get subcategory
+                Dictionary<string, Dictionary<string, double>> subCostMap = Model.InstallSubCategoryCostMap[key];
+                foreach (var key2 in subCostMap.Keys)
+                {
+                    Dictionary<string, double> costList = subCostMap[key2];
+                    <tr style="background-color: rgb(242,242,242); border-bottom: 1px solid gray">
+                        <td colspan="2" class="install_item_subcat">@key2</td>
+                        <td class="install_item_price_subcatnumber">@costList["Hours"]</td>
+                        <td class="install_item_price_subcattotal">@String.Format("{0:C}", costList["Material Cost"])</td>
+                        <td class="install_item_price_subcattotal">@String.Format("{0:C}", costList["Labor Cost"])</td>
+                        <td class="install_item_price_subcattotal">@String.Format("{0:C}", costList["Material Retail"])</td>
+                        <td class="install_item_price_subcattotal">@String.Format("{0:C}", costList["Total Cost"])</td>
+                    </tr>
+
+                    foreach (var item2 in Model.Lead.installations)
+                    {
+                        foreach (var task in item2.tasks_installation)
+                        {
+                            if (task.task.task_main_cat.Equals(key, StringComparison.OrdinalIgnoreCase) && task.task.task_sub_cat.Equals(key2, StringComparison.OrdinalIgnoreCase))
+                            {
+                                <tr>
+                                    <td></td>
+                                    <td class="install_item_text">@task.task.task_name</td>
+                                    <td class="install_item_number">@task.hours</td>
+                                    <td class="install_item_price">@String.Format("{0:C}", task.m_cost)</td>
+                                    <td class="install_item_price">@String.Format("{0:C}", task.labor_cost)</td>
+                                    <td class="install_item_price">@String.Format("{0:C}", task.material_retail_cost)</td>
+                                    <td class="install_item_price">
+                                        @{
+                                            double totalcost = task.labor_cost + (task.material_retail_cost != null ? (double)task.material_retail_cost : 0.00);
+                                            @String.Format("{0:C}", totalcost)
+                                        }
+                                    </td>
+                                </tr>
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+</table>

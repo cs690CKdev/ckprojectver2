@@ -1,0 +1,776 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CKsysdb" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityContainer Name="ckdatabase" annotation:LazyLoadingEnabled="true">
+    <FunctionImport Name="LoginByUsernamePassword">
+      <Parameter Name="username" Mode="In" Type="String" />
+      <Parameter Name="password" Mode="In" Type="String" />
+    </FunctionImport>
+    <EntitySet Name="rates_installation" EntityType="CKsysdb.rates_installation" />
+    <EntitySet Name="taxes_leads" EntityType="CKsysdb.taxes_leads" />
+    <EntitySet Name="addresses" EntityType="CKsysdb.address" />
+    <EntitySet Name="branches" EntityType="CKsysdb.branch" />
+    <EntitySet Name="building_permit" EntityType="CKsysdb.building_permit" />
+    <EntitySet Name="customers" EntityType="CKsysdb.customer" />
+    <EntitySet Name="delivery_status" EntityType="CKsysdb.delivery_status" />
+    <EntitySet Name="employees" EntityType="CKsysdb.employee" />
+    <EntitySet Name="installations" EntityType="CKsysdb.installation" />
+    <EntitySet Name="lead_log_file" EntityType="CKsysdb.lead_log_file" />
+    <EntitySet Name="lead_source" EntityType="CKsysdb.lead_source" />
+    <EntitySet Name="leads" EntityType="CKsysdb.lead" />
+    <EntitySet Name="products" EntityType="CKsysdb.product" />
+    <EntitySet Name="project_class" EntityType="CKsysdb.project_class" />
+    <EntitySet Name="project_status" EntityType="CKsysdb.project_status" />
+    <EntitySet Name="project_type" EntityType="CKsysdb.project_type" />
+    <EntitySet Name="rates" EntityType="CKsysdb.rate" />
+    <EntitySet Name="sysdiagrams" EntityType="CKsysdb.sysdiagram" />
+    <EntitySet Name="tasks" EntityType="CKsysdb.task" />
+    <EntitySet Name="tasks_installation" EntityType="CKsysdb.tasks_installation" />
+    <EntitySet Name="taxes" EntityType="CKsysdb.tax" />
+    <EntitySet Name="total_cost" EntityType="CKsysdb.total_cost" />
+    <EntitySet Name="users_types" EntityType="CKsysdb.users_types" />
+    <EntitySet Name="archive_leads" EntityType="CKsysdb.archive_leads" />
+    <AssociationSet Name="fk_branches_to_addresses" Association="CKsysdb.fk_branches_to_addresses">
+      <End Role="address" EntitySet="addresses" />
+      <End Role="branch" EntitySet="branches" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Customers_to_addresses" Association="CKsysdb.fk_Customers_to_addresses">
+      <End Role="address" EntitySet="addresses" />
+      <End Role="customer" EntitySet="customers" />
+    </AssociationSet>
+    <AssociationSet Name="fk_employees_to_brancges" Association="CKsysdb.fk_employees_to_brancges">
+      <End Role="branch" EntitySet="branches" />
+      <End Role="employee" EntitySet="employees" />
+    </AssociationSet>
+    <AssociationSet Name="fk_leads_to_branches" Association="CKsysdb.fk_leads_to_branches">
+      <End Role="branch" EntitySet="branches" />
+      <End Role="lead" EntitySet="leads" />
+    </AssociationSet>
+    <AssociationSet Name="fk_leads_to_customers" Association="CKsysdb.fk_leads_to_customers">
+      <End Role="customer" EntitySet="customers" />
+      <End Role="lead" EntitySet="leads" />
+    </AssociationSet>
+    <AssociationSet Name="fk_leads_to_delivery_status" Association="CKsysdb.fk_leads_to_delivery_status">
+      <End Role="delivery_status" EntitySet="delivery_status" />
+      <End Role="lead" EntitySet="leads" />
+    </AssociationSet>
+    <AssociationSet Name="fk_employees_to_users_types" Association="CKsysdb.fk_employees_to_users_types">
+      <End Role="users_types" EntitySet="users_types" />
+      <End Role="employee" EntitySet="employees" />
+    </AssociationSet>
+    <AssociationSet Name="fk_leads_to_employees" Association="CKsysdb.fk_leads_to_employees">
+      <End Role="employee" EntitySet="employees" />
+      <End Role="lead" EntitySet="leads" />
+    </AssociationSet>
+    <AssociationSet Name="fk_installation_to_leads" Association="CKsysdb.fk_installation_to_leads">
+      <End Role="lead" EntitySet="leads" />
+      <End Role="installation" EntitySet="installations" />
+    </AssociationSet>
+    <AssociationSet Name="fk_rates_installation_to_installation" Association="CKsysdb.fk_rates_installation_to_installation">
+      <End Role="installation" EntitySet="installations" />
+      <End Role="rates_installation" EntitySet="rates_installation" />
+    </AssociationSet>
+    <AssociationSet Name="fk_tasks_installation_to_installation" Association="CKsysdb.fk_tasks_installation_to_installation">
+      <End Role="installation" EntitySet="installations" />
+      <End Role="tasks_installation" EntitySet="tasks_installation" />
+    </AssociationSet>
+    <AssociationSet Name="fk_lead_log_file_to_Leads" Association="CKsysdb.fk_lead_log_file_to_Leads">
+      <End Role="lead" EntitySet="leads" />
+      <End Role="lead_log_file" EntitySet="lead_log_file" />
+    </AssociationSet>
+    <AssociationSet Name="fk_leads_to_lead_source" Association="CKsysdb.fk_leads_to_lead_source">
+      <End Role="lead_source" EntitySet="lead_source" />
+      <End Role="lead" EntitySet="leads" />
+    </AssociationSet>
+    <AssociationSet Name="fk_leads_to_project_class" Association="CKsysdb.fk_leads_to_project_class">
+      <End Role="project_class" EntitySet="project_class" />
+      <End Role="lead" EntitySet="leads" />
+    </AssociationSet>
+    <AssociationSet Name="fk_leads_to_project_status" Association="CKsysdb.fk_leads_to_project_status">
+      <End Role="project_status" EntitySet="project_status" />
+      <End Role="lead" EntitySet="leads" />
+    </AssociationSet>
+    <AssociationSet Name="fk_leads_to_project_type" Association="CKsysdb.fk_leads_to_project_type">
+      <End Role="project_type" EntitySet="project_type" />
+      <End Role="lead" EntitySet="leads" />
+    </AssociationSet>
+    <AssociationSet Name="fk_products_to_leads" Association="CKsysdb.fk_products_to_leads">
+      <End Role="lead" EntitySet="leads" />
+      <End Role="product" EntitySet="products" />
+    </AssociationSet>
+    <AssociationSet Name="fk_taxes_leads_to_leads" Association="CKsysdb.fk_taxes_leads_to_leads">
+      <End Role="lead" EntitySet="leads" />
+      <End Role="taxes_leads" EntitySet="taxes_leads" />
+    </AssociationSet>
+    <AssociationSet Name="fk_total_cost_to_leads" Association="CKsysdb.fk_total_cost_to_leads">
+      <End Role="lead" EntitySet="leads" />
+      <End Role="total_cost" EntitySet="total_cost" />
+    </AssociationSet>
+    <AssociationSet Name="fk_rates_installation_to_rates" Association="CKsysdb.fk_rates_installation_to_rates">
+      <End Role="rate" EntitySet="rates" />
+      <End Role="rates_installation" EntitySet="rates_installation" />
+    </AssociationSet>
+    <AssociationSet Name="fk_tasks_installation_to_tasks" Association="CKsysdb.fk_tasks_installation_to_tasks">
+      <End Role="task" EntitySet="tasks" />
+      <End Role="tasks_installation" EntitySet="tasks_installation" />
+    </AssociationSet>
+    <AssociationSet Name="fk_taxes_leads_to_taxes" Association="CKsysdb.fk_taxes_leads_to_taxes">
+      <End Role="tax" EntitySet="taxes" />
+      <End Role="taxes_leads" EntitySet="taxes_leads" />
+    </AssociationSet>
+  </EntityContainer>
+  <EntityType Name="rates_installation">
+    <Key>
+      <PropertyRef Name="rates_installation_number" />
+    </Key>
+    <Property Name="rates_installation_number" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="rate_number" Type="Int32" Nullable="false" />
+    <Property Name="installation_number" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="installation" Relationship="CKsysdb.fk_rates_installation_to_installation" FromRole="rates_installation" ToRole="installation" />
+    <NavigationProperty Name="rate" Relationship="CKsysdb.fk_rates_installation_to_rates" FromRole="rates_installation" ToRole="rate" />
+  </EntityType>
+  <EntityType Name="taxes_leads">
+    <Key>
+      <PropertyRef Name="taxes_leads_number" />
+    </Key>
+    <Property Name="taxes_leads_number" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tax_number" Type="Int32" Nullable="false" />
+    <Property Name="lead_number" Type="Int32" Nullable="false" />
+    <NavigationProperty Name="lead" Relationship="CKsysdb.fk_taxes_leads_to_leads" FromRole="taxes_leads" ToRole="lead" />
+    <NavigationProperty Name="tax" Relationship="CKsysdb.fk_taxes_leads_to_taxes" FromRole="taxes_leads" ToRole="tax" />
+  </EntityType>
+  <EntityType Name="address">
+    <Key>
+      <PropertyRef Name="address_number" />
+    </Key>
+    <Property Name="address_number" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="address_type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="address1" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="city" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="state" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="county" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="zipcode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="deleted" Type="Boolean" Nullable="false" />
+    <Property Name="lead_number" Type="Int32" />
+    <NavigationProperty Name="branches" Relationship="CKsysdb.fk_branches_to_addresses" FromRole="address" ToRole="branch" />
+    <NavigationProperty Name="customers" Relationship="CKsysdb.fk_Customers_to_addresses" FromRole="address" ToRole="customer" />
+  </EntityType>
+  <EntityType Name="branch">
+    <Key>
+      <PropertyRef Name="branch_number" />
+    </Key>
+    <Property Name="branch_number" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="branch_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="phone_number" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="fax_number" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="address_number" Type="Int32" Nullable="false" />
+    <Property Name="deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="address" Relationship="CKsysdb.fk_branches_to_addresses" FromRole="branch" ToRole="address" />
+    <NavigationProperty Name="employees" Relationship="CKsysdb.fk_employees_to_brancges" FromRole="branch" ToRole="employee" />
+    <NavigationProperty Name="leads" Relationship="CKsysdb.fk_leads_to_branches" FromRole="branch" ToRole="lead" />
+  </EntityType>
+  <EntityType Name="building_permit">
+    <Key>
+      <PropertyRef Name="permit_number" />
+    </Key>
+    <Property Name="permit_number" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="adjustable_fee" Type="Double" Nullable="false" />
+    <Property Name="fixed_fee" Type="Double" Nullable="false" />
+    <Property Name="start_range" Type="Double" Nullable="false" />
+    <Property Name="end_range" Type="Double" Nullable="false" />
+    <Property Name="start_date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="end_date" Type="DateTime" Precision="0" />
+    <Property Name="deleted" Type="Boolean" Nullable="false" />
+  </EntityType>
+  <EntityType Name="customer">
+    <Key>
+      <PropertyRef Name="customer_number" />
+    </Key>
+    <Property Name="customer_number" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="customer_firstname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="customer_middlename" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="customer_lastname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="phone_number" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="second_phone_number" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="address_number" Type="Int32" />
+    <Property Name="deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="address" Relationship="CKsysdb.fk_Customers_to_addresses" FromRole="customer" ToRole="address" />
+    <NavigationProperty Name="leads" Relationship="CKsysdb.fk_leads_to_customers" FromRole="customer" ToRole="lead" />
+  </EntityType>
+  <EntityType Name="delivery_status">
+    <Key>
+      <PropertyRef Name="delivery_status_number" />
+    </Key>
+    <Property Name="delivery_status_number" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="delivery_status_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="leads" Relationship="CKsysdb.fk_leads_to_delivery_status" FromRole="delivery_status" ToRole="lead" />
+  </EntityType>
+  <EntityType Name="employee">
+    <Key>
+      <PropertyRef Name="emp_number" />
+    </Key>
+    <Property Name="emp_number" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="emp_firstname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="emp_middlename" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="emp_lastname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="emp_username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="emp_password" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="phone_number" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="user_type_number" Type="Int32" Nullable="false" />
+    <Property Name="branch_number" Type="Int32" Nullable="false" />
+    <Property Name="deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="branch" Relationship="CKsysdb.fk_employees_to_brancges" FromRole="employee" ToRole="branch" />
+    <NavigationProperty Name="users_types" Relationship="CKsysdb.fk_employees_to_users_types" FromRole="employee" ToRole="users_types" />
+    <NavigationProperty Name="leads" Relationship="CKsysdb.fk_leads_to_employees" FromRole="employee" ToRole="lead" />
+  </EntityType>
+  <EntityType Name="installation">
+    <Key>
+      <PropertyRef Name="installation_number" />
+    </Key>
+    <Property Name="installation_number" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="estimated_by" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="statrt_date" Type="DateTime" Precision="0" />
+    <Property Name="lead_number" Type="Int32" Nullable="false" />
+    <Property Name="recommendation" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+    <Property Name="total_miles" Type="Double" />
+    <Property Name="required_hotel_nights" Type="Double" />
+    <Property Name="hotel_round_trip" Type="Double" />
+    <Property Name="installation_days" Type="Double" />
+    <Property Name="total_per_diem_cost" Type="Double" />
+    <Property Name="total_installation_labor_cost" Type="Double" />
+    <Property Name="total_operational_expenses" Type="Double" />
+    <Property Name="total_construction_materials_cost" Type="Double" />
+    <Property Name="total_tile_cost" Type="Double" Nullable="false" />
+    <Property Name="total_travel_cost" Type="Double" />
+    <Property Name="estimated_date" Type="DateTime" Precision="0" />
+    <Property Name="travel_time_one_way" Type="Double" />
+    <Property Name="building_permit_cost" Type="Double" />
+    <Property Name="hotel_expense" Type="Double" />
+    <Property Name="mileage_expense" Type="Double" />
+    <Property Name="tile_installation_days" Type="Double" />
+    <Property Name="installation_labor_only_cost" Type="Double" />
+    <Property Name="billable_hours" Type="Double" />
+    <Property Name="estimated_hours" Type="Double" />
+    <Property Name="oneway_mileages_to_destination" Type="Double" Nullable="false" />
+    <Property Name="ov_labor_rate" Type="Double" />
+    <Property Name="ov_material_rate" Type="Double" />
+    <NavigationProperty Name="lead" Relationship="CKsysdb.fk_installation_to_leads" FromRole="installation" ToRole="lead" />
+    <NavigationProperty Name="rates_installation" Relationship="CKsysdb.fk_rates_installation_to_installation" FromRole="installation" ToRole="rates_installation" />
+    <NavigationProperty Name="tasks_installation" Relationship="CKsysdb.fk_tasks_installation_to_installation" FromRole="installation" ToRole="tasks_installation" />
+  </EntityType>
+  <EntityType Name="lead_log_file">
+    <Key>
+      <PropertyRef Name="log_number" />
+    </Key>
+    <Property Name="log_number" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="emp_username" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="lead_number" Type="Int32" Nullable="false" />
+    <Property Name="table_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="column_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="action_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="update_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="prvious_value" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="new_value" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="lead" Relationship="CKsysdb.fk_lead_log_file_to_Leads" FromRole="lead_log_file" ToRole="lead" />
+  </EntityType>
+  <EntityType Name="lead_source">
+    <Key>
+      <PropertyRef Name="source_number" />
+    </Key>
+    <Property Name="source_number" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="source_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="leads" Relationship="CKsysdb.fk_leads_to_lead_source" FromRole="lead_source" ToRole="lead" />
+  </EntityType>
+  <EntityType Name="lead">
+    <Key>
+      <PropertyRef Name="lead_number" />
+    </Key>
+    <Property Name="lead_number" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="customer_number" Type="Int32" Nullable="false" />
+    <Property Name="class_number" Type="Int32" Nullable="false" />
+    <Property Name="project_status_number" Type="Int32" Nullable="false" />
+    <Property Name="project_type_number" Type="Int32" Nullable="false" />
+    <Property Name="source_number" Type="Int32" Nullable="false" />
+    <Property Name="emp_number" Type="Int32" Nullable="false" />
+    <Property Name="branch_number" Type="Int32" Nullable="false" />
+    <Property Name="delivery_status_number" Type="Int32" Nullable="false" />
+    <Property Name="in_city" Type="Boolean" Nullable="false" />
+    <Property Name="lead_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="project_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="tax_exempt" Type="Boolean" Nullable="false" />
+    <Property Name="deleted" Type="Boolean" Nullable="false" />
+    <Property Name="Last_update_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="phone_number" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="second_phone_number" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="note" Type="String" MaxLength="Max" FixedLength="false" Unicode="false" />
+    <Property Name="lead_creator" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="branch" Relationship="CKsysdb.fk_leads_to_branches" FromRole="lead" ToRole="branch" />
+    <NavigationProperty Name="customer" Relationship="CKsysdb.fk_leads_to_customers" FromRole="lead" ToRole="customer" />
+    <NavigationProperty Name="delivery_status" Relationship="CKsysdb.fk_leads_to_delivery_status" FromRole="lead" ToRole="delivery_status" />
+    <NavigationProperty Name="employee" Relationship="CKsysdb.fk_leads_to_employees" FromRole="lead" ToRole="employee" />
+    <NavigationProperty Name="installations" Relationship="CKsysdb.fk_installation_to_leads" FromRole="lead" ToRole="installation" />
+    <NavigationProperty Name="lead_log_file" Relationship="CKsysdb.fk_lead_log_file_to_Leads" FromRole="lead" ToRole="lead_log_file" />
+    <NavigationProperty Name="lead_source" Relationship="CKsysdb.fk_leads_to_lead_source" FromRole="lead" ToRole="lead_source" />
+    <NavigationProperty Name="project_class" Relationship="CKsysdb.fk_leads_to_project_class" FromRole="lead" ToRole="project_class" />
+    <NavigationProperty Name="project_status" Relationship="CKsysdb.fk_leads_to_project_status" FromRole="lead" ToRole="project_status" />
+    <NavigationProperty Name="project_type" Relationship="CKsysdb.fk_leads_to_project_type" FromRole="lead" ToRole="project_type" />
+    <NavigationProperty Name="products" Relationship="CKsysdb.fk_products_to_leads" FromRole="lead" ToRole="product" />
+    <NavigationProperty Name="taxes_leads" Relationship="CKsysdb.fk_taxes_leads_to_leads" FromRole="lead" ToRole="taxes_leads" />
+    <NavigationProperty Name="total_cost" Relationship="CKsysdb.fk_total_cost_to_leads" FromRole="lead" ToRole="total_cost" />
+  </EntityType>
+  <EntityType Name="product">
+    <Key>
+      <PropertyRef Name="product_number" />
+    </Key>
+    <Property Name="product_number" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="cat_anme" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="quantity" Type="Int32" Nullable="false" />
+    <Property Name="Description" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="model" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="color" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="product_source" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="manufacture" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="location" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="price" Type="Double" Nullable="false" />
+    <Property Name="lead_number" Type="Int32" Nullable="false" />
+    <Property Name="deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="lead" Relationship="CKsysdb.fk_products_to_leads" FromRole="product" ToRole="lead" />
+  </EntityType>
+  <EntityType Name="project_class">
+    <Key>
+      <PropertyRef Name="class_number" />
+    </Key>
+    <Property Name="class_number" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="class_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="leads" Relationship="CKsysdb.fk_leads_to_project_class" FromRole="project_class" ToRole="lead" />
+  </EntityType>
+  <EntityType Name="project_status">
+    <Key>
+      <PropertyRef Name="project_status_number" />
+    </Key>
+    <Property Name="project_status_number" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="project_status_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="leads" Relationship="CKsysdb.fk_leads_to_project_status" FromRole="project_status" ToRole="lead" />
+  </EntityType>
+  <EntityType Name="project_type">
+    <Key>
+      <PropertyRef Name="project_type_number" />
+    </Key>
+    <Property Name="project_type_number" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="project_type_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="leads" Relationship="CKsysdb.fk_leads_to_project_type" FromRole="project_type" ToRole="lead" />
+  </EntityType>
+  <EntityType Name="rate">
+    <Key>
+      <PropertyRef Name="rate_number" />
+    </Key>
+    <Property Name="rate_number" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="rate_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="rate_measurement" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="amount" Type="Double" Nullable="false" />
+    <Property Name="start_date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="end_date" Type="DateTime" Precision="0" />
+    <Property Name="deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="rates_installation" Relationship="CKsysdb.fk_rates_installation_to_rates" FromRole="rate" ToRole="rates_installation" />
+  </EntityType>
+  <EntityType Name="sysdiagram">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="String" Nullable="false" MaxLength="128" FixedLength="false" Unicode="true" />
+    <Property Name="principal_id" Type="Int32" Nullable="false" />
+    <Property Name="diagram_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="version" Type="Int32" />
+    <Property Name="definition" Type="Binary" MaxLength="Max" FixedLength="false" />
+  </EntityType>
+  <EntityType Name="task">
+    <Key>
+      <PropertyRef Name="task_number" />
+    </Key>
+    <Property Name="task_number" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="special_task" Type="Boolean" Nullable="false" />
+    <Property Name="task_name" Type="String" Nullable="false" MaxLength="250" FixedLength="false" Unicode="false" />
+    <Property Name="task_main_cat" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="task_sub_cat" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="tasks_installation" Relationship="CKsysdb.fk_tasks_installation_to_tasks" FromRole="task" ToRole="tasks_installation" />
+  </EntityType>
+  <EntityType Name="tasks_installation">
+    <Key>
+      <PropertyRef Name="tasks_installation_number" />
+    </Key>
+    <Property Name="tasks_installation_number" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="task_number" Type="Int32" Nullable="false" />
+    <Property Name="installation_number" Type="Int32" Nullable="false" />
+    <Property Name="hours" Type="Double" Nullable="false" />
+    <Property Name="m_cost" Type="Double" Nullable="false" />
+    <Property Name="labor_cost" Type="Double" Nullable="false" />
+    <Property Name="material_retail_cost" Type="Double" />
+    <NavigationProperty Name="installation" Relationship="CKsysdb.fk_tasks_installation_to_installation" FromRole="tasks_installation" ToRole="installation" />
+    <NavigationProperty Name="task" Relationship="CKsysdb.fk_tasks_installation_to_tasks" FromRole="tasks_installation" ToRole="task" />
+  </EntityType>
+  <EntityType Name="tax">
+    <Key>
+      <PropertyRef Name="tax_number" />
+    </Key>
+    <Property Name="tax_number" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="tax_anme" Type="String" Nullable="false" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="tax_value" Type="Double" Nullable="false" />
+    <Property Name="city" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="state" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="county" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="zipcode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="start_date" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="end_date" Type="DateTime" Precision="0" />
+    <Property Name="deleted" Type="Boolean" Nullable="false" />
+    <Property Name="in_city" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="taxes_leads" Relationship="CKsysdb.fk_taxes_leads_to_taxes" FromRole="tax" ToRole="taxes_leads" />
+  </EntityType>
+  <EntityType Name="total_cost">
+    <Key>
+      <PropertyRef Name="cost_number" />
+    </Key>
+    <Property Name="cost_number" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="product_cost" Type="Double" />
+    <Property Name="installation_cost" Type="Double" />
+    <Property Name="total_cost1" Type="Double" />
+    <Property Name="lead_number" Type="Int32" Nullable="false" />
+    <Property Name="tax_cost" Type="Double" />
+    <Property Name="building_permit_cost" Type="Double" />
+    <NavigationProperty Name="lead" Relationship="CKsysdb.fk_total_cost_to_leads" FromRole="total_cost" ToRole="lead" />
+  </EntityType>
+  <EntityType Name="users_types">
+    <Key>
+      <PropertyRef Name="user_type_number" />
+    </Key>
+    <Property Name="user_type_number" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="user_type_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="deleted" Type="Boolean" Nullable="false" />
+    <NavigationProperty Name="employees" Relationship="CKsysdb.fk_employees_to_users_types" FromRole="users_types" ToRole="employee" />
+  </EntityType>
+  <EntityType Name="archive_leads">
+    <Key>
+      <PropertyRef Name="lead_number" />
+      <PropertyRef Name="project_name" />
+      <PropertyRef Name="branch_name" />
+      <PropertyRef Name="customer_firstname" />
+      <PropertyRef Name="customer_lastname" />
+      <PropertyRef Name="phone_number" />
+      <PropertyRef Name="emp_firstname" />
+      <PropertyRef Name="emp_lastname" />
+      <PropertyRef Name="project_status" />
+      <PropertyRef Name="delivery_status" />
+      <PropertyRef Name="source_name" />
+      <PropertyRef Name="class_name" />
+      <PropertyRef Name="project_type" />
+      <PropertyRef Name="jobsite_address" />
+      <PropertyRef Name="jobsite_city" />
+      <PropertyRef Name="jobsite_county" />
+      <PropertyRef Name="jobsite_state" />
+      <PropertyRef Name="jobsite_zipcode" />
+      <PropertyRef Name="lead_date" />
+      <PropertyRef Name="lead_close_date" />
+      <PropertyRef Name="tax_exempt" />
+      <PropertyRef Name="in_city" />
+    </Key>
+    <Property Name="lead_number" Type="Int32" Nullable="false" />
+    <Property Name="project_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="branch_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="customer_firstname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="customer_lastname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="customer_email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="phone_number" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="emp_firstname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="emp_lastname" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="project_status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="delivery_status" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="source_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="class_name" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="project_type" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="jobsite_address" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="jobsite_city" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="jobsite_county" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="jobsite_state" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="jobsite_zipcode" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="lead_email" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="lead_phone_number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="second_lead_phone_number" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="lead_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="lead_close_date" Type="DateTime" Nullable="false" Precision="3" />
+    <Property Name="tax_exempt" Type="Boolean" Nullable="false" />
+    <Property Name="in_city" Type="Boolean" Nullable="false" />
+    <Property Name="building_permit_cost" Type="Double" />
+    <Property Name="installation_cost" Type="Double" />
+    <Property Name="product_cost" Type="Double" />
+    <Property Name="tax_cost" Type="Double" />
+    <Property Name="total_cost" Type="Double" />
+  </EntityType>
+  <Association Name="fk_branches_to_addresses">
+    <End Type="CKsysdb.address" Role="address" Multiplicity="1" />
+    <End Type="CKsysdb.branch" Role="branch" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="address">
+        <PropertyRef Name="address_number" />
+      </Principal>
+      <Dependent Role="branch">
+        <PropertyRef Name="address_number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Customers_to_addresses">
+    <End Type="CKsysdb.address" Role="address" Multiplicity="0..1" />
+    <End Type="CKsysdb.customer" Role="customer" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="address">
+        <PropertyRef Name="address_number" />
+      </Principal>
+      <Dependent Role="customer">
+        <PropertyRef Name="address_number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_employees_to_brancges">
+    <End Type="CKsysdb.branch" Role="branch" Multiplicity="1" />
+    <End Type="CKsysdb.employee" Role="employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="branch">
+        <PropertyRef Name="branch_number" />
+      </Principal>
+      <Dependent Role="employee">
+        <PropertyRef Name="branch_number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_leads_to_branches">
+    <End Type="CKsysdb.branch" Role="branch" Multiplicity="1" />
+    <End Type="CKsysdb.lead" Role="lead" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="branch">
+        <PropertyRef Name="branch_number" />
+      </Principal>
+      <Dependent Role="lead">
+        <PropertyRef Name="branch_number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_leads_to_customers">
+    <End Type="CKsysdb.customer" Role="customer" Multiplicity="1" />
+    <End Type="CKsysdb.lead" Role="lead" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="customer">
+        <PropertyRef Name="customer_number" />
+      </Principal>
+      <Dependent Role="lead">
+        <PropertyRef Name="customer_number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_leads_to_delivery_status">
+    <End Type="CKsysdb.delivery_status" Role="delivery_status" Multiplicity="1" />
+    <End Type="CKsysdb.lead" Role="lead" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="delivery_status">
+        <PropertyRef Name="delivery_status_number" />
+      </Principal>
+      <Dependent Role="lead">
+        <PropertyRef Name="delivery_status_number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_employees_to_users_types">
+    <End Type="CKsysdb.users_types" Role="users_types" Multiplicity="1" />
+    <End Type="CKsysdb.employee" Role="employee" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users_types">
+        <PropertyRef Name="user_type_number" />
+      </Principal>
+      <Dependent Role="employee">
+        <PropertyRef Name="user_type_number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_leads_to_employees">
+    <End Type="CKsysdb.employee" Role="employee" Multiplicity="1" />
+    <End Type="CKsysdb.lead" Role="lead" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employee">
+        <PropertyRef Name="emp_number" />
+      </Principal>
+      <Dependent Role="lead">
+        <PropertyRef Name="emp_number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_installation_to_leads">
+    <End Type="CKsysdb.lead" Role="lead" Multiplicity="1" />
+    <End Type="CKsysdb.installation" Role="installation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="lead">
+        <PropertyRef Name="lead_number" />
+      </Principal>
+      <Dependent Role="installation">
+        <PropertyRef Name="lead_number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_rates_installation_to_installation">
+    <End Type="CKsysdb.installation" Role="installation" Multiplicity="1" />
+    <End Type="CKsysdb.rates_installation" Role="rates_installation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="installation">
+        <PropertyRef Name="installation_number" />
+      </Principal>
+      <Dependent Role="rates_installation">
+        <PropertyRef Name="installation_number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_tasks_installation_to_installation">
+    <End Type="CKsysdb.installation" Role="installation" Multiplicity="1" />
+    <End Type="CKsysdb.tasks_installation" Role="tasks_installation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="installation">
+        <PropertyRef Name="installation_number" />
+      </Principal>
+      <Dependent Role="tasks_installation">
+        <PropertyRef Name="installation_number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_lead_log_file_to_Leads">
+    <End Type="CKsysdb.lead" Role="lead" Multiplicity="1" />
+    <End Type="CKsysdb.lead_log_file" Role="lead_log_file" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="lead">
+        <PropertyRef Name="lead_number" />
+      </Principal>
+      <Dependent Role="lead_log_file">
+        <PropertyRef Name="lead_number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_leads_to_lead_source">
+    <End Type="CKsysdb.lead_source" Role="lead_source" Multiplicity="1" />
+    <End Type="CKsysdb.lead" Role="lead" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="lead_source">
+        <PropertyRef Name="source_number" />
+      </Principal>
+      <Dependent Role="lead">
+        <PropertyRef Name="source_number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_leads_to_project_class">
+    <End Type="CKsysdb.project_class" Role="project_class" Multiplicity="1" />
+    <End Type="CKsysdb.lead" Role="lead" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="project_class">
+        <PropertyRef Name="class_number" />
+      </Principal>
+      <Dependent Role="lead">
+        <PropertyRef Name="class_number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_leads_to_project_status">
+    <End Type="CKsysdb.project_status" Role="project_status" Multiplicity="1" />
+    <End Type="CKsysdb.lead" Role="lead" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="project_status">
+        <PropertyRef Name="project_status_number" />
+      </Principal>
+      <Dependent Role="lead">
+        <PropertyRef Name="project_status_number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_leads_to_project_type">
+    <End Type="CKsysdb.project_type" Role="project_type" Multiplicity="1" />
+    <End Type="CKsysdb.lead" Role="lead" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="project_type">
+        <PropertyRef Name="project_type_number" />
+      </Principal>
+      <Dependent Role="lead">
+        <PropertyRef Name="project_type_number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_products_to_leads">
+    <End Type="CKsysdb.lead" Role="lead" Multiplicity="1" />
+    <End Type="CKsysdb.product" Role="product" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="lead">
+        <PropertyRef Name="lead_number" />
+      </Principal>
+      <Dependent Role="product">
+        <PropertyRef Name="lead_number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_taxes_leads_to_leads">
+    <End Type="CKsysdb.lead" Role="lead" Multiplicity="1" />
+    <End Type="CKsysdb.taxes_leads" Role="taxes_leads" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="lead">
+        <PropertyRef Name="lead_number" />
+      </Principal>
+      <Dependent Role="taxes_leads">
+        <PropertyRef Name="lead_number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_total_cost_to_leads">
+    <End Type="CKsysdb.lead" Role="lead" Multiplicity="1" />
+    <End Type="CKsysdb.total_cost" Role="total_cost" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="lead">
+        <PropertyRef Name="lead_number" />
+      </Principal>
+      <Dependent Role="total_cost">
+        <PropertyRef Name="lead_number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_rates_installation_to_rates">
+    <End Type="CKsysdb.rate" Role="rate" Multiplicity="1" />
+    <End Type="CKsysdb.rates_installation" Role="rates_installation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="rate">
+        <PropertyRef Name="rate_number" />
+      </Principal>
+      <Dependent Role="rates_installation">
+        <PropertyRef Name="rate_number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_tasks_installation_to_tasks">
+    <End Type="CKsysdb.task" Role="task" Multiplicity="1" />
+    <End Type="CKsysdb.tasks_installation" Role="tasks_installation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="task">
+        <PropertyRef Name="task_number" />
+      </Principal>
+      <Dependent Role="tasks_installation">
+        <PropertyRef Name="task_number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_taxes_leads_to_taxes">
+    <End Type="CKsysdb.tax" Role="tax" Multiplicity="1" />
+    <End Type="CKsysdb.taxes_leads" Role="taxes_leads" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tax">
+        <PropertyRef Name="tax_number" />
+      </Principal>
+      <Dependent Role="taxes_leads">
+        <PropertyRef Name="tax_number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+</Schema>

@@ -1,0 +1,116 @@
+﻿@model ck_project.product
+
+@{
+    Layout = null;
+}
+
+<div>
+@using (Html.BeginForm("Add","Product",new { lid=ViewBag.lid}))
+{
+    @Html.AntiForgeryToken()
+    
+    <div class="form-horizontal">
+        <h4>All field with srart is required</h4>
+        
+        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.cat_anme, "Category Name",htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-xs-4">
+               
+                @Html.DropDownListFor(Model=>Model.cat_anme,(List<SelectListItem>)ViewBag.catlist, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.cat_anme, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.quantity, "* Quantity ",htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-xs-4">
+                @Html.EditorFor(model => model.quantity, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.quantity, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.Description, "Description",htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-xs-4">
+                @Html.EditorFor(model => model.Description, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.Description, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.model, "Model Name",htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-xs-4">
+                @Html.EditorFor(model => model.model, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.model, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.color, "Color",htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-xs-4">
+                @Html.EditorFor(model => model.color, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.color, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.product_source, "Project Source",htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-xs-4">
+                @Html.EditorFor(model => model.product_source, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.product_source, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.manufacture, "Manufacture",htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-xs-4">
+                @Html.EditorFor(model => model.manufacture, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.manufacture, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.location, "Location",htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-xs-4">
+                @Html.EditorFor(model => model.location, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.location, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.price, "* Price",htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-xs-4">
+                @Html.EditorFor(model => model.price, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.price, "", new { @class = "text-danger" })
+            </div>
+        </div>
+
+        <div class="form-group">
+            @*@Html.LabelFor(model => model.lead_number, "lead_number", htmlAttributes: new { @class = "control-label col-md-2" })
+            <div class="col-xs-4">
+                @Html.DropDownList("lead_number", null, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.lead_number, "", new { @class = "text-danger" })
+            </div>*@
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.lead_number)
+        </div>
+        
+       
+
+        <div class="form-group">
+            <div class="col-md-offset-2 col-xs-4">
+                <input type="submit" value="Create" class="btn btn-default" />
+            </div>
+        </div>
+    </div>
+}
+    </div>
+
+@*<div>
+    <a href="javascript:void(0);" onclick="history.go(-1);">i am done</a>
+</div>*@
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

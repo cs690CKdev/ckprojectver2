@@ -1,0 +1,624 @@
+﻿@model ck_project.Models.ProjectSummary
+
+@{
+    ViewBag.Title = "InstallationDetailsInternal";
+    Layout = null;
+
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    @*<meta name="viewport" content="initial-scale=1.0">*@
+    <title>Sale Contract Management System</title>
+    <link href="http://leadmanagealpha.apphb.com/Content/bootstrap.sandstone.css" rel="stylesheet" type="text/css" />
+    <link href="http://leadmanagealpha.apphb.com/Content/Print.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <table cellpadding=0 style="width:100%">
+        <tr>
+            <td id="idi_header1"><h2>Creative Kitchens Incorporated</h2></td>
+        </tr>
+        <tr>
+            <td id="idi_header2">INSTALLATION DETAILS CK COPY</td>
+        </tr>
+        <tr>
+            <td style="height:15px; background-color: rgb(51,51,51)"></td>
+        </tr>
+    </table>
+    <table style="empty-cells:show">
+        <tr>
+            <td colspan="2" style="width:700px; font-weight:bold">Proposal Prepared For:</td>
+            <td colspan="2" style="width:650px; font-weight:bold">Designed By:</td>
+            <td colspan="2" style="width:400px; font-weight:bold">Total Install and Tile</td>
+            <td rowspan="2" style="width:50px">@Model.TotalInstallationDays</td>
+        </tr>
+        <tr>
+            @{
+                if (Model.Customer != null)
+                {
+                    <td colspan="2" style="padding-left:3px">@Model.Customer.customer_firstname @Model.Customer.customer_lastname</td>
+                }
+                else
+                {
+                    <td colspan="2"></td>
+                }
+
+                if (Model.Customer != null)
+                {
+                    <td colspan="2" style="padding-left:3px">@Model.Lead.employee.emp_firstname @Model.Lead.employee.emp_lastname</td>
+                }
+                else
+                {
+                    <td colspan="2"></td>
+                }
+            }
+            <td colspan="2" style="font-weight:bold">Days on Job:</td>
+        </tr>
+        <tr>
+            <td colspan="2" style="padding-left:3px">
+            @{
+                if (Model.JobsiteAddress != null)
+                {
+                    @Model.JobsiteAddress.address1
+                }
+            }
+            </td>
+            <td style="font-weight:bold">Lead Number:</td>
+            <td align="right">Estimated by:</td>
+            <td style="padding-left:3px; border: 1px solid; border-color: rgb(0,176,80)">
+                @{ 
+                    if (Model.Lead != null)
+                    {
+                        @Model.Lead.employee.emp_firstname@:&nbsp;@Model.Lead.employee.emp_lastname
+                    }
+                }
+            </td>
+        </tr>
+        <tr>
+            @{
+                if (Model.JobsiteAddress != null)
+                {
+                    <td colspan="2" style="padding-left:3px">@Model.JobsiteAddress.city, @Model.JobsiteAddress.state @Model.JobsiteAddress.zipcode</td>
+                    <td style="padding-left:3px">@Model.Lead.lead_number</td>
+                }
+                else
+                {
+                    <td colspan="2"></td>
+                    <td></td>
+                }
+            }
+            <td align="right">Date of Estimation:</td>
+            <td style="padding-left:3px; border: 1px solid; border-color: rgb(0,176,80)">
+                @{
+                    if (Model.Lead != null && Model.Lead.installations != null)
+                    {
+                        foreach (var item in Model.Lead.installations)
+                        {
+                            @String.Format("{0:M/d/yyyy}", item.estimated_date)
+                        }
+                    }
+                }
+            </td>
+        </tr>
+    </table>
+    <table style="empty-cells:show">
+        <tr>
+            <td style="width:381px; color:grey" align="right">Date & Time printed:</td>
+            <td style="width:331px; padding-left:3px; color:grey">@String.Format("{0:M/d/yyyy HH:mm}", DateTime.Now)</td>
+            <td style="width:104px; border: 1px solid; border-top: none; border-color: rgb(0,176,80); padding-right: 3px; text-align: right;">
+                @{
+                    if (Model.Lead != null && Model.Lead.installations != null)
+                    {
+                        foreach (var item in Model.Lead.installations)
+                        {
+                            @item.oneway_mileages_to_destination
+                        }
+                    }
+                }
+            </td>
+            <td style="padding-left:3px; color:rgb(0,176,80)">One way Mileage</td>
+        </tr>
+        <tr>
+            <td colspan="2"></td>
+            <td style="border: 1px solid; border-color: rgb(0,176,80); padding-right: 3px; text-align: right;">
+                @{
+                    if (Model.Lead != null && Model.Lead.installations != null)
+                    {
+                        foreach (var item in Model.Lead.installations)
+                        {
+                            @String.Format("{0:M/d/yyyy}", item.statrt_date)
+                        }
+                    }
+                }
+            </td>
+            <td style="padding-left:3px; color:rgb(0,176,80)">Requested Start Date</td>
+        </tr>
+        <tr>
+            <td colspan="2"></td>
+            <td style="border: 1px solid; border-color: rgb(0,176,80); padding-right: 3px; text-align: right;">
+                @{
+                    if (Model.Lead != null && Model.Lead.installations != null)
+                    {
+                        foreach (var item in Model.Lead.installations)
+                        {
+                            @item.total_tile_cost
+                        }
+                    }
+                }
+            </td>
+            <td style="padding-left:3px; color:rgb(0,176,80)">Tile Installation Total</td>
+        </tr>
+    </table>
+    <div style="padding-top:5px"></div>
+    <table>
+        <tr style="background-color: rgb(51,51,51); color: white; border-right: 1px solid gray">
+            <td align ="center" style="width:100px">Categories</td>
+            <td align ="center" style="width:500px"></td>
+            <td align ="center" style="width:100px">Hrs</td>
+            <td align ="center" style="width:100px">Mat Cost</td>
+            <td align ="center" style="width:100px">Labor</td>
+            <td align ="center" style="width:100px">Mat Retail</td>
+            <td align ="center" style="width:100px">Labor/Mat</td>
+        </tr>
+        @{
+            if (Model.InstallSubCategoryCostMap != null)
+            {
+                foreach (var key in Model.InstallSubCategoryCostMap.Keys)
+                {
+                    //get category
+                    <tr style="background-color: rgb(128,128,128); color: white; border-right: 1px solid gray">
+                        <td class="item_cat">@key</td>
+                        <td colspan="6" style="padding-left: 170px;">Job Descriptions</td>
+                    </tr>
+
+                    //get subcategory
+                    Dictionary<string, Dictionary<string, double>> subCostMap = Model.InstallSubCategoryCostMap[key];
+                    foreach (var key2 in subCostMap.Keys)
+                    {
+                        Dictionary<string, double> costList = subCostMap[key2];
+                        <tr style="background-color: rgb(242,242,242); border-bottom: 1px solid gray">
+                            <td colspan="2" class="item_subcat">@key2</td>
+                            <td class="item_price_subcattotal">@costList["Hours"]</td>
+                            <td class="item_price_subcattotal">@costList["Material Cost"]</td>
+                            <td class="item_price_subcattotal">@costList["Labor Cost"]</td>
+                            <td class="item_price_subcattotal">@costList["Material Retail"]</td>
+                            <td class="item_price_subcattotal">@costList["Total Cost"]</td>
+                        </tr>
+
+                        foreach (var item2 in Model.Lead.installations)
+                        {
+                            foreach (var task in item2.tasks_installation)
+                            {
+                                if (task.task.task_main_cat.Equals(key, StringComparison.OrdinalIgnoreCase) && task.task.task_sub_cat.Equals(key2, StringComparison.OrdinalIgnoreCase))
+                                {
+                                    <tr>
+                                        <td></td>
+                                        <td class="item_text">@task.task.task_name</td>
+                                        <td class="item_price">@task.hours</td>
+                                        <td class="item_price">@task.m_cost</td>
+                                        <td class="item_price">@task.labor_cost</td>
+                                        <td class="item_price">@task.material_retail_cost</td>
+                                        <td class="item_price">
+                                            @{
+                                                double totalcost = task.labor_cost + (task.material_retail_cost != null ? (double)task.material_retail_cost : 0.00);
+                                                @totalcost
+                                            }
+                                        </td>
+                                    </tr>
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    </table>
+    <div style="padding-top:30px">
+        <p class="wrapper">
+            EXCLUSIONS: Any Electrical, Plumbing, Gas Lines, Drywall Work, Wallcoverings, Painting, Trim Work , Tile Work or any "Hidden" or unforeseen conditions
+            and/or other item or task not listed in this scope of work. Any Unforeseen conditions or work will be considered an "Add-On" and will be charged as Time
+            and Materials. An Add-On Ticket will be required with signatures of approval.
+        </p>
+    </div>
+    <div style="padding-top:10px; margin-left:3%">Please be aware that the following products and tasks will extend the completion of this project:</div>
+    <ul style="margin-left:6px; list-style-type:none">
+        <li>Custom Countertops will require templating after cabinet installation and additional days to fabricate.</li>
+        <li>Custom Shower Door(s) require final measurements after tile installation and additional days to fabricate.</li>
+        <li>Tile and Flooring installation and curing will cause a disruption or delay in completion of other tasks.</li>
+    </ul>
+    <div style="padding-top:5px"></div>
+    <table style="width:100%; font-size:12px; border: 1px solid black">
+        <tr>
+            <td colspan="9" style="height:15px; background-color:rgb(166,166,166)"></td>
+        </tr>
+        <tr>
+            <td class ="table5_border_left"></td>
+            <td class ="table5_col1">
+                @{
+                    if (Model.Lead != null && Model.Lead.installations.Count != 0)
+                    {
+                        foreach (var item in Model.Lead.installations)
+                        {
+                            @item.recommendation
+                        }
+                    }
+                }
+            </td>
+            <td class ="table5_col2">Recommendation (Jobs over 90 miles = hotel)</td>
+            <td class ="table5_col3">Total Estimated Hours</td>
+            <td colspan="2" class="table5_col4">
+                @{
+                    if (Model.Lead != null && Model.Lead.installations.Count != 0)
+                    {
+                        foreach (var item in Model.Lead.installations)
+                        {
+                            @item.estimated_hours
+                        }
+                    }
+                }
+            </td>
+            <td class ="table5_col5">
+                @{
+                    if (Model.Lead != null && Model.Lead.installations.Count != 0)
+                    {
+                        foreach (var item in Model.Lead.installations)
+                        {
+                            if (item.installation_labor_only_cost != null)
+                            {
+                                @String.Format("{0:#,0.00}", item.installation_labor_only_cost)
+                            }
+                        }
+                    }
+                }
+            </td>
+            <td class ="table5_col6">Installation Labor Only</td>
+            <td class ="table5_border_right"></td>
+        </tr>
+        <tr>
+            <td colspan="3" class ="table5_border_left"></td>
+            <td class ="table5_col3">Billable Hours</td>
+            <td colspan="2" class="table5_col4">
+                @{
+                    if (Model.Lead != null && Model.Lead.installations.Count != 0)
+                    {
+                        foreach (var item in Model.Lead.installations)
+                        {
+                            @item.billable_hours
+                        }
+                    }
+                }
+            </td>
+            <td class="table5_col5">
+                @{
+                    if (Model.Lead != null && Model.Lead.installations.Count != 0)
+                    {
+                        foreach (var item in Model.Lead.installations)
+                        {
+                            if (item.total_travel_cost != null)
+                            {
+                                @String.Format("{0:#,0.00}", item.total_travel_cost)
+                            }
+                        }
+                    }
+                }
+            </td>
+            <td class ="table5_col6">Travel Hrs Expense</td>
+            <td class ="table5_border_right"></td>
+        </tr>
+        <tr>
+            <td class ="table5_border_left"></td>
+            <td class ="table5_col1">
+                @{
+                    if (Model.Lead != null && Model.Lead.installations.Count != 0)
+                    {
+                        foreach (var item in Model.Lead.installations)
+                        {
+                            @item.required_hotel_nights
+                        }
+                    }
+                }
+            </td>
+            <td class ="table5_col2"># of Hotel nights required</td>
+            <td class ="table5_col3">TRAVEL- Total Miles (Roundtrip x Days)</td>
+            <td colspan="2" class="table5_col4">
+                @{
+                    if (Model.Lead != null && Model.Lead.installations.Count != 0)
+                    {
+                        foreach (var item in Model.Lead.installations)
+                        {
+                           @item.total_miles
+                        }
+                    }
+                }
+            </td>
+            <td class="table5_col5">
+                @{
+                    if (Model.Lead != null && Model.Lead.installations.Count != 0)
+                    {
+                        foreach (var item in Model.Lead.installations)
+                        {
+                            if (item.mileage_expense != null)
+                            {
+                                @String.Format("{0:#,0.00}", item.mileage_expense)
+                            }
+                        }
+                    }
+                }
+            </td>
+            <td class ="table5_col6">Mileage</td>
+            <td class ="table5_border_right"></td>
+        </tr>
+        <tr>
+            <td class ="table5_border_left"></td>
+            <td class ="table5_col1">
+                @{
+                    if (Model.Lead != null && Model.Lead.installations.Count != 0)
+                    {
+                        foreach (var item in Model.Lead.installations)
+                        {
+                            @item.travel_time_one_way
+                        }
+                    }
+                }
+            </td>
+            <td class ="table5_col2">Travel Time One Way</td>
+            <td colspan="6" class ="table5_border_right"></td>
+        </tr>
+        <tr>
+            <td class="table5_border_left"></td>
+            <td class="table5_col1">
+                @{
+                    if (Model.PaidTravelTimeOneWay != 0)
+                    {
+                        @Model.PaidTravelTimeOneWay
+                    }
+                }
+            </td>
+            <td class="table5_col2">Paid travel time per (1 way)</td>
+            <td class="table5_col3">Applicable Taxes (Use, B&O, Municipal)</td>
+            <td colspan="2" class="table5_col4">
+                @{
+                    if (Model.TotalCost != null)
+                    {
+                        @Model.TotalCost.tax_cost
+                    }
+                }
+            </td>
+            <td class="table5_col5">
+                @{
+                    if (Model.Lead != null && Model.Lead.installations.Count != 0)
+                    {
+                        foreach (var item in Model.Lead.installations)
+                        {
+                            if (item.hotel_expense != null)
+                            {
+                                @String.Format("{0:#,0.00}", item.hotel_expense)
+                            }
+                        }
+                    }
+                }
+            </td>
+            <td class="table5_col6">Hotel</td>
+            <td class="table5_border_right"></td>
+        </tr>
+        <tr>
+            <td class="table5_border_left"></td>
+            <td class="table5_col1">
+                @{
+                    if (Model.TwoWayMilesToJob != 0)
+                    {
+                        @Model.TwoWayMilesToJob
+                    }
+                }
+            </td>
+            <td class="table5_col2">Calculated (2-Way) Miles to Job</td>
+            <td colspan="3" class="table5_col3_4_combine"></td>
+            <td class="table5_col5">
+                @{
+                    if (Model.TotalCost != null)
+                    {
+                        @String.Format("{0:#,0.00}", Model.TotalCost.building_permit_cost)
+                    }
+                }
+            </td>
+            <td class="table5_col6">Building Permit</td>
+            <td class="table5_border_right"></td>
+        </tr>
+        <tr>
+            <td class="table5_border_left"></td>
+            <td class="table5_col1">
+                @{
+                    if (Model.Lead != null && Model.Lead.installations.Count != 0)
+                    {
+                        foreach (var item in Model.Lead.installations)
+                        {
+                            @item.total_miles
+                        }
+                    }
+                }
+            </td>
+            <td class="table5_col2">Miles Traveled (If staying in a Hotel)</td>
+            <td colspan="3" class="table5_col3_4_combine"></td>
+            <td class="table5_col5">
+                @{
+                    if (Model.OperationalExp != 0)
+                    {
+                        @String.Format("{0:#,0.00}", Model.OperationalExp)
+                    }
+                }
+            </td>
+            <td class="table5_col6">Operational Expense</td>
+            <td class="table5_border_right"></td>
+        </tr>
+        <tr>
+            <td class="table5_border_left"></td>
+            <td class="table5_col1">@Model.TotalApplicableTravelHours</td>
+            <td class="table5_col2">Total Applicable Travel Hours</td>
+            <td colspan="3" class="table5_col3_4_combine"></td>
+            <td class="table5_col5">
+                @{
+                    if (Model.Lead != null && Model.Lead.installations.Count != 0)
+                    {
+                        foreach (var item in Model.Lead.installations)
+                        {
+                            if (item.total_per_diem_cost != null)
+                            {
+                                @String.Format("{0:#,0.00}", item.total_per_diem_cost)
+                            }
+                        }
+                    }
+                }
+            </td>
+            <td class="table5_col6">Per Diem</td>
+            <td class="table5_border_right"></td>
+        </tr>
+        <tr>
+            <td class="table5_border_left"></td>
+            <td class="table5_col1">
+                @{
+                    if (Model.Lead != null && Model.Lead.installations.Count != 0)
+                    {
+                        foreach (var item in Model.Lead.installations)
+                        {
+                            @item.total_per_diem_cost
+                        }
+                    }
+                }
+            </td>
+            <td class="table5_col2">Per diem (2 men/day)</td>
+            <td colspan="6" class="table5_border_right"></td>
+        </tr>
+        <tr>
+            <td class="table5_border_left"></td>
+            <td class="table5_col1">
+                @{
+                    if (Model.Lead != null && Model.Lead.installations.Count != 0)
+                    {
+                        foreach (var item in Model.Lead.installations)
+                        {
+                            @item.hotel_expense
+                        }
+                    }
+                }
+            </td>
+            <td class="table5_col2">Total Hotel Expense</td>
+            <td colspan="6" class="table5_border_right"></td>
+        </tr>
+        <tr>
+            <td class="table5_border_left"></td>
+            <td class="table5_col1">
+                @{
+                    if (Model.Lead != null && Model.Lead.installations.Count != 0)
+                    {
+                        foreach (var item in Model.Lead.installations)
+                        {
+                            @item.hotel_round_trip
+                        }
+                    }
+                }
+            </td>
+            <td class="table5_col2">Roundtrips (HOTEL)</td>
+            <td class="table5_col3">Installation Days (hours/8)</td>
+            <td class="table5_col4_1">
+                @{
+                    if (Model.Lead != null && Model.Lead.installations.Count != 0)
+                    {
+                        foreach (var item in Model.Lead.installations)
+                        {
+                            @item.installation_days
+                        }
+                    }
+                }
+            </td>
+            <td class="table5_col4_2"></td>
+            <td class="table5_col5">
+                @{
+                    double totalLaborCost = 0.00;
+                    if (Model.Lead != null) {
+                        if (Model.Lead.installations.Count != 0)
+                        {
+                            foreach (var item in Model.Lead.installations)
+                            {
+                                totalLaborCost = item.total_installation_labor_cost != null ? (double)item.total_installation_labor_cost : 0.00;
+                            }
+                        }
+                        else
+                        {
+                            if (Model.TotalCost != null && Model.TotalCost.building_permit_cost != null)
+                            {
+                                totalLaborCost += (double)Model.TotalCost.building_permit_cost;
+                            }
+
+                            totalLaborCost += Model.OperationalExp;
+                        }
+                    }
+                    @String.Format("{0:#,0.00}", totalLaborCost)
+                }
+            </td>
+            <td class="table5_col6">Installation Labor Expense</td>
+            <td class="table5_border_right"></td>
+        </tr>
+        <tr>
+            <td class="table5_border_left"></td>
+            <td class="table5_col1">
+                @{
+                    if (Model.Lead != null && Model.Lead.installations.Count != 0)
+                    {
+                        foreach (var item in Model.Lead.installations)
+                        {
+                            @item.installation_days
+                        }
+                    }
+                }
+            </td>
+            <td class="table5_col2">Roundtrips (TRAVEL)</td>
+            <td class="table5_col3">Tile Installation Days (hours/8)</td>
+            <td class="table5_col4">
+                @{
+                    if (Model.Lead != null && Model.Lead.installations.Count != 0)
+                    {
+                        foreach (var item in Model.Lead.installations)
+                        {
+                           @item.tile_installation_days
+                        }
+                    }
+                }
+            </td>
+            <td colspan="4" class="table5_border_right"></td>
+        </tr>
+        <tr>
+            <td colspan="3" class="table5_border_left"></td>
+            <td class="table5_col3">Total Install Days on Job</td>
+            <td class="table5_col4_1">
+                @{
+                    if (Model.TotalInstallationDays != 0) {
+                        @Model.TotalInstallationDays
+                    }
+                }
+            </td>
+            <td class="table5_col4_2"></td>
+            <td class="table5_col5">
+                @{
+                    if (Model.Lead != null && Model.Lead.installations.Count != 0)
+                    {
+                        foreach (var item in Model.Lead.installations)
+                        {
+                            if (item.total_construction_materials_cost != null)
+                            {
+                                @String.Format("{0:#,0.00}", item.total_construction_materials_cost)
+                            }
+                        }
+                    }
+                }
+            </td>
+            <td class="table5_col6">Installation Materials Price</td>
+            <td class="table5_border_right"></td>
+        </tr>
+        <tr>
+            <td colspan="9" style="height:15px; background-color:rgb(166,166,166)"></td>
+        </tr>
+    </table>
+</body>
+</html>

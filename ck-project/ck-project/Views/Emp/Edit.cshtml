@@ -1,0 +1,116 @@
+﻿@model ck_project.employee
+
+@Html.Partial("_AdminMenu")
+
+<div class="container">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+
+
+            <table>
+                <tr>
+                    <td style="width:1150px"><h3>Edit Employee Information</h3></td>
+                    <td style="width:50px">
+                    </td>
+                </tr>
+            </table>
+            <div style="padding-bottom:10px"></div>
+
+            <h5>All the fields with star are required</h5>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.emp_number)
+
+            <!-- Form start -->
+
+            <div class='col-xs-4'>
+                <div class="form-group">
+                    <label class="control-label" for="name">First Name*</label>
+                    @Html.EditorFor(model => model.emp_firstname, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.emp_firstname, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <!-- Text input-->
+            <div class='col-xs-4'>
+                <div class="form-group">
+                    <label class="control-label" for="email">Middle Name</label>
+                    @Html.EditorFor(model => model.emp_middlename, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.emp_middlename, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class='col-xs-4'>
+                <div class="form-group">
+                    <label class="control-label" for="date">Last Name*</label>
+                    @Html.EditorFor(model => model.emp_lastname, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.emp_lastname, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class='col-xs-4'>
+                <div class="form-group">
+                    <label class="control-label" for="date">System Username*</label>
+
+                    @Html.EditorFor(model => model.emp_username, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.emp_username, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class='col-xs-4'>
+                <div class="form-group">
+                    <label class="control-label" for="date">Password*</label>
+
+                    @Html.EditorFor(model => model.emp_password, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.emp_password, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class='col-xs-4'>
+                <div class="form-group">
+                    <label class="control-label" for="date">Phone Number*</label>
+                    @Html.EditorFor(model => model.phone_number, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.phone_number, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class='col-xs-4 '>
+                <div class="form-group">
+                    <label class='control-label'>User Type*</label>
+                    @Html.DropDownList("user_type_number", (IEnumerable<SelectListItem>)ViewBag.utype, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.user_type_number, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class='col-xs-4'>
+                <div class="form-group">
+                    <label class='control-label'>Branch*</label>
+                    @Html.DropDownList("branch_number", (IEnumerable<SelectListItem>)ViewBag.branch, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.branch_number, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <!-- Form end -->
+
+            <div class="form-group">
+                <div class="col-md-offset-0 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+    <div>
+        @Html.ActionLink("Back to List", "ListEmp")
+    </div>
+</div>
+
+       @section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @if (ViewBag.m != null)
+    {
+        <script type="text/javascript">
+ $(document).ready(function () {
+     toastr.success('@ViewBag.m');
+       
+});
+        </script>
+    }
+    }

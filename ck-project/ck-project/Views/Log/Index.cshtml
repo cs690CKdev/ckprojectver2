@@ -1,0 +1,85 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<ck_project.lead_log_file>
+
+
+@Html.Partial("_AdminMenu")
+
+<div class="container">
+
+
+
+    @Html.Action("Search")
+    <table class="table table-striped">
+        <thead class="mdb-color darken-3">
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().lead.project_name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().emp_username)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().table_name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().column_name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().action_name)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.First().prvious_value)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().new_value)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().update_date)
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+        @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.lead.project_name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.emp_username)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.table_name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.column_name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.action_name)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.prvious_value)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.new_value)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.update_date)
+                    </td>
+
+
+                </tr>
+            }
+        }
+    </table>
+
+    @Html.PagedListPager(Model, page => Url.Action("Index",
+     new { page, search = Request.QueryString["Search"], Type = Request.QueryString["type"], Start = Request.QueryString["start"], end = Request.QueryString["end"] }), new PagedListRenderOptions() { DisplayPageCountAndCurrentLocation = true })
+</div>

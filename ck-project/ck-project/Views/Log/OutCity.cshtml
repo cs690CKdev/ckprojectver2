@@ -1,0 +1,132 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<ck_project.rate>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @if (ViewBag.m != null)
+    {
+        <script type="text/javascript">
+ $(document).ready(function () {
+     toastr.success('@ViewBag.m');
+     @ViewBag.m = null
+ });
+
+        </script>
+    }
+}
+@{
+    if (HttpContext.Current.User.IsInRole("Administrator"))
+    {
+        @Html.Partial("_AdminMenu")
+    }
+    else
+
+    {
+        @Html.Partial("_MainMenu")
+    }
+}
+
+<div class="container">
+    <table>
+        <tr>
+            <td style="width:100%"><h3>Edit Labor-Cost</h3></td>
+
+        </tr>
+    </table>
+    <table class="table table-striped">
+        <thead class="mdb-color darken-3">
+            <tr>
+
+                <th>
+                    Rate Name
+                </th>
+
+                <th>
+                    Amount
+                </th>
+                <th>
+                    Effective Date
+
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+
+
+        <tr>
+
+            <td>
+                @using (Html.BeginForm("OutCity", "Log", FormMethod.Get))
+                {
+
+                    @Html.DropDownList("type", (IEnumerable<SelectListItem>)ViewBag.lead_type, new { @class = "search_box", onchange = "this.form.submit()" })
+
+
+                }
+            </td>
+
+
+
+
+            @if (Model != null)
+            {
+                @*@if (Model.Count() == 0)
+                    {
+                        <tr>
+                            <td colspan="6"> Sorry, There are no leads with the entered project name
+                            <td>
+                        </tr>
+                    }
+                    else
+                    {*@
+                foreach (var item in Model)
+                {
+
+
+
+
+
+                    <td>
+
+                        @Html.TextBox("Search", ViewData.TemplateInfo.FormattedModelValue, new { placeholder = @Html.DisplayFor(model => item.amount), @class = "search_box" })
+                    </td>
+                    <td>
+
+                        <input type="date" name="start" class="search_box" />
+                    </td>
+                    <td>
+                        <input type="submit" value="Update" class="btn btn-default" />
+
+
+
+
+
+                    </td>
+
+                }
+            }
+
+
+
+
+
+        </tr>
+        @*  <tr>
+                <td>
+                    <input type="button" value="Create Lead" onclick="location.href='@Url.Action("ListCustomers", "Customers")'" class="btn btn-default" style="width: 100px;" />
+                </td>
+            </tr> *@
+    </table>
+
+
+
+
+    @Html.PagedListPager(Model, page => Url.Action("OutCity",
+             new { page, search = Request.QueryString["Search"], Type = Request.QueryString["type"], Start = Request.QueryString["start"], end = Request.QueryString["end"] }), new PagedListRenderOptions() { DisplayPageCountAndCurrentLocation = true })
+
+
+
+</div>
+
+
+

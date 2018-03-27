@@ -1,0 +1,1127 @@
+﻿@model ck_project.Models.ProjectSummary
+
+@{
+    ViewBag.Title = "ProductsInternal";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    @*<meta name="viewport" content="initial-scale=1.0">*@
+    <title>Sale Contract Management System</title>
+    <link href="http://leadmanagealpha.apphb.com/Content/bootstrap.sandstone.css" rel="stylesheet" type="text/css" />
+    <link href="http://leadmanagealpha.apphb.com/Content/Print.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="pic2" align="center"><img src="http://leadmanagealpha.apphb.com/Content/Images/proposal_pic2.png" /></div>
+    <div class="header"><h2>PRODUCT AND MATERIALS DETAILS (Office Copy)</h2></div>
+    <table>
+        <tr>
+            <td style="width:100px; padding-right: 3px; color:gray">PROJECT:</td>
+            <td colspan="4" style="width:450px"></td>
+            <td style="width:100px; padding-right: 3px; color:gray">BILL TO:</td>
+            <td colspan="4" style="width:450px"></td>
+        </tr>
+        <tr>
+            <td style="width:100px; text-align:right; padding-right: 3px; color:gray">NAME</td>
+            <td colspan="3" style="width:300px; border-bottom: 1px dotted gray; font-weight:bold">
+                @{ 
+                    if (Model.Customer != null)
+                    {
+                        @Model.Customer.customer_firstname@:&nbsp;@Model.Customer.customer_lastname
+                    }
+                }
+            </td>
+            <td style="width:10px"></td>
+            <td style="width:100px; text-align:right; padding-right: 3px; color:gray">NAME</td>
+            <td colspan="3" style="width:300px; border-bottom: 1px dotted gray; font-weight:bold">
+                @{
+                    if (Model.Customer != null)
+                    {
+                        @Model.Customer.customer_firstname@:&nbsp;@Model.Customer.customer_lastname
+                    }
+                }
+            </td>
+            <td style="width:100px"></td>
+        </tr>
+        <tr>
+            <td style="width:100px; text-align:right; padding-right: 3px; color:gray">ADDRESS</td>
+            <td colspan="3" style="width:300px; border-bottom: 1px dotted gray; font-weight:bold">
+                @{
+                    if (Model.JobsiteAddress != null)
+                    {
+                        @Model.JobsiteAddress.address1
+                    }
+                }
+            </td>
+            <td style="width:100px"></td>
+            <td style="width:100px; text-align:right; padding-right: 3px; color:gray">ADDRESS</td>
+            <td colspan="3" style="width:300px; border-bottom: 1px dotted gray; font-weight:bold">
+                @{
+                    if (Model.Lead != null && Model.Lead.customer.address != null)
+                    {
+                        @Model.Lead.customer.address.address1
+                    }
+                    else if (Model.JobsiteAddress != null)
+                    {
+                        @Model.JobsiteAddress.address1
+                    }
+                }
+            </td>
+            <td rowspan="3" style="width:100px; border: 1px solid black; padding-right: 3px; text-align:center; font-size:12px"><b>Customer#</b> <br />
+                @{
+                    if (Model.Lead != null)
+                    {
+                        @Model.Lead.customer_number
+                    }
+                }
+               <br /> <text style="font-size:9px">@String.Format("{0:d/M/yyyy hh:mm tt}", DateTime.Now)</ text ></td>
+        </tr>
+        <tr>
+            <td style="width:100px; text-align:right; padding-right: 3px; color:gray">CITY</td>
+            <td colspan="3" style="width:300px; border-bottom: 1px dotted gray; font-weight:bold">
+                @{
+                    if (Model.JobsiteAddress != null)
+                    {
+                        @Model.JobsiteAddress.city
+                    }
+                }
+            </td>
+            <td style="width:100px"></td>
+            <td style="width:100px; text-align:right; padding-right: 3px; color:gray">CITY</td>
+            <td colspan="3" style="width:300px; border-bottom: 1px dotted gray; font-weight:bold">
+                @{
+                    if (Model.Lead != null && Model.Lead.customer.address != null)
+                    {
+                        @Model.Lead.customer.address.city
+                    }
+                    else if (Model.JobsiteAddress != null)
+                    {
+                        @Model.JobsiteAddress.city
+                    }
+                }
+            </td>
+        </tr>
+        <tr>
+            <td style="width:100px; text-align:right; padding-right: 3px; color:gray">STATE</td>
+            <td style="width:100px; border-bottom: 1px dotted gray; font-weight:bold">
+                @{
+                    if (Model.JobsiteAddress != null)
+                    {
+                        @Model.JobsiteAddress.state
+                    }
+                }
+            </td>
+            <td style="width:100px; text-align:right; padding-right: 3px; color:gray">ZIP</td>
+            <td style="width:100px; border-bottom: 1px dotted gray; font-weight:bold">
+                @{
+                    if (Model.JobsiteAddress != null)
+                    {
+                        @Model.JobsiteAddress.zipcode
+                    }
+                }
+            </td>
+            <td style="width:100px"></td>
+            <td style="width:100px; text-align:right; padding-right: 3px; color:gray">STATE</td>
+            <td style="width:100px; border-bottom: 1px dotted gray; font-weight:bold">
+                @{
+                    if (Model.Lead != null && Model.Lead.customer.address != null)
+                    {
+                        @Model.Lead.customer.address.state
+                    }
+                    else if (Model.JobsiteAddress != null)
+                    {
+                        @Model.JobsiteAddress.state
+                    }
+                }
+            </td>
+            <td style="width:100px; text-align:right; padding-right: 3px; color:gray">ZIP</td>
+            <td style="width:100px; border-bottom: 1px dotted gray; font-weight:bold">
+                @{
+                    if (Model.Lead != null && Model.Lead.customer.address != null)
+                    {
+                        @Model.Lead.customer.address.zipcode
+                    }
+                    else if (Model.JobsiteAddress != null)
+                    {
+                        @Model.JobsiteAddress.zipcode
+                    }
+                }
+            </td>
+        </tr>
+        <tr>
+            <td style="width:100px; text-align:right; padding-right: 3px; color:gray">PHONE#</td>
+            <td style="width:120px; border-bottom: 1px dotted gray; font-weight:bold">
+                @{
+                    if (Model.Lead != null && Model.Lead.phone_number != null && !Model.Lead.phone_number.Equals(""))
+                    {
+                        @String.Format("{0:(###) ###-####}", Convert.ToInt64(Model.Lead.phone_number))
+                    }
+                }
+            </td>
+            <td style="width:100px; text-align:right; padding-right: 3px; color:gray">ALT#</td>
+            <td colspan="2" style="width:200px; border-bottom: 1px dotted gray; font-weight:bold">
+                @{
+                    if (Model.Lead != null && Model.Lead.second_phone_number != null && !Model.Lead.second_phone_number.Equals(""))
+                    {
+                        @String.Format("{0:(###) ###-####}", Convert.ToInt64(Model.Lead.second_phone_number))
+                    }
+                }
+            </td>
+            <td style="width:100px; text-align:right; padding-right: 3px; color:gray">PHONE#</td>
+            <td style="width:120px; border-bottom: 1px dotted gray; font-weight:bold">
+                @{
+                    if (Model.Lead != null && Model.Lead.customer.phone_number != null && !Model.Lead.customer.phone_number.Equals(""))
+                    {
+                        @String.Format("{0:(###) ###-####}", Convert.ToInt64(Model.Lead.customer.phone_number))
+                    }
+                    else if (Model.Lead.phone_number != null && !Model.Lead.phone_number.Equals(""))
+                    {
+                        @String.Format("{0:(###) ###-####}", Convert.ToInt64(Model.Lead.phone_number))
+                    }
+                }
+            </td>
+            <td style="width:100px; text-align:right; padding-right: 3px; color:gray">ALT#</td>
+            <td colspan="2" style="width:200px; border-bottom: 1px dotted gray; font-weight:bold; padding-left: 3px">
+                @{
+                    if (Model.Lead != null && Model.Lead.customer.second_phone_number != null && !Model.Lead.customer.second_phone_number.Equals(""))
+                    {
+                        @String.Format("{0:(###) ###-####}", Convert.ToInt64(Model.Lead.customer.second_phone_number))
+                    }
+                    else if (Model.Lead.second_phone_number != null && !Model.Lead.second_phone_number.Equals(""))
+                    {
+                        @String.Format("{0:(###) ###-####}", Convert.ToInt64(Model.Lead.second_phone_number))
+                    }
+                }
+            </td>
+        </tr>
+    </table>
+    <div style="padding-bottom:10px"></div>
+    <table style="width:50%; float:left">
+        <tr style="border-top: 1px solid black">
+            <td colspan="4" style="width:400px" class="pam_cat_row_left pam_cat_row_color">CABINETRY</td>
+            <td style="width:150px" class="pam_item_header">Location</td>
+            <td style="width:150px" class="pam_item_header">Price</td>
+        </tr>
+        @{
+            int count = 5;
+            var cabinetList = Model.ProductMapList1["CABINETRY"];
+            if (cabinetList.Count != 0)
+            {
+                foreach (var prod in cabinetList)
+                {
+                    <tr>
+                        <td colspan="4" class="pam_item_text">@prod.Description</td>
+                        <td class="pam_item_text">@prod.location</td>
+                        <td class="pam_item_price">@String.Format("{0:#,0.00}", prod.price * prod.quantity)</td>
+                    </tr>
+                    count--;
+                }
+            }
+
+            if (count > 0)
+            {
+                for (int i = count; i > 0; i--)
+                {
+                    <tr>
+                        <td colspan="4" class="pam_item_nodata"></td>
+                        <td class="pam_item_nodata"></td>
+                        <td class="pam_item_nodata"></td>
+                    </tr>
+                }
+            }
+        }
+        <tr>
+            <td colspan="4" style="width:400px" class="pam_cat_row_left pam_cat_row_color">HARDWARE</td>
+            <td style="width:150px" class="pam_total_col">TOTAL $</td>
+            <td style="width:150px" class="pam_totalprice_col">
+                @{
+                    if (Model.ProductTotalMap != null)
+                    {
+                        double cabtotal = Model.ProductTotalMap["CABINETRY"];
+                        if (cabtotal != 0)
+                        {
+                            @String.Format("{0:#,0.00}", cabtotal)
+                        }
+                    }
+                }
+            </td>
+        </tr>
+        <tr>
+            <td style="width:50px" class="pam_item_header">Qty</td>
+            <td style="width:50px" class="pam_item_header">Mfg.</td>
+            <td style="width:100px" class="pam_item_header">Model</td>
+            <td style="width:200px" class="pam_item_header">Description</td>
+            <td style="width:150px" class="pam_item_header">Location</td>
+            <td style="width:150px" class="pam_item_header">Price</td>
+        </tr>
+        @{
+            count = 5;
+            var hardwareList = Model.ProductMapList1["HARDWARE"];
+            if (hardwareList.Count != 0)
+            {
+                foreach (var prod in hardwareList)
+                {
+                    <tr>
+                        <td class="pam_item_qty">@String.Format("{0:#,#}", prod.quantity)</td>
+                        <td class="pam_item_text">@prod.manufacture</td>
+                        <td class="pam_item_text">@prod.model</td>
+                        <td class="pam_item_text">@prod.Description</td>
+                        <td class="pam_item_text">@prod.location</td>
+                        <td class="pam_item_price">@String.Format("{0:#,0.00}", prod.price * prod.quantity)</td>
+                    </tr>
+                    count--;
+                }
+            }
+
+            if (count > 0)
+            {
+                for (int i = count; i > 0; i--)
+                {
+                    <tr>
+                        <td class="pam_item_nodata"></td>
+                        <td class="pam_item_nodata"></td>
+                        <td class="pam_item_nodata"></td>
+                        <td class="pam_item_nodata"></td>
+                        <td class="pam_item_nodata"></td>
+                        <td class="pam_item_nodata"></td>
+                    </tr>
+                }
+            }
+        }
+
+        @{
+            var ventiList = Model.ProductMapList1["VENTILATION/LIGHTING/ENCLOSURES"];
+            if (ventiList.Count != 0)
+            {
+                <tr>
+                    <td colspan="4" style="width:400px" class="pam_cat_row_left pam_cat_row_color">VENTILATION/LIGHTING/ENCLOSURES</td>
+                    <td style="width:150px" class="pam_total_col">TOTAL $</td>
+                    <td style="width:150px" class="pam_totalprice_col">
+                        @{
+                            if (Model.ProductTotalMap != null)
+                            {
+                                double harTotal = Model.ProductTotalMap["HARDWARE"];
+                                if (harTotal != 0)
+                                {
+                                    @String.Format("{0:#,0.00}", harTotal)
+                                }
+                            }
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:50px" class="pam_item_header">Qty</td>
+                    <td style="width:50px" class="pam_item_header">Mfg.</td>
+                    <td style="width:100px" class="pam_item_header">Model</td>
+                    <td style="width:200px" class="pam_item_header">Color</td>
+                    <td style="width:150px" class="pam_item_header">Description</td>
+                    <td style="width:150px" class="pam_item_header">Price</td>
+                </tr>
+
+                count = 5;
+                foreach (var prod in ventiList)
+                {
+                    <tr>
+                        <td class="pam_item_qty">@String.Format("{0:#,#}", prod.quantity)</td>
+                        <td class="pam_item_text">@prod.manufacture</td>
+                        <td class="pam_item_text">@prod.model</td>
+                        <td class="pam_item_text">@prod.color</td>
+                        <td class="pam_item_text">@prod.Description</td>
+                        <td class="pam_item_price">@String.Format("{0:#,0.00}", prod.price * prod.quantity)</td>
+                    </tr>
+                    count--;
+                }
+
+                if (count > 0)
+                {
+                    for (int i = count; i > 0; i--)
+                    {
+                        <tr>
+                            <td class="pam_item_nodata"></td>
+                            <td class="pam_item_nodata"></td>
+                            <td class="pam_item_nodata"></td>
+                            <td class="pam_item_nodata"></td>
+                            <td class="pam_item_nodata"></td>
+                            <td class="pam_item_nodata"></td>
+                        </tr>
+                    }
+                }
+
+                <tr>
+                    <td colspan="4" style="width:400px" class="pam_cat_row_left pam_cat_row_color">OWNER PROVIDED PRODUCT</td>
+                    <td style="width:150px" class="pam_total_col">TOTAL $</td>
+                    <td style="width:150px" class="pam_totalprice_col">
+                        @{
+                            if (Model.ProductTotalMap != null)
+                            {
+                                double appTotal = Model.ProductTotalMap["VENTILATION/LIGHTING/ENCLOSURES"];
+                                if (appTotal != 0)
+                                {
+                                    @appTotal
+                                }
+                            }
+                        }
+                    </td>
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <td colspan="4" style="width:400px" class="pam_cat_row_left pam_cat_row_color">APPLIANCES</td>
+                    <td style="width:150px" class="pam_total_col">TOTAL $</td>
+                    <td style="width:150px" class="pam_totalprice_col">
+                        @{
+                            if (Model.ProductTotalMap != null)
+                            {
+                                double harTotal = Model.ProductTotalMap["HARDWARE"];
+                                if (harTotal != 0)
+                                {
+                                    @String.Format("{0:#,0.00}", harTotal)
+                                }
+                            }
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:50px" class="pam_item_header">Qty</td>
+                    <td style="width:50px" class="pam_item_header">Mfg.</td>
+                    <td style="width:100px" class="pam_item_header">Model</td>
+                    <td style="width:200px" class="pam_item_header">Color</td>
+                    <td style="width:150px" class="pam_item_header">Description</td>
+                    <td style="width:150px" class="pam_item_header">Price</td>
+                </tr>
+
+                count = 5;
+                var appList = Model.ProductMapList1["APPLIANCES"];
+                if (appList.Count != 0)
+                {
+                    foreach (var prod in appList)
+                    {
+                        <tr>
+                            <td class="pam_item_qty">@String.Format("{0:#,#}", prod.quantity)</td>
+                            <td class="pam_item_text">@prod.manufacture</td>
+                            <td class="pam_item_text">@prod.model</td>
+                            <td class="pam_item_text">@prod.color</td>
+                            <td class="pam_item_text">@prod.Description</td>
+                            <td class="pam_item_price">@String.Format("{0:#,0.00}", prod.price * prod.quantity)</td>
+                        </tr>
+                        count--;
+                    }
+                }
+
+                if (count > 0)
+                {
+                    for (int i = count; i > 0; i--)
+                    {
+                        <tr>
+                            <td class="pam_item_nodata"></td>
+                            <td class="pam_item_nodata"></td>
+                            <td class="pam_item_nodata"></td>
+                            <td class="pam_item_nodata"></td>
+                            <td class="pam_item_nodata"></td>
+                            <td class="pam_item_nodata"></td>
+                        </tr>
+                    }
+                }
+
+                <tr>
+                    <td colspan="4" style="width:400px" class="pam_cat_row_left pam_cat_row_color">OWNER PROVIDED PRODUCT</td>
+                    <td style="width:150px" class="pam_total_col">TOTAL $</td>
+                    <td style="width:150px" class="pam_totalprice_col">
+                        @{
+                            if (Model.ProductTotalMap != null)
+                            {
+                                double appTotal = Model.ProductTotalMap["APPLIANCES"];
+                                if (appTotal != 0)
+                                {
+                                    @String.Format("{0:#,0.00}", appTotal)
+                                }
+                            }
+                        }
+                    </td>
+                </tr>
+            }
+        }
+
+        <tr>
+            <td style="width:50px" class="pam_item_header">Qty</td>
+            <td colspan="4" style="width:700px" class="pam_item_header">Description</td>
+            <td style="width:150px" class="pam_item_header">Price</td>
+        </tr>
+        @{
+            count = 5;
+            var ownerList = Model.ProductMapList1["OWNER PROVIDED PRODUCT"];
+            if (ownerList.Count != 0)
+            {
+                foreach (var prod in ownerList)
+                {
+                    <tr>
+                        <td class="pam_item_qty">@String.Format("{0:#,#}", prod.quantity)</td>
+                        <td colspan="4" class="pam_item_text">@prod.Description</td>
+                        <td class="pam_item_price">@String.Format("{0:#,0.00}", prod.price * prod.quantity)</td>
+                    </tr>
+                    count--;
+                }
+            }
+
+            if (count > 0)
+            {
+                for (int i = count; i > 0; i--)
+                {
+                    <tr>
+                        <td class="pam_item_nodata"></td>
+                        <td colspan="4" class="pam_item_nodata"></td>
+                        <td class="pam_item_nodata"></td>
+                    </tr>
+                }
+            }
+        }
+
+        @{
+            var miscList = Model.ProductMapList1["MISC ITEMS"];
+            if (miscList.Count != 0)
+            {
+                <tr>
+                    <td colspan="4" style="width:400px" class="pam_cat_row_left pam_cat_row_color">MISC ITEMS</td>
+                    <td style="width:150px" class="pam_total_col">TOTAL $</td>
+                    <td style="width:150px" class="pam_totalprice_col">
+                        @{
+                            if (Model.ProductTotalMap != null)
+                            {
+                                double ownTotal = Model.ProductTotalMap["OWNER PROVIDED PRODUCT"];
+                                if (ownTotal != 0)
+                                {
+                                    @String.Format("{0:#,0.00}", ownTotal)
+                                }
+                            }
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:50px" class="pam_item_header">Qty</td>
+                    <td style="width:50px" class="pam_item_header">Mfg.</td>
+                    <td colspan="3" style="width:350px" class="pam_item_header">Model/Finish/Description</td>
+                    <td style="width:150px" class="pam_item_header">Price</td>
+                </tr>
+
+                count = 5;
+                foreach (var prod in miscList)
+                {
+                    <tr>
+                        <td class="pam_item_qty">@String.Format("{0:#,#}", prod.quantity)</td>
+                        <td class="pam_item_text">@prod.manufacture</td>
+                        <td colspan="3" class="pam_item_text">@prod.model/@prod.color/@prod.Description</td>
+                        <td class="pam_item_price">@String.Format("{0:#,0.00}", prod.price * prod.quantity)</td>
+                    </tr>
+                    count--;
+                }
+
+                if (count > 0)
+                {
+                    for (int i = count; i > 0; i--)
+                    {
+                        <tr>
+                            <td class="pam_item_nodata"></td>
+                            <td class="pam_item_nodata"></td>
+                            <td class="pam_item_nodata"></td>
+                            <td colspan="2" class="pam_item_nodata"></td>
+                            <td class="pam_item_nodata"></td>
+                        </tr>
+                    }
+                }
+                <tr>
+                    <td colspan="4" style="width:400px; border-right: 1px solid black"></td>
+                    <td style="width:150px" class="pam_total_col">TOTAL $</td>
+                    <td style="width:150px" class="pam_totalprice_col">
+                        @{
+                            if (Model.ProductTotalMap != null)
+                            {
+                                double accTotal = Model.ProductTotalMap["MISC ITEMS"];
+                                if (accTotal != 0)
+                                {
+                                    @String.Format("{0:#,0.00}", accTotal)
+                                }
+                            }
+                        }
+                    </td>
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <td colspan="4" style="width:400px" class="pam_cat_row_left pam_cat_row_color">ACCESSORIES & MIRRORS</td>
+                    <td style="width:150px" class="pam_total_col">TOTAL $</td>
+                    <td style="width:150px" class="pam_totalprice_col">
+                        @{
+                            if (Model.ProductTotalMap != null)
+                            {
+                                double ownTotal = Model.ProductTotalMap["OWNER PROVIDED PRODUCT"];
+                                if (ownTotal != 0)
+                                {
+                                    @String.Format("{0:#,0.00}", ownTotal)
+                                }
+                            }
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:50px" class="pam_item_header">Qty</td>
+                    <td style="width:50px" class="pam_item_header">Mfg.</td>
+                    <td colspan="3" style="width:350px" class="pam_item_header">Model/Finish/Description</td>
+                    <td style="width:150px" class="pam_item_header">Price</td>
+                </tr>
+
+                count = 5;
+                var accList = Model.ProductMapList1["ACCESSORIES & MIRRORS"];
+                if (accList.Count != 0)
+                {
+                    foreach (var prod in accList)
+                    {
+                        <tr>
+                            <td class="pam_item_qty">@String.Format("{0:#,#}", prod.quantity)</td>
+                            <td class="pam_item_text">@prod.manufacture</td>
+                            <td colspan="3" class="pam_item_text">@prod.model/@prod.color/@prod.Description</td>
+                            <td class="pam_item_price">@String.Format("{0:#,0.00}", prod.price * prod.quantity)</td>
+                        </tr>
+                        count--;
+                    }
+                }
+
+                if (count > 0)
+                {
+                    for (int i = count; i > 0; i--)
+                    {
+                        <tr>
+                            <td class="pam_item_nodata"></td>
+                            <td class="pam_item_nodata"></td>
+                            <td class="pam_item_nodata"></td>
+                            <td colspan="2" class="pam_item_nodata"></td>
+                            <td class="pam_item_nodata"></td>
+                        </tr>
+                    }
+                }
+                <tr>
+                    <td colspan="4" style="width:400px; border-right: 1px solid black"></td>
+                    <td style="width:150px" class="pam_total_col">TOTAL $</td>
+                    <td style="width:150px" class="pam_totalprice_col">
+                        @{
+                            if (Model.ProductTotalMap != null)
+                            {
+                                double accTotal = Model.ProductTotalMap["ACCESSORIES & MIRRORS"];
+                                if (accTotal != 0)
+                                {
+                                    @String.Format("{0:#,0.00}", accTotal)
+                                }
+                            }
+                        }
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+    <table style="width:50%; float:left">
+        <tr style="border-top: 1px solid black">
+            <td colspan="4" style="width:400px" class="pam_cat_row_right pam_cat_row_color">COUNTERS</td>
+            <td style="width:150px" class="pam_item_header">Location</td>
+            <td style="width:150px" class="pam_item_header">Price</td>
+        </tr>
+        @{
+            count = 5;
+            var counterList = Model.ProductMapList2["COUNTERS"];
+            if (counterList.Count != 0)
+            {
+                foreach (var prod in counterList)
+                {
+                    <tr>
+                        <td colspan="4" class="pam_item_text2">@prod.Description</td>
+                        <td class="pam_item_text">@prod.location</td>
+                        <td class="pam_item_price">@String.Format("{0:#,0.00}", prod.price * prod.quantity)</td>
+                    </tr>
+                    count--;
+                }
+            }
+
+            if (count > 0)
+            {
+                for (int i = count; i > 0; i--)
+                {
+                    <tr>
+                        <td colspan="4" class="pam_item_nodata2"></td>
+                        <td class="pam_item_nodata"></td>
+                        <td class="pam_item_nodata"></td>
+                    </tr>
+                }
+            }
+        }
+        
+        
+        @{
+            var plumbList = Model.ProductMapList2["PLUMBING FIXTURES, FAUCETS & FITTINGS"];
+            if (plumbList.Count != 0)
+            {
+                <tr>
+                    <td colspan="4" style="width:400px" class="pam_cat_row_right pam_cat_row_color">PLUMBING FIXTURES, FAUCETS & FITTINGS</td>
+                    <td style="width:150px" class="pam_total_col">TOTAL $</td>
+                    <td style="width:150px" class="pam_totalprice_col">
+                        @{
+                            if (Model.ProductTotalMap != null)
+                            {
+                                double couTotal = Model.ProductTotalMap["COUNTERS"];
+                                if (couTotal != 0)
+                                {
+                                    @String.Format("{0:#,0.00}", couTotal)
+                                }
+                            }
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:50px" class="pam_item_header2">Qty</td>
+                    <td style="width:50px" class="pam_item_header">Mfg.</td>
+                    <td style="width:100px" class="pam_item_header">Model</td>
+                    <td style="width:200px" class="pam_item_header">Color</td>
+                    <td style="width:150px" class="pam_item_header">Description</td>
+                    <td style="width:150px" class="pam_item_header">Price</td>
+                </tr>
+
+                count = 5;
+                foreach (var prod in plumbList)
+                {
+                    <tr>
+                        <td class="pam_item_qty2">@String.Format("{0:#,#}", prod.quantity)</td>
+                        <td class="pam_item_text">@prod.manufacture</td>
+                        <td class="pam_item_text">@prod.model</td>
+                        <td class="pam_item_text">@prod.color</td>
+                        <td class="pam_item_text">@prod.Description</td>
+                        <td class="pam_item_price">@String.Format("{0:#,0.00}", prod.price * prod.quantity)</td>
+                    </tr>
+                    count--;
+                }
+                 
+                if (count > 0)
+                {
+                    for (int i = count; i > 0; i--)
+                    {
+                        <tr>
+                            <td class="pam_item_nodata2"></td>
+                            <td class="pam_item_nodata"></td>
+                            <td class="pam_item_nodata"></td>
+                            <td class="pam_item_nodata"></td>
+                            <td class="pam_item_nodata"></td>
+                            <td class="pam_item_nodata"></td>
+                        </tr>
+                    }
+                }
+
+                <tr>
+                    <td colspan="4" style="width:400px" class="pam_cat_row_right pam_cat_row_color">DECORATIVE SURFACES</td>
+                    <td style="width:150px" class="pam_total_col">TOTAL $</td>
+                    <td style="width:150px" class="pam_totalprice_col">
+                        @{
+                            if (Model.ProductTotalMap != null)
+                            {
+                                double sinTotal = Model.ProductTotalMap["PLUMBING FIXTURES, FAUCETS & FITTINGS"];
+                                if (sinTotal != 0)
+                                {
+                                    @String.Format("{0:#,0.00}", sinTotal)
+                                }
+                            }
+                        }
+                    </td>
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <td colspan="4" style="width:400px" class="pam_cat_row_right pam_cat_row_color">SINK, STRAINER, FAUCET, FITTINGS</td>
+                    <td style="width:150px" class="pam_total_col">TOTAL $</td>
+                    <td style="width:150px" class="pam_totalprice_col">
+                        @{
+                            if (Model.ProductTotalMap != null)
+                            {
+                                double couTotal = Model.ProductTotalMap["COUNTERS"];
+                                if (couTotal != 0)
+                                {
+                                    @String.Format("{0:#,0.00}", couTotal)
+                                }
+                            }
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td style="width:50px" class="pam_item_header2">Qty</td>
+                    <td style="width:50px" class="pam_item_header">Mfg.</td>
+                    <td style="width:100px" class="pam_item_header">Model</td>
+                    <td style="width:200px" class="pam_item_header">Color</td>
+                    <td style="width:150px" class="pam_item_header">Description</td>
+                    <td style="width:150px" class="pam_item_header">Price</td>
+                </tr>
+        
+                count = 5;
+                var sinkList = Model.ProductMapList2["SINK, STRAINER, FAUCET, FITTINGS"];
+                if (sinkList.Count != 0)
+                {
+                    foreach (var prod in sinkList)
+                    {
+                        <tr>
+                            <td class="pam_item_qty2">@String.Format("{0:#,#}", prod.quantity)</td>
+                            <td class="pam_item_text">@prod.manufacture</td>
+                            <td class="pam_item_text">@prod.model</td>
+                            <td class="pam_item_text">@prod.color</td>
+                            <td class="pam_item_text">@prod.Description</td>
+                            <td class="pam_item_price">@String.Format("{0:#,0.00}", prod.price * prod.quantity)</td>
+                        </tr>
+                        count--;
+                    }
+                }
+
+                if (count > 0)
+                {
+                    for (int i = count; i > 0; i--)
+                    {
+                        <tr>
+                            <td class="pam_item_nodata2"></td>
+                            <td class="pam_item_nodata"></td>
+                            <td class="pam_item_nodata"></td>
+                            <td class="pam_item_nodata"></td>
+                            <td class="pam_item_nodata"></td>
+                            <td class="pam_item_nodata"></td>
+                        </tr>
+                    }
+                }
+
+                <tr>
+                    <td colspan="4" style="width:400px" class="pam_cat_row_right pam_cat_row_color">DECORATIVE SURFACES</td>
+                    <td style="width:150px" class="pam_total_col">TOTAL $</td>
+                    <td style="width:150px" class="pam_totalprice_col">
+                        @{
+                            if (Model.ProductTotalMap != null)
+                            {
+                                double sinTotal = Model.ProductTotalMap["SINK, STRAINER, FAUCET, FITTINGS"];
+                                if (sinTotal != 0)
+                                {
+                                    @String.Format("{0:#,0.00}", sinTotal)
+                                }
+                            }
+                        }
+                    </td>
+                </tr>
+            }
+        }
+        
+        <tr>
+            <td style="width:50px" class="pam_item_header2">Qty</td>
+            <td colspan="2" style="width:150px" class="pam_item_header">Source</td>
+            <td colspan="2" style="width:350px" class="pam_item_header">Description</td>
+            <td style="width:150px" class="pam_item_header">Price</td>
+        </tr>
+        @{
+            count = 5;
+            var decoList = Model.ProductMapList2["DECORATIVE SURFACES"];
+            if (decoList.Count != 0)
+            {
+                foreach (var prod in decoList)
+                {
+                    <tr>
+                        <td class="pam_item_qty2">@String.Format("{0:#,#}", prod.quantity)</td>
+                        <td colspan="2" class="pam_item_text">@prod.product_source</td>
+                        <td colspan="2" class="pam_item_text">@prod.Description</td>
+                        <td class="pam_item_price">@String.Format("{0:#,0.00}", prod.price * prod.quantity)</td>
+                    </tr>
+                    count--;
+                }
+            }
+
+            if (count > 0)
+            {
+                for (int i = count; i > 0; i--)
+                {
+                    <tr>
+                        <td class="pam_item_nodata2"></td>
+                        <td colspan="2" class="pam_item_nodata"></td>
+                        <td colspan="2" class="pam_item_nodata"></td>
+                        <td class="pam_item_nodata"></td>
+                    </tr>
+                }
+            }
+        }
+        
+        @{
+            var discountList = Model.ProductMapList2["DISCOUNT OR ADJUSTMENT"];
+            if (discountList.Count != 0)
+            {
+                <tr>
+                    <td colspan="4" style="width:400px" class="pam_cat_row_right pam_cat_row_color">DISCOUNT OR ADJUSTMENT</td>
+                    <td style="width:150px" class="pam_total_col">TOTAL $</td>
+                    <td style="width:150px" class="pam_totalprice_col">
+                        @{
+                            if (Model.ProductTotalMap != null)
+                            {
+                                double decTotal = Model.ProductTotalMap["DECORATIVE SURFACES"];
+                                if (decTotal != 0)
+                                {
+                                    @String.Format("{0:#,0.00}", decTotal)
+                                }
+                            }
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5" style="width:350px" class="pam_item_header2">Description</td>
+                    <td style="width:150px" class="pam_item_header">Price</td>
+                </tr>
+
+                count = 5;
+                foreach (var prod in discountList)
+                {
+                    <tr>
+                        <td colspan="5" class="pam_item_text2">@prod.Description</td>
+                        <td class="pam_item_price">@String.Format("{0:#,0.00}", prod.price * prod.quantity)</td>
+                    </tr>
+                    count--;
+                }
+
+                if (count > 0)
+                {
+                    for (int i = count; i > 0; i--)
+                    {
+                        <tr>
+                            <td colspan="5" class="pam_item_nodata2"></td>
+                            <td class="pam_item_nodata"></td>
+                        </tr>
+                    }
+                }
+
+                <tr>
+                    <td colspan="4" style="width:400px; border-right: 1px solid black"></td>
+                    <td style="width:150px" class="pam_total_col">TOTAL $</td>
+                    <td style="width:150px" class="pam_totalprice_col">
+                        @{
+                            if (Model.ProductTotalMap != null)
+                            {
+                                double addTotal = Model.ProductTotalMap["DISCOUNT OR ADJUSTMENT"];
+                                if (addTotal != 0)
+                                {
+                                    @String.Format("{0:#,0.00}", addTotal)
+                                }
+                            }
+                        }
+                    </td>
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <td colspan="4" style="width:400px" class="pam_cat_row_right pam_cat_row_color">ADDITIONAL ITEMS</td>
+                    <td style="width:150px" class="pam_total_col">TOTAL $</td>
+                    <td style="width:150px" class="pam_totalprice_col">
+                        @{
+                            if (Model.ProductTotalMap != null)
+                            {
+                                double decTotal = Model.ProductTotalMap["DECORATIVE SURFACES"];
+                                if (decTotal != 0)
+                                {
+                                    @String.Format("{0:#,0.00}", decTotal)
+                                }
+                            }
+                        }
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="5" style="width:350px" class="pam_item_header2">Description</td>
+                    <td style="width:150px" class="pam_item_header">Price</td>
+                </tr>
+
+
+                count = 5;
+                var additionaList = Model.ProductMapList2["ADDITIONAL ITEMS"];
+                if (additionaList.Count != 0)
+                {
+                    foreach (var prod in additionaList)
+                    {
+                        <tr>
+                            <td colspan="5" class="pam_item_text2">@prod.Description</td>
+                            <td class="pam_item_price">@String.Format("{0:#,0.00}", prod.price * prod.quantity)</td>
+                        </tr>
+                        count--;
+                    }
+                }
+
+                if (count > 0)
+                {
+                    for (int i = count; i > 0; i--)
+                    {
+                        <tr>
+                            <td colspan="5" class="pam_item_nodata2"></td>
+                            <td class="pam_item_nodata"></td>
+                        </tr>
+                    }
+                }
+
+                <tr>
+                    <td colspan="4" style="width:400px; border-right: 1px solid black; border-left: 1px solid black"></td>
+                    <td style="width:150px" class="pam_total_col">TOTAL $</td>
+                    <td style="width:150px" class="pam_totalprice_col">
+                        @{
+                            if (Model.ProductTotalMap != null)
+                            {
+                                double addTotal = Model.ProductTotalMap["ADDITIONAL ITEMS"];
+                                if (addTotal != 0)
+                                {
+                                    @String.Format("{0:#,0.00}", addTotal)
+                                }
+                            }
+                        }
+                    </td>
+                </tr>
+            }
+        }
+        <tr>
+            <td colspan="6" style="height:20px; border-left: 1px solid black"></td>
+        </tr>
+        <tr>
+            <td colspan="6" class="pam_cat_row_color" style="font-weight: bolder; text-align:center; border: 1px solid black;">CONTRACT TOTALS</td>
+        </tr>
+        <tr>
+            <td colspan="5" style="text-align:right; padding-right:3px; border-left: 1px solid black;">Product / Merchandise</td>
+            <td class="pam_item_price">
+                @{
+                    if (Model.TotalCost != null)
+                    {
+                        @String.Format("{0:#,0.00}", Model.TotalCost.product_cost)
+                    }
+                }
+            </td>
+        </tr>
+        <tr>
+            <td colspan="5" style="text-align:right; padding-right:3px; border-left: 1px solid black;">Construction Materials</td>
+            <td class="pam_item_price">
+                @{
+                    if (Model.Lead != null && Model.Lead.installations.Count != 0)
+                    {
+                        foreach (var item in Model.Lead.installations)
+                        {
+                            @String.Format("{0:#,0.00}", item.total_construction_materials_cost)
+                        }
+                    }
+                }
+            </td>
+        </tr>
+        <tr>
+            <td colspan="5" style="text-align:right; padding-right:3px; border-left: 1px solid black;">Installation Labor</td>
+            <td class="pam_item_price">
+                @{
+                    double totalLaborCost = 0;
+                    if (Model.Lead != null)
+                    {
+                        if (Model.Lead.installations.Count != 0)
+                        {
+                            foreach (var item in Model.Lead.installations)
+                            {
+                                totalLaborCost = item.total_installation_labor_cost == null ? 0 : (double)item.total_installation_labor_cost;
+                            }
+                        }
+                        else
+                        {
+                            if (Model.TotalCost != null && Model.TotalCost.building_permit_cost != null)
+                            {
+                                totalLaborCost += (double)Model.TotalCost.building_permit_cost;
+                            }
+
+                            totalLaborCost += Model.OperationalExp;
+                        }
+                    }
+                    @String.Format("{0:#,0.00}", totalLaborCost)
+                }
+            </td>
+        </tr>
+        <tr>
+            <td colspan="5" style="text-align:right; padding-right:3px; border-left: 1px solid black;">
+                @{
+                    if (Model.Lead != null && Model.Lead.tax_exempt)
+                    {
+                        @:Exempt from Tax
+                }
+                    else
+                    {
+                        @:Related Taxes, Permits & Fees
+                }
+                }
+            </td>
+            <td class="pam_item_price">
+                @{
+                    if (Model.Lead != null && Model.TotalCost != null)
+                    {
+                        if (!Model.Lead.tax_exempt)
+                        {
+                            @String.Format("{0:#,0.00}", Model.TotalCost.tax_cost)
+                        }
+                        else
+                        {
+                            @String.Format("{0:#,0.00}", 0)
+                        }
+                    }
+                }
+            </td>
+        </tr>
+        <tr>
+            <td colspan = "5" style="font-weight: bolder; text-align:right; padding-right:3px; border-left: 1px solid black;">TOTAL ORDER $</td>
+            <td style = "width:150px; font-weight: bolder; border: 2px solid black; text-align:right; padding-right:3px" >
+                @{
+                    if (Model.TotalCost != null)
+                    {
+                        @String.Format("{0:#,0.00}", Model.TotalCost.total_cost1)
+                    }
+                }
+            </td>
+        </tr>
+    </table>
+    <div style = "clear:both; width:150px; background-color:rgb(242,242,242); border: 1px solid; border-color:rgb(89,89,89); text-align:center; padding-bottom:10px" >
+        @{
+            if (Model.Lead != null)
+            {
+                @Model.Lead.project_class.class_name<br />
+
+                if (Model.Lead.in_city)
+                {
+                    @: In City <br />
+                }
+
+                @Model.Lead.delivery_status.delivery_status_name
+            }
+        }
+    </div>
+    <table style="width: 100%">
+        <tr>
+            <td style="width:500px; text-align: right">
+                @{ 
+                    if (Model.Lead != null)
+                    {
+                        @Model.Lead.branch.address.address1@:&#44;&nbsp;@Model.Lead.branch.address.city&#44;&nbsp;@Model.Lead.branch.address.state&nbsp;@Model.Lead.branch.address.zipcode
+                    }
+                }
+            </td>
+            <td style="width:180px; text-align:right">Phone:
+                @{ 
+                    if (Model.Lead != null)
+                    {
+                        @Model.Lead.branch.phone_number
+                    }
+                }
+            </td>
+            <td style="padding-left:10px">Fax
+                @{
+                    if (Model.Lead != null)
+                    {
+                        @Model.Lead.branch.fax_number
+                    }
+                }
+            </td>
+        </tr>
+    </table>
+    <div align="center" style="padding-top: 20px">Contractor License #WV 002910</div>
+</body>
+</html>

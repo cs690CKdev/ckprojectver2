@@ -1,0 +1,80 @@
+﻿@model ck_project.Models.ProjectSummary
+
+<hr style="border:1px solid; border-color: darkgray" />
+<table>
+    <tr>
+        <td></td>
+        <td class="le_title">Customer:</td>
+        <td class="le_data">
+            @{
+                if (Model.Customer != null)
+                {
+                    @Model.Customer.customer_firstname@:&nbsp;@Model.Customer.customer_lastname
+                    }
+            }
+        </td>
+        <td class="le_title">Primary Phone:</td>
+        <td class="le_data">
+            @{
+                if (Model.Customer != null && Model.Customer.phone_number != null && !Model.Customer.phone_number.Equals(""))
+                {
+                    @String.Format("{0:(###) ###-####}", Convert.ToInt64(Model.Customer.phone_number))
+                }
+            }
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td class="le_title">Address:</td>
+        <td class="le_data">
+            @{
+                if (Model.Customer != null)
+                {
+                    @Model.Customer.address.address1
+                }
+            }
+        </td>
+        <td class="le_title">Alternate Phone:</td>
+        <td class="le_data">
+            @{
+                if (Model.Customer != null && Model.Customer.second_phone_number != null && !Model.Customer.second_phone_number.Equals(""))
+                {
+                    @String.Format("{0:(###) ###-####}", Convert.ToInt64(Model.Customer.second_phone_number))
+                }
+            }
+        </td>
+    </tr>
+    <tr>
+        <td></td>
+        <td class="le_title"></td>
+        <td class="le_data">
+            @{
+                if (Model.Customer != null)
+                {
+                    @Model.Customer.address.city@:&#44;&nbsp;@Model.Customer.address.state&nbsp;@Model.Customer.address.zipcode
+                    }
+            }
+        </td>
+        <td class="le_title">Primary Email:</td>
+        <td class="le_data">
+            @{
+                if (Model.Customer != null)
+                {
+                    @Model.Customer.email
+                }
+            }
+        </td>
+    </tr>
+    <tr>
+        <td colspan="3"></td>
+        <td class="le_title">Secondary Email:</td>
+        <td class="le_data">
+            @{
+                if (Model.Customer != null)
+                {
+
+                }
+            }
+        </td>
+    </tr>
+</table>

@@ -1,0 +1,94 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+
+@model IPagedList<ck_project.lead>
+
+@{
+    ViewBag.Title = "MainPage";
+}
+
+@Html.Partial("_MainMenu")
+
+<div class="container">
+    <table>
+        <tr>
+            <td style="width:720px"><h2>Projects</h2></td>
+            <td style="width:700px" align="right"></td>
+        </tr>
+        <tr>
+            <td>This page displays the curent user's leads.</td>
+            <td rowspan="2">
+                @using (Html.BeginForm("MainPage", "Home", FormMethod.Get))
+                {
+                    <b>Project Name: </b>
+                    @Html.TextBox("name", ViewData.TemplateInfo.FormattedModelValue, new { placeholder = "Type project name here", @class = "search_box" });
+                    <b>&nbsp;&nbsp;&nbsp;&nbsp;Status:</b>
+                    @Html.DropDownList("status", (IEnumerable<SelectListItem>)ViewBag.projStatusList, new { @class="search_box" });
+                    <div style="float:left; padding-top:12px"><b>&nbsp;&nbsp;&nbsp;Create Date:&nbsp;</b></div>
+                    <div style="float:left; padding-right:10px; padding-top:4px"><input style="width:160px;" type="date" name="start" class="search_box" /></div>
+                    <div style="float:left; padding-right:20px; padding-top:4px"><input style="width:160px" type="date" name="end" class="search_box" /></div>
+                    <div style="padding-top:6px"><input type="submit" value="Search" class="btn btn-default" /></div>
+                }
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <input type="button" value="Create Lead" onclick="location.href='@Url.Action("ListCustomers", "Customers")'" class="btn btn-default" style="width: 100px;" />
+            </td>
+        </tr>
+    </table>
+    <div style="padding-top:15px"></div>
+    <table class="table table-striped" style="clear:both">
+        <thead class="mdb-color darken-3">
+            <tr>
+                <th>@Html.ActionLink("Project Name","Sort",new { by="pn"})</th>
+                <th>@Html.ActionLink("Customer", "Sort", new { by = "cu" })</th>
+                <th>@Html.ActionLink("Project Type", "Sort", new { by= "pt" })</th>
+                <th>@Html.ActionLink("Project Status", "Sort", new { by = "ps" })</th>
+                <th>@Html.ActionLink("SalesPerson", "Sort", new { by = "sp" })</th>
+                <th>@Html.ActionLink("Create Date", "Sort", new { by = "cd" })</th>
+                <th>@Html.ActionLink("Last Update Date", "Sort", new { by = "lu" })</th>
+            </tr>
+        </thead>
+        <tbody>
+            @{
+                if (Model != null)
+                {
+                    foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.project_name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.customer.customer_firstname)
+                                @Html.DisplayFor(modelItem => item.customer.customer_lastname)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.project_type.project_type_name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.project_status.project_status_name)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.lead_creator)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.lead_date)
+                            </td>
+                            <td>
+                                @Html.DisplayFor(modelItem => item.Last_update_date)
+                            </td>
+                            <td>
+                                @Html.ActionLink("View", "ProjSummary", new { id = item.lead_number }) |
+                                @Html.ActionLink("Edit", "Edit", "Lead", new { id = item.lead_number }, null) |
+                                @Html.ActionLink("Delete", "Delete", "Lead", new { id = item.lead_number }, new { onclick = "return confirm('Are you sure you wish to delete the lead?');" })
+                            </td>
+                        </tr>
+                    }
+                }
+            }
+        </tbody>
+    </table>
+    @Html.PagedListPager(Model, page => Url.Action("MainPage", new { page, search = Request.QueryString["name"], Type = Request.QueryString["status"], Start = Request.QueryString["start"], end = Request.QueryString["end"] }), new PagedListRenderOptions() { DisplayPageCountAndCurrentLocation = true })
+</div>

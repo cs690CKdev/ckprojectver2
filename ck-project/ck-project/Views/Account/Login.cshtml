@@ -1,0 +1,86 @@
+﻿@using ck_project.Models
+@model LoginViewModel
+@{
+    ViewBag.Title = "Log in";
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sale Contract Managvsdvsement System</title>
+    <link href="@Url.Content("~/Content/bootstrap.united.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/toastr.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/Login.css")" rel="stylesheet" type="text/css" />
+    @Scripts.Render("~/bundles/modernizr")
+    @Scripts.Render("~/bundles/jquery")
+
+</head>
+<body>
+    <h1>Sale Contract Management System</h1>
+    <div class="container">
+        <hr />
+            <div class="row top-buffer">
+                <div class="col-md-12">
+                    <section id="loginForm">
+                        @using (Html.BeginForm("Login", "Account", new { ReturnUrl = ViewBag.ReturnUrl }, FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+                        {
+                            @Html.AntiForgeryToken()
+
+                            
+                        <div class="transBox col-md-4">
+                        @*    <div class="form-group">
+                                <div class="col-md-offset-1 col-md-9">
+                                    @Html.DropDownList("User Type", new List<SelectListItem>
+{
+new SelectListItem { Text = "Administrator", Value = "1"},
+new SelectListItem { Text = "Store Manager", Value = "2"},
+new SelectListItem { Text = "Sales", Value = "3"}
+}, "Select User Type")
+
+                                </div></div>*@
+
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Email, new { @class = "col-md-2 control-label" })
+                                    <div class="col-md-offset-1 col-md-9">
+                                        @Html.TextBoxFor(m => m.Email, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.Email, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="form-group">
+                                    @Html.LabelFor(m => m.Password, new { @class = "col-md-2 control-label" })
+                                    <div class="col-md-offset-1 col-md-9">
+                                        @Html.PasswordFor(m => m.Password, new { @class = "form-control" })
+                                        @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+                                    </div>
+                                </div>
+                                <div class="col-md-9">
+                                    @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                                </div>
+                                <div class="form-group">
+                                    <div class="col-md-6">
+                                        <a id="passwordInfo">Forgot your password?</a>
+                                    </div>
+                                    <div class="col-md-offset-3 col-md-3">
+                                        <input type="submit" value="Login" class="btn btn-default" />
+                                    </div>
+                                </div>
+                            </div>
+                            }
+</section>
+                </div>
+            </div>
+    </div>
+</body>
+</html>
+
+
+<script>
+    $(document).ready(function () {
+        $('#passwordInfo').click(function () {
+            // show when the button is clicked
+            toastr.info('Please contact your administrator to reset your password.');
+        });
+    });
+</script>

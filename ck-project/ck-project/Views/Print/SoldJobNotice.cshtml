@@ -1,0 +1,192 @@
+﻿@model ck_project.Models.ProjectSummary
+
+@{ 
+    ViewBag.Title = "SoldJobNotice";
+    Layout = null;
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    @*<meta name="viewport" content="initial-scale=1.0">*@
+    <title>Sale Contract Management System</title>
+    <link href="http://leadmanagealpha.apphb.com/Content/bootstrap.sandstone.css" rel="stylesheet" type="text/css" />
+    <link href="http://leadmanagealpha.apphb.com/Content/Print.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="pic2" align="center"><img src="http://leadmanagealpha.apphb.com/Content/Images/proposal_pic2.png" /></div>
+    <div align="center" style="padding-bottom: 10%"><h2><b>SOLD JOB NOTICE</b></h2></div>
+    <table>
+        <tr>
+            <td class="left_text">Check #:</td>
+            <td class="left_data"></td>
+            <td class="right_text">Deposit Amount:</td>
+            <td class="right_data"></td>
+        </tr>
+        <tr>
+            <td class="left_text">Job Name:</td>
+            <td class="left_data">
+                @{
+                    if (Model.Customer != null)
+                    {
+                        @Model.Customer.customer_firstname@:&nbsp;@Model.Customer.customer_lastname
+                    }
+                }
+            </td>
+            <td class="right_text">Deposit Date:</td>
+            <td class="right_data"></td>
+        </tr>
+        <tr>
+            <td class="left_text">Project Reference:</td>
+            <td class="left_data">
+                @{
+                    if (Model.Lead != null)
+                    {
+                        @Model.Lead.project_name
+                    }
+                }
+            </td>
+        </tr>
+        <tr>
+            <td class="left_text">Address:</td>
+            <td class="left_data">
+                @{
+                    if (Model.JobsiteAddress != null)
+                    {
+                        @Model.JobsiteAddress.address1
+                    }
+                }
+            </td>
+        </tr>
+        <tr>
+            <td class="left_text">City/State:</td>
+            <td class="left_data">
+                @{
+                    if (Model.JobsiteAddress != null)
+                    {
+                        @Model.JobsiteAddress.city@:&#44;&nbsp;@Model.JobsiteAddress.state
+                    }
+                }
+            </td>
+            <td class="right_text">Zip Code:</td>
+            <td class="right_data">
+                @{
+                    if (Model.JobsiteAddress != null)
+                    {
+                        @Model.JobsiteAddress.zipcode
+                    }
+                }
+            </td>
+        </tr>
+        <tr>
+            <td class="left_text">Home Phone:</td>
+            <td class="left_data">
+                @{
+                    if (Model.Lead != null && Model.Lead.phone_number != null && !Model.Lead.phone_number.Equals(""))
+                    {
+                        @String.Format("{0:(###) ###-####}", Convert.ToInt64(Model.Lead.phone_number))
+                    }
+                }
+            </td>
+            <td class="right_text">Cell/Alt Phone:</td>
+            <td class="right_data">
+                @{
+                    if (Model.Lead != null && Model.Lead.second_phone_number != null && Model.Lead.second_phone_number.Equals(""))
+                    {
+                        @String.Format("{0:(###) ###-####}", Convert.ToInt64(Model.Lead.second_phone_number))
+                    }
+                }
+            </td>
+        </tr>
+        <tr>
+            <td class="left_text">Job Total:</td>
+            <td class="left_data">
+                @{
+                    if (Model.TotalCost != null)
+                    {
+                        @String.Format("{0:C}", Model.TotalCost.total_cost1)
+                    }
+                }
+            </td>
+            <td class="right_text">Designer:</td>
+            <td class="right_data">
+                @{
+                    if (Model.Lead != null)
+                    {
+                        @Model.Lead.employee.emp_firstname@:&nbsp;@Model.Lead.employee.emp_lastname
+                    }
+                }
+            </td>
+        </tr>
+    </table>
+    <table style="margin-top: 5%">
+        <tr>
+            <td class="left_text">
+                @{
+                    if (Model.Lead != null)
+                    {
+                        @Model.Lead.delivery_status.delivery_status_name
+                    }
+                }
+            </td>
+            <td style="width: 200px; text-align:center">
+                @{
+                    if (Model.Lead != null)
+                    {
+                        if (Model.Lead.in_city)
+                        {
+                            @:In City
+                        }
+                        else
+                        {
+                            @:Out of City
+                        }
+                    }
+                }
+            <td style="width: 200px; text-align:center">
+                @{
+                    if (Model.JobsiteAddress != null)
+                    {
+                        @Model.JobsiteAddress.city
+                    }
+                }
+            </td>
+            <td style="width: 200px; text-align:center">
+                @{
+                    if (Model.Lead != null)
+                    {
+                        @Model.Lead.project_class.class_name
+                    }
+                }
+            </td>
+            <td style="border: solid 1px gray; width: 60px"></td>
+            <td style="width: 120px; padding-left: 5px">C.O.D</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td style="border: solid 1px gray; width: 60px"></td>
+            <td style="width: 120px; padding-left: 5px">D.O.R.I</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td style="border: solid 1px gray; width: 60px"></td>
+            <td style="width: 120px; padding-left: 5px">N-10</td>
+        </tr>
+        <tr>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td style="border: solid 1px gray; width: 60px"></td>
+            <td style="width: 120px; padding-left: 5px">N-30</td>
+        </tr>
+    </table>
+</body> 
+</html>

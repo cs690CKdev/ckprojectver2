@@ -1,0 +1,768 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CKsysdb.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+  <EntityType Name="addresses">
+    <Key>
+      <PropertyRef Name="address_number" />
+    </Key>
+    <Property Name="address_number" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="address_type" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="address" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="city" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="state" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="county" Type="varchar" MaxLength="50" />
+    <Property Name="zipcode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="deleted" Type="bit" Nullable="false" />
+    <Property Name="lead_number" Type="int" />
+  </EntityType>
+  <!--Errors Found During Generation:
+warning 6002: The table/view 'dbfd474fa710d2442e8b3ea80e0016e454.dbo.archive_leads' does not have a primary key defined. The key has been inferred and the definition was created as a read-only table/view.-->
+  <EntityType Name="archive_leads">
+    <Key>
+      <PropertyRef Name="lead_number" />
+      <PropertyRef Name="project_name" />
+      <PropertyRef Name="branch_name" />
+      <PropertyRef Name="customer_firstname" />
+      <PropertyRef Name="customer_lastname" />
+      <PropertyRef Name="phone_number" />
+      <PropertyRef Name="emp_firstname" />
+      <PropertyRef Name="emp_lastname" />
+      <PropertyRef Name="project_status" />
+      <PropertyRef Name="delivery_status" />
+      <PropertyRef Name="source_name" />
+      <PropertyRef Name="class_name" />
+      <PropertyRef Name="project_type" />
+      <PropertyRef Name="jobsite_address" />
+      <PropertyRef Name="jobsite_city" />
+      <PropertyRef Name="jobsite_county" />
+      <PropertyRef Name="jobsite_state" />
+      <PropertyRef Name="jobsite_zipcode" />
+      <PropertyRef Name="lead_date" />
+      <PropertyRef Name="lead_close_date" />
+      <PropertyRef Name="tax_exempt" />
+      <PropertyRef Name="in_city" />
+    </Key>
+    <Property Name="lead_number" Type="int" Nullable="false" />
+    <Property Name="project_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="branch_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="customer_firstname" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="customer_lastname" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="customer_email" Type="varchar" MaxLength="50" />
+    <Property Name="phone_number" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="emp_firstname" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="emp_lastname" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="project_status" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="delivery_status" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="source_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="class_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="project_type" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="jobsite_address" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="jobsite_city" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="jobsite_county" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="jobsite_state" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="jobsite_zipcode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="lead_email" Type="varchar" MaxLength="50" />
+    <Property Name="lead_phone_number" Type="varchar" MaxLength="50" />
+    <Property Name="second_lead_phone_number" Type="varchar" MaxLength="50" />
+    <Property Name="lead_date" Type="datetime" Nullable="false" />
+    <Property Name="lead_close_date" Type="datetime" Nullable="false" />
+    <Property Name="tax_exempt" Type="bit" Nullable="false" />
+    <Property Name="in_city" Type="bit" Nullable="false" />
+    <Property Name="building_permit_cost" Type="float" />
+    <Property Name="installation_cost" Type="float" />
+    <Property Name="product_cost" Type="float" />
+    <Property Name="tax_cost" Type="float" />
+    <Property Name="total_cost" Type="float" />
+  </EntityType>
+  <EntityType Name="branches">
+    <Key>
+      <PropertyRef Name="branch_number" />
+    </Key>
+    <Property Name="branch_number" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="branch_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="phone_number" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="fax_number" Type="varchar" MaxLength="20" />
+    <Property Name="address_number" Type="int" Nullable="false" />
+    <Property Name="deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="building_permit">
+    <Key>
+      <PropertyRef Name="permit_number" />
+    </Key>
+    <Property Name="permit_number" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="adjustable_fee" Type="float" Nullable="false" />
+    <Property Name="fixed_fee" Type="float" Nullable="false" />
+    <Property Name="start_range" Type="float" Nullable="false" />
+    <Property Name="end_range" Type="float" Nullable="false" />
+    <Property Name="start_date" Type="date" Nullable="false" />
+    <Property Name="end_date" Type="date" />
+    <Property Name="deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="customers">
+    <Key>
+      <PropertyRef Name="customer_number" />
+    </Key>
+    <Property Name="customer_number" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="customer_firstname" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="customer_middlename" Type="varchar" MaxLength="50" />
+    <Property Name="customer_lastname" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="phone_number" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="second_phone_number" Type="varchar" MaxLength="20" />
+    <Property Name="email" Type="varchar" MaxLength="20" />
+    <Property Name="address_number" Type="int" />
+    <Property Name="deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="delivery_status">
+    <Key>
+      <PropertyRef Name="delivery_status_number" />
+    </Key>
+    <Property Name="delivery_status_number" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="delivery_status_name" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="employees">
+    <Key>
+      <PropertyRef Name="emp_number" />
+    </Key>
+    <Property Name="emp_number" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="emp_firstname" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="emp_middlename" Type="varchar" MaxLength="50" />
+    <Property Name="emp_lastname" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="emp_username" Type="varchar" MaxLength="50" />
+    <Property Name="emp_password" Type="varchar(max)" />
+    <Property Name="phone_number" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="user_type_number" Type="int" Nullable="false" />
+    <Property Name="branch_number" Type="int" Nullable="false" />
+    <Property Name="deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="installation">
+    <Key>
+      <PropertyRef Name="installation_number" />
+    </Key>
+    <Property Name="installation_number" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="estimated_by" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="statrt_date" Type="date" />
+    <Property Name="lead_number" Type="int" Nullable="false" />
+    <Property Name="recommendation" Type="varchar" MaxLength="100" />
+    <Property Name="total_miles" Type="float" />
+    <Property Name="required_hotel_nights" Type="float" />
+    <Property Name="hotel_round_trip" Type="float" />
+    <Property Name="installation_days" Type="float" />
+    <Property Name="total_per_diem_cost" Type="float" />
+    <Property Name="total_installation_labor_cost" Type="float" />
+    <Property Name="total_operational_expenses" Type="float" />
+    <Property Name="total_construction_materials_cost" Type="float" />
+    <Property Name="total_tile_cost" Type="float" Nullable="false" />
+    <Property Name="total_travel_cost" Type="float" />
+    <Property Name="estimated_date" Type="date" />
+    <Property Name="travel_time_one_way" Type="float" />
+    <Property Name="building_permit_cost" Type="float" />
+    <Property Name="hotel_expense" Type="float" />
+    <Property Name="mileage_expense" Type="float" />
+    <Property Name="tile_installation_days" Type="float" />
+    <Property Name="installation_labor_only_cost" Type="float" />
+    <Property Name="billable_hours" Type="float" />
+    <Property Name="estimated_hours" Type="float" />
+    <Property Name="oneway_mileages_to_destination" Type="float" Nullable="false" />
+    <Property Name="ov_labor_rate" Type="float" />
+    <Property Name="ov_material_rate" Type="float" />
+  </EntityType>
+  <EntityType Name="lead_log_file">
+    <Key>
+      <PropertyRef Name="log_number" />
+    </Key>
+    <Property Name="log_number" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="emp_username" Type="varchar" MaxLength="50" />
+    <Property Name="lead_number" Type="int" Nullable="false" />
+    <Property Name="table_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="column_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="action_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="update_date" Type="datetime" Nullable="false" />
+    <Property Name="prvious_value" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="new_value" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="lead_source">
+    <Key>
+      <PropertyRef Name="source_number" />
+    </Key>
+    <Property Name="source_number" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="source_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="leads">
+    <Key>
+      <PropertyRef Name="lead_number" />
+    </Key>
+    <Property Name="lead_number" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="customer_number" Type="int" Nullable="false" />
+    <Property Name="class_number" Type="int" Nullable="false" />
+    <Property Name="project_status_number" Type="int" Nullable="false" />
+    <Property Name="project_type_number" Type="int" Nullable="false" />
+    <Property Name="source_number" Type="int" Nullable="false" />
+    <Property Name="emp_number" Type="int" Nullable="false" />
+    <Property Name="branch_number" Type="int" Nullable="false" />
+    <Property Name="delivery_status_number" Type="int" Nullable="false" />
+    <Property Name="in_city" Type="bit" Nullable="false" />
+    <Property Name="lead_date" Type="datetime" Nullable="false" />
+    <Property Name="project_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="tax_exempt" Type="bit" Nullable="false" />
+    <Property Name="deleted" Type="bit" Nullable="false" />
+    <Property Name="Last_update_date" Type="datetime" Nullable="false" />
+    <Property Name="phone_number" Type="varchar" MaxLength="20" />
+    <Property Name="second_phone_number" Type="varchar" MaxLength="20" />
+    <Property Name="email" Type="varchar" MaxLength="50" />
+    <Property Name="note" Type="varchar(max)" />
+    <Property Name="lead_creator" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="products">
+    <Key>
+      <PropertyRef Name="product_number" />
+    </Key>
+    <Property Name="product_number" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="cat_anme" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="quantity" Type="int" Nullable="false" />
+    <Property Name="Description" Type="varchar" MaxLength="50" />
+    <Property Name="model" Type="varchar" MaxLength="20" />
+    <Property Name="color" Type="varchar" MaxLength="20" />
+    <Property Name="product_source" Type="varchar" MaxLength="20" />
+    <Property Name="manufacture" Type="varchar" MaxLength="20" />
+    <Property Name="location" Type="varchar" MaxLength="50" />
+    <Property Name="price" Type="float" Nullable="false" />
+    <Property Name="lead_number" Type="int" Nullable="false" />
+    <Property Name="deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="project_class">
+    <Key>
+      <PropertyRef Name="class_number" />
+    </Key>
+    <Property Name="class_number" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="class_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="project_status">
+    <Key>
+      <PropertyRef Name="project_status_number" />
+    </Key>
+    <Property Name="project_status_number" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="project_status_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="project_type">
+    <Key>
+      <PropertyRef Name="project_type_number" />
+    </Key>
+    <Property Name="project_type_number" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="project_type_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="rates">
+    <Key>
+      <PropertyRef Name="rate_number" />
+    </Key>
+    <Property Name="rate_number" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="rate_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="rate_measurement" Type="varchar" MaxLength="50" />
+    <Property Name="amount" Type="float" Nullable="false" />
+    <Property Name="start_date" Type="date" Nullable="false" />
+    <Property Name="end_date" Type="date" />
+    <Property Name="deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="rates_installation">
+    <Key>
+      <PropertyRef Name="rates_installation_number" />
+    </Key>
+    <Property Name="rates_installation_number" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="rate_number" Type="int" Nullable="false" />
+    <Property Name="installation_number" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="sysdiagrams">
+    <Key>
+      <PropertyRef Name="diagram_id" />
+    </Key>
+    <Property Name="name" Type="nvarchar" MaxLength="128" Nullable="false" />
+    <Property Name="principal_id" Type="int" Nullable="false" />
+    <Property Name="diagram_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="version" Type="int" />
+    <Property Name="definition" Type="varbinary(max)" />
+  </EntityType>
+  <EntityType Name="tasks">
+    <Key>
+      <PropertyRef Name="task_number" />
+    </Key>
+    <Property Name="task_number" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="special_task" Type="bit" Nullable="false" />
+    <Property Name="task_name" Type="varchar" MaxLength="250" Nullable="false" />
+    <Property Name="task_main_cat" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="task_sub_cat" Type="varchar" MaxLength="50" Nullable="false" />
+  </EntityType>
+  <EntityType Name="tasks_installation">
+    <Key>
+      <PropertyRef Name="tasks_installation_number" />
+    </Key>
+    <Property Name="tasks_installation_number" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="task_number" Type="int" Nullable="false" />
+    <Property Name="installation_number" Type="int" Nullable="false" />
+    <Property Name="hours" Type="float" Nullable="false" />
+    <Property Name="m_cost" Type="float" Nullable="false" />
+    <Property Name="labor_cost" Type="float" Nullable="false" />
+    <Property Name="material_retail_cost" Type="float" />
+  </EntityType>
+  <EntityType Name="taxes">
+    <Key>
+      <PropertyRef Name="tax_number" />
+    </Key>
+    <Property Name="tax_number" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tax_anme" Type="varchar" MaxLength="20" Nullable="false" />
+    <Property Name="tax_value" Type="float" Nullable="false" />
+    <Property Name="city" Type="varchar" MaxLength="50" />
+    <Property Name="state" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="county" Type="varchar" MaxLength="50" />
+    <Property Name="zipcode" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="start_date" Type="date" Nullable="false" />
+    <Property Name="end_date" Type="date" />
+    <Property Name="deleted" Type="bit" Nullable="false" />
+    <Property Name="in_city" Type="bit" Nullable="false" />
+  </EntityType>
+  <EntityType Name="taxes_leads">
+    <Key>
+      <PropertyRef Name="taxes_leads_number" />
+    </Key>
+    <Property Name="taxes_leads_number" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="tax_number" Type="int" Nullable="false" />
+    <Property Name="lead_number" Type="int" Nullable="false" />
+  </EntityType>
+  <EntityType Name="total_cost">
+    <Key>
+      <PropertyRef Name="cost_number" />
+    </Key>
+    <Property Name="cost_number" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="product_cost" Type="float" />
+    <Property Name="installation_cost" Type="float" />
+    <Property Name="total_cost" Type="float" />
+    <Property Name="lead_number" Type="int" Nullable="false" />
+    <Property Name="tax_cost" Type="float" />
+    <Property Name="building_permit_cost" Type="float" />
+  </EntityType>
+  <EntityType Name="users_types">
+    <Key>
+      <PropertyRef Name="user_type_number" />
+    </Key>
+    <Property Name="user_type_number" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+    <Property Name="user_type_name" Type="varchar" MaxLength="50" Nullable="false" />
+    <Property Name="deleted" Type="bit" Nullable="false" />
+  </EntityType>
+  <Association Name="fk_branches_to_addresses">
+    <End Role="addresses" Type="Self.addresses" Multiplicity="1" />
+    <End Role="branches" Type="Self.branches" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="addresses">
+        <PropertyRef Name="address_number" />
+      </Principal>
+      <Dependent Role="branches">
+        <PropertyRef Name="address_number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_Customers_to_addresses">
+    <End Role="addresses" Type="Self.addresses" Multiplicity="0..1" />
+    <End Role="customers" Type="Self.customers" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="addresses">
+        <PropertyRef Name="address_number" />
+      </Principal>
+      <Dependent Role="customers">
+        <PropertyRef Name="address_number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_employees_to_brancges">
+    <End Role="branches" Type="Self.branches" Multiplicity="1" />
+    <End Role="employees" Type="Self.employees" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="branches">
+        <PropertyRef Name="branch_number" />
+      </Principal>
+      <Dependent Role="employees">
+        <PropertyRef Name="branch_number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_employees_to_users_types">
+    <End Role="users_types" Type="Self.users_types" Multiplicity="1" />
+    <End Role="employees" Type="Self.employees" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="users_types">
+        <PropertyRef Name="user_type_number" />
+      </Principal>
+      <Dependent Role="employees">
+        <PropertyRef Name="user_type_number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_installation_to_leads">
+    <End Role="leads" Type="Self.leads" Multiplicity="1" />
+    <End Role="installation" Type="Self.installation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="leads">
+        <PropertyRef Name="lead_number" />
+      </Principal>
+      <Dependent Role="installation">
+        <PropertyRef Name="lead_number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_lead_log_file_to_Leads">
+    <End Role="leads" Type="Self.leads" Multiplicity="1" />
+    <End Role="lead_log_file" Type="Self.lead_log_file" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="leads">
+        <PropertyRef Name="lead_number" />
+      </Principal>
+      <Dependent Role="lead_log_file">
+        <PropertyRef Name="lead_number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_leads_to_branches">
+    <End Role="branches" Type="Self.branches" Multiplicity="1" />
+    <End Role="leads" Type="Self.leads" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="branches">
+        <PropertyRef Name="branch_number" />
+      </Principal>
+      <Dependent Role="leads">
+        <PropertyRef Name="branch_number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_leads_to_customers">
+    <End Role="customers" Type="Self.customers" Multiplicity="1" />
+    <End Role="leads" Type="Self.leads" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="customers">
+        <PropertyRef Name="customer_number" />
+      </Principal>
+      <Dependent Role="leads">
+        <PropertyRef Name="customer_number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_leads_to_delivery_status">
+    <End Role="delivery_status" Type="Self.delivery_status" Multiplicity="1" />
+    <End Role="leads" Type="Self.leads" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="delivery_status">
+        <PropertyRef Name="delivery_status_number" />
+      </Principal>
+      <Dependent Role="leads">
+        <PropertyRef Name="delivery_status_number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_leads_to_employees">
+    <End Role="employees" Type="Self.employees" Multiplicity="1" />
+    <End Role="leads" Type="Self.leads" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="employees">
+        <PropertyRef Name="emp_number" />
+      </Principal>
+      <Dependent Role="leads">
+        <PropertyRef Name="emp_number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_leads_to_lead_source">
+    <End Role="lead_source" Type="Self.lead_source" Multiplicity="1" />
+    <End Role="leads" Type="Self.leads" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="lead_source">
+        <PropertyRef Name="source_number" />
+      </Principal>
+      <Dependent Role="leads">
+        <PropertyRef Name="source_number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_leads_to_project_class">
+    <End Role="project_class" Type="Self.project_class" Multiplicity="1" />
+    <End Role="leads" Type="Self.leads" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="project_class">
+        <PropertyRef Name="class_number" />
+      </Principal>
+      <Dependent Role="leads">
+        <PropertyRef Name="class_number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_leads_to_project_status">
+    <End Role="project_status" Type="Self.project_status" Multiplicity="1" />
+    <End Role="leads" Type="Self.leads" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="project_status">
+        <PropertyRef Name="project_status_number" />
+      </Principal>
+      <Dependent Role="leads">
+        <PropertyRef Name="project_status_number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_leads_to_project_type">
+    <End Role="project_type" Type="Self.project_type" Multiplicity="1" />
+    <End Role="leads" Type="Self.leads" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="project_type">
+        <PropertyRef Name="project_type_number" />
+      </Principal>
+      <Dependent Role="leads">
+        <PropertyRef Name="project_type_number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_products_to_leads">
+    <End Role="leads" Type="Self.leads" Multiplicity="1" />
+    <End Role="products" Type="Self.products" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="leads">
+        <PropertyRef Name="lead_number" />
+      </Principal>
+      <Dependent Role="products">
+        <PropertyRef Name="lead_number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_rates_installation_to_installation">
+    <End Role="installation" Type="Self.installation" Multiplicity="1" />
+    <End Role="rates_installation" Type="Self.rates_installation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="installation">
+        <PropertyRef Name="installation_number" />
+      </Principal>
+      <Dependent Role="rates_installation">
+        <PropertyRef Name="installation_number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_rates_installation_to_rates">
+    <End Role="rates" Type="Self.rates" Multiplicity="1" />
+    <End Role="rates_installation" Type="Self.rates_installation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="rates">
+        <PropertyRef Name="rate_number" />
+      </Principal>
+      <Dependent Role="rates_installation">
+        <PropertyRef Name="rate_number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_tasks_installation_to_installation">
+    <End Role="installation" Type="Self.installation" Multiplicity="1" />
+    <End Role="tasks_installation" Type="Self.tasks_installation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="installation">
+        <PropertyRef Name="installation_number" />
+      </Principal>
+      <Dependent Role="tasks_installation">
+        <PropertyRef Name="installation_number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_tasks_installation_to_tasks">
+    <End Role="tasks" Type="Self.tasks" Multiplicity="1" />
+    <End Role="tasks_installation" Type="Self.tasks_installation" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="tasks">
+        <PropertyRef Name="task_number" />
+      </Principal>
+      <Dependent Role="tasks_installation">
+        <PropertyRef Name="task_number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_taxes_leads_to_leads">
+    <End Role="leads" Type="Self.leads" Multiplicity="1" />
+    <End Role="taxes_leads" Type="Self.taxes_leads" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="leads">
+        <PropertyRef Name="lead_number" />
+      </Principal>
+      <Dependent Role="taxes_leads">
+        <PropertyRef Name="lead_number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_taxes_leads_to_taxes">
+    <End Role="taxes" Type="Self.taxes" Multiplicity="1" />
+    <End Role="taxes_leads" Type="Self.taxes_leads" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="taxes">
+        <PropertyRef Name="tax_number" />
+      </Principal>
+      <Dependent Role="taxes_leads">
+        <PropertyRef Name="tax_number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="fk_total_cost_to_leads">
+    <End Role="leads" Type="Self.leads" Multiplicity="1" />
+    <End Role="total_cost" Type="Self.total_cost" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="leads">
+        <PropertyRef Name="lead_number" />
+      </Principal>
+      <Dependent Role="total_cost">
+        <PropertyRef Name="lead_number" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Function Name="LoginByUsernamePassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+    <Parameter Name="username" Type="varchar" Mode="In" />
+    <Parameter Name="password" Type="varchar" Mode="In" />
+  </Function>
+  <EntityContainer Name="CKsysdbStoreContainer">
+    <EntitySet Name="addresses" EntityType="Self.addresses" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="branches" EntityType="Self.branches" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="building_permit" EntityType="Self.building_permit" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="customers" EntityType="Self.customers" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="delivery_status" EntityType="Self.delivery_status" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="employees" EntityType="Self.employees" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="installation" EntityType="Self.installation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="lead_log_file" EntityType="Self.lead_log_file" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="lead_source" EntityType="Self.lead_source" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="leads" EntityType="Self.leads" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="products" EntityType="Self.products" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="project_class" EntityType="Self.project_class" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="project_status" EntityType="Self.project_status" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="project_type" EntityType="Self.project_type" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="rates" EntityType="Self.rates" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="rates_installation" EntityType="Self.rates_installation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="sysdiagrams" EntityType="Self.sysdiagrams" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tasks" EntityType="Self.tasks" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="tasks_installation" EntityType="Self.tasks_installation" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="taxes" EntityType="Self.taxes" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="taxes_leads" EntityType="Self.taxes_leads" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="total_cost" EntityType="Self.total_cost" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="users_types" EntityType="Self.users_types" Schema="dbo" store:Type="Tables" />
+    <EntitySet Name="archive_leads" EntityType="Self.archive_leads" store:Type="Tables" store:Schema="dbo">
+      <DefiningQuery>SELECT 
+    [archive_leads].[lead_number] AS [lead_number], 
+    [archive_leads].[project_name] AS [project_name], 
+    [archive_leads].[branch_name] AS [branch_name], 
+    [archive_leads].[customer_firstname] AS [customer_firstname], 
+    [archive_leads].[customer_lastname] AS [customer_lastname], 
+    [archive_leads].[customer_email] AS [customer_email], 
+    [archive_leads].[phone_number] AS [phone_number], 
+    [archive_leads].[emp_firstname] AS [emp_firstname], 
+    [archive_leads].[emp_lastname] AS [emp_lastname], 
+    [archive_leads].[project_status] AS [project_status], 
+    [archive_leads].[delivery_status] AS [delivery_status], 
+    [archive_leads].[source_name] AS [source_name], 
+    [archive_leads].[class_name] AS [class_name], 
+    [archive_leads].[project_type] AS [project_type], 
+    [archive_leads].[jobsite_address] AS [jobsite_address], 
+    [archive_leads].[jobsite_city] AS [jobsite_city], 
+    [archive_leads].[jobsite_county] AS [jobsite_county], 
+    [archive_leads].[jobsite_state] AS [jobsite_state], 
+    [archive_leads].[jobsite_zipcode] AS [jobsite_zipcode], 
+    [archive_leads].[lead_email] AS [lead_email], 
+    [archive_leads].[lead_phone_number] AS [lead_phone_number], 
+    [archive_leads].[second_lead_phone_number] AS [second_lead_phone_number], 
+    [archive_leads].[lead_date] AS [lead_date], 
+    [archive_leads].[lead_close_date] AS [lead_close_date], 
+    [archive_leads].[tax_exempt] AS [tax_exempt], 
+    [archive_leads].[in_city] AS [in_city], 
+    [archive_leads].[building_permit_cost] AS [building_permit_cost], 
+    [archive_leads].[installation_cost] AS [installation_cost], 
+    [archive_leads].[product_cost] AS [product_cost], 
+    [archive_leads].[tax_cost] AS [tax_cost], 
+    [archive_leads].[total_cost] AS [total_cost]
+    FROM [dbo].[archive_leads] AS [archive_leads]</DefiningQuery>
+    </EntitySet>
+    <AssociationSet Name="fk_branches_to_addresses" Association="Self.fk_branches_to_addresses">
+      <End Role="addresses" EntitySet="addresses" />
+      <End Role="branches" EntitySet="branches" />
+    </AssociationSet>
+    <AssociationSet Name="fk_Customers_to_addresses" Association="Self.fk_Customers_to_addresses">
+      <End Role="addresses" EntitySet="addresses" />
+      <End Role="customers" EntitySet="customers" />
+    </AssociationSet>
+    <AssociationSet Name="fk_employees_to_brancges" Association="Self.fk_employees_to_brancges">
+      <End Role="branches" EntitySet="branches" />
+      <End Role="employees" EntitySet="employees" />
+    </AssociationSet>
+    <AssociationSet Name="fk_employees_to_users_types" Association="Self.fk_employees_to_users_types">
+      <End Role="users_types" EntitySet="users_types" />
+      <End Role="employees" EntitySet="employees" />
+    </AssociationSet>
+    <AssociationSet Name="fk_installation_to_leads" Association="Self.fk_installation_to_leads">
+      <End Role="leads" EntitySet="leads" />
+      <End Role="installation" EntitySet="installation" />
+    </AssociationSet>
+    <AssociationSet Name="fk_lead_log_file_to_Leads" Association="Self.fk_lead_log_file_to_Leads">
+      <End Role="leads" EntitySet="leads" />
+      <End Role="lead_log_file" EntitySet="lead_log_file" />
+    </AssociationSet>
+    <AssociationSet Name="fk_leads_to_branches" Association="Self.fk_leads_to_branches">
+      <End Role="branches" EntitySet="branches" />
+      <End Role="leads" EntitySet="leads" />
+    </AssociationSet>
+    <AssociationSet Name="fk_leads_to_customers" Association="Self.fk_leads_to_customers">
+      <End Role="customers" EntitySet="customers" />
+      <End Role="leads" EntitySet="leads" />
+    </AssociationSet>
+    <AssociationSet Name="fk_leads_to_delivery_status" Association="Self.fk_leads_to_delivery_status">
+      <End Role="delivery_status" EntitySet="delivery_status" />
+      <End Role="leads" EntitySet="leads" />
+    </AssociationSet>
+    <AssociationSet Name="fk_leads_to_employees" Association="Self.fk_leads_to_employees">
+      <End Role="employees" EntitySet="employees" />
+      <End Role="leads" EntitySet="leads" />
+    </AssociationSet>
+    <AssociationSet Name="fk_leads_to_lead_source" Association="Self.fk_leads_to_lead_source">
+      <End Role="lead_source" EntitySet="lead_source" />
+      <End Role="leads" EntitySet="leads" />
+    </AssociationSet>
+    <AssociationSet Name="fk_leads_to_project_class" Association="Self.fk_leads_to_project_class">
+      <End Role="project_class" EntitySet="project_class" />
+      <End Role="leads" EntitySet="leads" />
+    </AssociationSet>
+    <AssociationSet Name="fk_leads_to_project_status" Association="Self.fk_leads_to_project_status">
+      <End Role="project_status" EntitySet="project_status" />
+      <End Role="leads" EntitySet="leads" />
+    </AssociationSet>
+    <AssociationSet Name="fk_leads_to_project_type" Association="Self.fk_leads_to_project_type">
+      <End Role="project_type" EntitySet="project_type" />
+      <End Role="leads" EntitySet="leads" />
+    </AssociationSet>
+    <AssociationSet Name="fk_products_to_leads" Association="Self.fk_products_to_leads">
+      <End Role="leads" EntitySet="leads" />
+      <End Role="products" EntitySet="products" />
+    </AssociationSet>
+    <AssociationSet Name="fk_rates_installation_to_installation" Association="Self.fk_rates_installation_to_installation">
+      <End Role="installation" EntitySet="installation" />
+      <End Role="rates_installation" EntitySet="rates_installation" />
+    </AssociationSet>
+    <AssociationSet Name="fk_rates_installation_to_rates" Association="Self.fk_rates_installation_to_rates">
+      <End Role="rates" EntitySet="rates" />
+      <End Role="rates_installation" EntitySet="rates_installation" />
+    </AssociationSet>
+    <AssociationSet Name="fk_tasks_installation_to_installation" Association="Self.fk_tasks_installation_to_installation">
+      <End Role="installation" EntitySet="installation" />
+      <End Role="tasks_installation" EntitySet="tasks_installation" />
+    </AssociationSet>
+    <AssociationSet Name="fk_tasks_installation_to_tasks" Association="Self.fk_tasks_installation_to_tasks">
+      <End Role="tasks" EntitySet="tasks" />
+      <End Role="tasks_installation" EntitySet="tasks_installation" />
+    </AssociationSet>
+    <AssociationSet Name="fk_taxes_leads_to_leads" Association="Self.fk_taxes_leads_to_leads">
+      <End Role="leads" EntitySet="leads" />
+      <End Role="taxes_leads" EntitySet="taxes_leads" />
+    </AssociationSet>
+    <AssociationSet Name="fk_taxes_leads_to_taxes" Association="Self.fk_taxes_leads_to_taxes">
+      <End Role="taxes" EntitySet="taxes" />
+      <End Role="taxes_leads" EntitySet="taxes_leads" />
+    </AssociationSet>
+    <AssociationSet Name="fk_total_cost_to_leads" Association="Self.fk_total_cost_to_leads">
+      <End Role="leads" EntitySet="leads" />
+      <End Role="total_cost" EntitySet="total_cost" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

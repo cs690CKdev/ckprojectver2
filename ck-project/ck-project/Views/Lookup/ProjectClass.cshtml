@@ -1,0 +1,41 @@
+﻿@model IEnumerable<ck_project.project_class>
+
+@{
+    ViewBag.Title = "ProjectClass";
+    Html.Partial("_AdminMenu");
+}
+
+<head>
+    <script type="text/javascript">
+        function del(id) {
+            if (confirm("sure?")) {
+                window.location = "/Lookup/ProjectClassDelete/" + id;
+            }
+        }
+
+
+    </script>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<h2>Project Class</h2>
+
+<body>
+    <table>
+        @if (ViewBag.project_class_list != null)
+        {
+            foreach (project_class a in ViewBag.project_class_list)
+            {
+                <tr>
+                    <td>@a.class_number</td>
+                    <td>@a.class_name</td>
+
+                    <td> <a href="javascript:del(@a.class_number)">Delete</a></td>
+                </tr>
+            }
+            <tr>
+                <td> <a href="/Lookup/ProjectClassAdd/">Add New</a></td>
+            </tr>      }
+    </table>
+</body>
+

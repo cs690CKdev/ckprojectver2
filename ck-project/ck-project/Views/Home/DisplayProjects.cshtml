@@ -1,0 +1,44 @@
+﻿@model IEnumerable<ck_project.lead>
+
+@{
+    ViewBag.Title = "DisplayProjects";
+}
+
+<h2>DisplayProjects</h2>
+
+<table class="table table-striped">
+    <thead class="mdb-color darken-3">
+        <tr>
+            <th>Type</th>
+            <th>Customer</th>
+            <th>Title</th>
+            <th>Status</th>
+            <th>Last Modified</th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.project_type.project_type_name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.customer.customer_firstname)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.project_name)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.project_status.project_status_name)
+                </td>
+                    @Html.DisplayFor(modelItem => item.last_status_date)
+                <td>
+                    @Html.ActionLink("Edit", "Edit", new { id = item.lead_number }) |
+                    @Html.ActionLink("View", "View", new { id = item.lead_number }) |
+                </td>
+            </tr>
+        }
+    </tbody>
+
+</table>

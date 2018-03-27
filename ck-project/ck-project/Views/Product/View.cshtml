@@ -1,0 +1,107 @@
+﻿@model List<ck_project.Models.Pg> 
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @Scripts.Render("~/Scripts/jquery-3.2.1.min.js")
+    @if (ViewBag.msg != null)
+    {
+        <script type="text/javascript">
+            $(document).ready(function () {
+                toastr.success('@ViewBag.msg');
+            });
+        </script>
+    }
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".navbar-nav li").removeClass("active");//this will remove the active class from
+            //previously active menu item
+            $('#lead').addClass('active');
+        });
+    </script>
+}
+
+@{
+    <link href="~/Content/Tabs.css" rel="stylesheet" type="text/css" />
+
+    if (HttpContext.Current.User.IsInRole("Administrator"))
+    {
+        @Html.Partial("_AdminMenu")
+    }
+    else
+    {
+        @Html.Partial("_MainMenu")
+    }
+}
+
+<div class="container">
+    <table>
+        <tr>
+            <td style="width:947px"><h2>Products</h2></td>
+            <td style="width:50px">
+                <input type="button" value="Customer" onclick="location.href='@Url.Action("Edit", "Customers", new { id = ViewBag.customerNbr })'" class="btn btn-default" id="tabBtn" />
+            </td>
+            <td style="width:50px">
+                <input type="button" value="Lead" onclick="location.href='@Url.Action("Edit", "Lead", new { id = ViewBag.lid })'" class="btn btn-default" id="tabBtn" />
+            </td>
+            <td style="width:100px">
+                <input type="button" value="Installation" onclick="location.href='@Url.Action("Lis", "Install", new { lid = ViewBag.lid })'" class="btn btn-default" id="tabBtn" />
+            </td>
+            <td style="width:50px">
+                <input type="button" value="Summary" onclick="location.href='@Url.Action("ProjSummary", "Home", new { id = ViewBag.lid })'" class="btn btn-default" id="tabBtn" />
+            </td>
+            <td style="width:50px">
+                <input type="button" value="Print" onclick="location.href='@Url.Action("ProjPrint", "Home", new { id = ViewBag.lid })'" class="btn btn-default" id="tabBtn" />
+            </td>
+        </tr>
+    </table>
+    <hr />
+
+    <div class="panel-group" id="accordion">
+        <div class="panel panel-default">
+            <h3 class="panel-heading">
+                <a data-toggle="collapse" data-parent="#accordion" href="#collapseR" style="color:#8B0000">
+                    Add New Product
+                </a>
+            </h3>
+
+            <div id="collapseR" class="panel-collapse collapse">
+                <div class="panel-body">
+                    @{
+                        if (Model != null)
+                        {
+                            @Html.Action("Add", new { lid = ViewBag.lid })
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+
+        @foreach (var item in Model)
+        {
+            var cat = item.cat;
+            var lid = item.lid;
+
+            <div class="panel panel-default">
+                <div class="panel-heading">
+                    <h4 class="panel-title">
+                        <a data-toggle="collapse" data-parent="#accordion"
+                           href="#collapse@(item.uid)">
+                            @item.cat
+                        </a>
+
+                    </h4>
+                </div>
+                <div id="collapse@(item.uid)" class="panel-collapse collapse">
+                    <div class="panel-body">
+
+
+                        @Html.Action("gp", new { cat = cat, lid = lid })
+                    </div>
+                </div>
+            </div>
+
+        }
+    </div>
+</div>

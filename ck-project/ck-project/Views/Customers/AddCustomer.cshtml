@@ -1,0 +1,134 @@
+﻿@model  Tuple<ck_project.customer, ck_project.address> 
+
+@{
+    if (HttpContext.Current.User.IsInRole("Administrator"))
+    {
+        @Html.Partial("_AdminMenu")
+    }
+    else
+    {
+        @Html.Partial("_MainMenu")
+    }
+}
+
+<div class="container">
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <table>
+                <tr>
+                    <td style="width:1150px"><h3>Add a New Customer</h3></td>
+                    <td style="width:50px">
+                    </td>
+                </tr>
+            </table>
+            <div style="padding-bottom:10px"></div>
+            <h5>All the fields with star are required</h5>
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+            <div class='col-xs-4 '>
+                <div class="form-group">
+                    <label class="control-label" for="name">First Name*</label>
+                    @Html.EditorFor(tuple => tuple.Item1.customer_firstname, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(tuple => tuple.Item1.customer_firstname, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class='col-xs-4 '>
+                <div class="form-group">
+                    <label class="control-label" for="name">Middle Name</label>
+                    @Html.EditorFor(tuple => tuple.Item1.customer_middlename, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(tuple => tuple.Item1.customer_middlename, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class='col-xs-4 '>
+                <div class="form-group">
+                    <label class="control-label" for="name">Last Name*</label>
+                    @Html.EditorFor(tuple => tuple.Item1.customer_lastname, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(tuple => tuple.Item1.customer_lastname, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class='col-xs-4 '>
+                <div class="form-group">
+                    <label class="control-label" for="name">Phone Number*</label>
+                    @Html.EditorFor(tuple => tuple.Item1.phone_number, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(tuple => tuple.Item1.phone_number, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class='col-xs-4 '>
+                <div class="form-group">
+                    <label class="control-label" for="name"> Second Phone Number</label>
+                    @Html.EditorFor(tuple => tuple.Item1.second_phone_number, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(tuple => tuple.Item1.second_phone_number, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class='col-xs-4 '>
+                <div class="form-group">
+                    <label class="control-label" for="name"> Email Address</label>
+                    @Html.EditorFor(tuple => tuple.Item1.email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(tuple => tuple.Item1.email, "", new { @class = "text-danger" })
+                </div>
+            </div>
+        </div>
+
+
+
+
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            <div class='col-xs-4'>
+                <div class="form-group">
+                    <label class="control-label" for="name"> Billing Address*</label>
+                    @Html.EditorFor(tuple => tuple.Item2.address1, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(tuple => tuple.Item2.address1, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class='col-xs-4'>
+                <div class="form-group">
+                    <label class="control-label" for="name"> Billing City*</label>
+                    @Html.EditorFor(tuple => tuple.Item2.city, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(tuple => tuple.Item2.city, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class='col-xs-4 '>
+                <div class="form-group">
+                    <label class="control-label" for="name"> Billing State*</label>
+                    @Html.DropDownList("state_number", (IEnumerable<SelectListItem>)ViewBag.Sstate, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(tuple => tuple.Item2.state, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class='col-xs-4 '>
+                <div class="form-group">
+                    <label class="control-label" for="name"> Billing Zipcode*</label>
+                    @Html.EditorFor(tuple => tuple.Item2.zipcode, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(tuple => tuple.Item2.zipcode, "", new { @class = "text-danger" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                <div class="col-md-offset-0 col-md-10">
+                    <input type="submit" value="Create" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+    <div>
+        @Html.ActionLink("Back to List", "ListCustomers")
+    </div>
+</div>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @if (ViewBag.m != null)
+    {
+        <script type="text/javascript">
+ $(document).ready(function () {
+toastr.success('@ViewBag.m');
+});
+        </script>
+    }
+}

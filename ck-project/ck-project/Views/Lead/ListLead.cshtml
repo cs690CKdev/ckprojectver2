@@ -1,0 +1,164 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<ck_project.lead>
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @if (ViewBag.m != null)
+    {
+        <script type="text/javascript">
+ $(document).ready(function () {
+     toastr.success('@ViewBag.m');
+     @ViewBag.m = null
+ });
+
+        </script>
+    }
+}
+@{
+    if (HttpContext.Current.User.IsInRole("Administrator"))
+    {
+        @Html.Partial("_AdminMenu")
+    }
+    else
+
+    {
+        @Html.Partial("_MainMenu")
+    }
+}
+
+<div class="container">
+    <table>
+        <tr>
+            <td style="width:720px"><h3>Projects</h3></td>
+            <td style="width:700px" align="right"></td>
+        </tr>
+        <tr>
+            <td>This page displays all leads.</td>
+            <td rowspan="2">
+                @using (Html.BeginForm("ListLead", "Lead", FormMethod.Get))
+                {
+                    <b>Project Name: </b>
+                    @Html.TextBox("Search", ViewData.TemplateInfo.FormattedModelValue, new { placeholder = "Type project name here", @class = "search_box" });
+                    <b>&nbsp;&nbsp;&nbsp;&nbsp;Status:</b>
+                    @Html.DropDownList("type", (IEnumerable<SelectListItem>)ViewBag.lead_type, new { @class = "search_box" });
+                    <div style="float:left; padding-top:12px"><b>&nbsp;&nbsp;&nbsp;Create Date:&nbsp;</b></div>
+                    <div style="float:left; padding-right:10px; padding-top:4px"><input style="width:160px;" type="date" name="start" class="search_box" /></div>
+                    <div style="float:left; padding-right:20px; padding-top:4px"><input style="width:160px" type="date" name="end" class="search_box" /></div>
+                    <div style="padding-top:6px"><input type="submit" value="Search" class="btn btn-default" /></div>
+                }
+            </td>
+        </tr>
+        @*  <tr>
+                <td>
+                    <input type="button" value="Create Lead" onclick="location.href='@Url.Action("ListCustomers", "Customers")'" class="btn btn-default" style="width: 100px;" />
+                </td>
+            </tr> *@
+    </table>
+    <div style="padding-top:15px"></div>
+    <table class="table table-striped">
+        <thead class="mdb-color darken-3">
+            <tr>
+                <th>
+                    @Html.ActionLink("Project Name", "Sort", new { by = "pn" })
+                </th>
+                <th>
+                    @Html.ActionLink("Customer Name", "Sort", new { by = "cn" })
+                </th>
+                <th>
+                    @Html.ActionLink("Designer", "Sort", new { by = "ds" })
+                </th>
+                <th>
+                    @Html.ActionLink("SalesPerson", "Sort", new { by = "sp" })
+                </th>
+                <th>
+                    @Html.ActionLink("Project Type", "Sort", new { by = "pt" })
+                </th>
+                <th>
+                    @Html.ActionLink("Project Status", "Sort", new { by = "ps" })
+                </th>
+                <th>
+                    @Html.ActionLink("Create Dated", "Sort", new { by = "cd" })
+                </th>
+                <th>
+                    @Html.ActionLink("Last Update Date", "Sort", new { by = "lud" })
+                </th>
+                <th>
+                    @Html.ActionLink("Branch", "Sort", new { by = "br" })
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        @if (Model != null)
+        {
+            @*@if (Model.Count() == 0)
+                {
+                    <tr>
+                        <td colspan="6"> Sorry, There are no leads with the entered project name
+                        <td>
+                    </tr>
+                }
+                else
+                {*@
+            foreach (var item in Model)
+            {
+
+
+                <tr>
+                    <td>
+                        @Html.DisplayFor(model => item.project_name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.customer.customer_firstname)
+                        @Html.DisplayFor(model => item.customer.customer_lastname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.employee.emp_firstname)
+                        @Html.DisplayFor(model => item.employee.emp_lastname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.lead_creator)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.project_type.project_type_name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.project_status.project_status_name)
+                    </td>
+                    <td>
+                        @*@Html.DisplayFor(model => Model.First().lead_date)*@
+                        @item.lead_date.ToString("dd MMM yyyy")
+                    </td>
+                    <td>
+                        @{
+                            if (item.Last_update_date == item.lead_date)
+                            {
+                                @Html.DisplayName(" - ")
+                            }
+                            else
+                            {
+                                @Html.DisplayName(item.Last_update_date.ToString("dd MMM yyyy"))
+                            } }
+                    </td>
+                    <td>
+                        @Html.DisplayFor(model => item.branch.branch_name)
+                    </td>
+
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.lead_number }) |
+                        @Html.ActionLink("Details", "ProjSummary", "Home", new { id = item.lead_number }, null) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.lead_number },
+                                      new { onclick = "return confirm('Are you sure you wish to delete the lead?');" })
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+    @Html.PagedListPager(Model, page => Url.Action("ListLead",
+        new { page, search = Request.QueryString["Search"], Type = Request.QueryString["type"], Start = Request.QueryString["start"], end = Request.QueryString["end"] }), new PagedListRenderOptions() { DisplayPageCountAndCurrentLocation = true })
+
+
+
+</div>
+
+
+

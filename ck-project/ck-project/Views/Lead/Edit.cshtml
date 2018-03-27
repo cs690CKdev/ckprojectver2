@@ -1,0 +1,177 @@
+﻿@model ck_project.lead
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    @if (ViewBag.m != null)
+    {
+        <script type="text/javascript">
+ $(document).ready(function () {
+     toastr.success('@ViewBag.m');
+    
+});
+        </script>
+    }
+}
+
+@{
+    <link href="~/Content/Tabs.css" rel="stylesheet" type="text/css" />
+    if (HttpContext.Current.User.IsInRole("Administrator"))
+    {
+        @Html.Partial("_AdminMenu")
+    }
+    else
+    {
+        @Html.Partial("_MainMenu")
+    }
+}
+
+<div class="container">
+
+
+    <table>
+        <tr>
+            <td style="width:1150px"><h3>Edit Lead</h3></td>
+            <td style="width:50px">
+            </td>
+        </tr>
+    </table>
+    <div style="padding-bottom:10px"></div>
+
+
+
+
+    <table>
+        <tr>
+            <td style="width:50px" align="right">
+            </td>
+        </tr>
+        <tr>
+            <td style="width:947px"><h5>All the fields with star are required</h5></td>
+            <td style="width:50px">
+                <input type="button" value="Customer" onclick="location.href='@Url.Action("Edit", "Customers", new { id = @Model.customer_number })'" class="btn btn-default" id="tabBtn" />
+            </td>
+            <td style="width:50px">
+                <input type="button" value="Products" onclick="location.href='@Url.Action("View", "Product", new { id = @Model.lead_number })'" class="btn btn-default" id="tabBtn" />
+            </td>
+            <td style="width:100px">
+                <input type="button" value="Installation" onclick="location.href='@Url.Action("Lis", "Install", new { lid = @Model.lead_number })'" class="btn btn-default" id="tabBtn" />
+            </td>
+            <td style="width:50px">
+                <input type="button" value="Summary" onclick="location.href='@Url.Action("ProjSummary", "Home", new { id = @Model.lead_number })'" class="btn btn-default" id="tabBtn" />
+            </td>
+            <td style="width:50px">
+                <input type="button" value="Print" onclick="location.href='@Url.Action("ProjPrint", "Home", new { id = @Model.lead_number })'" class="btn btn-default" id="tabBtn" />
+            </td>
+        </tr>
+    </table>
+    <hr />
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+
+        <div class="form-horizontal">
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => model.lead_number)
+            <div class='col-xs-4 '>
+                <label class='control-label'>Project Name*</label>
+                @Html.EditorFor(model => model.project_name, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.project_name, "", new { @class = "text-danger" })
+            </div>
+            <div class='col-xs-4 '>
+                <label class='control-label'>CLass Name*</label>
+                @Html.DropDownList("class_number", (List<SelectListItem>)ViewBag.Class_Info, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.class_number, "", new { @class = "text-danger" })
+            </div>
+
+            <div class='col-xs-4 '>
+                <label class='control-label'>Project Status*</label>
+                @Html.DropDownList("project_status_number", (IEnumerable<SelectListItem>)ViewBag.Status_Info, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.project_status_number, "", new { @class = "text-danger" })
+            </div>
+            <div class='col-xs-4 '>
+                <label class='control-label'>Project Type*</label>
+                @Html.DropDownList("project_type_number", (IEnumerable<SelectListItem>)ViewBag.ProjectType_Info, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.project_type_number, "", new { @class = "text-danger" })
+            </div>
+            <div class='col-xs-4 '>
+                <label class='control-label'>Project Source*</label>
+                @Html.DropDownList("source_number", (IEnumerable<SelectListItem>)ViewBag.Source_Info, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.source_number, "", new { @class = "text-danger" })
+            </div>
+            <div class='col-xs-4 '>
+                <label class='control-label'>Designer Name*</label>
+                @Html.DropDownList("emp_number", (IEnumerable<SelectListItem>)ViewBag.Emp_Info, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.emp_number, "", new { @class = "text-danger" })
+            </div>
+            <div class='col-xs-4 '>
+                <label class='control-label'>Branch Name*</label>
+                @Html.DropDownList("branch_number", (IEnumerable<SelectListItem>)ViewBag.Branch_Info, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.branch_number, "", new { @class = "text-danger" })
+            </div>
+            <div class='col-xs-4 '>
+                <label class='control-label'>Delivery Status*</label>
+                @Html.DropDownList("delivery_status_number", (IEnumerable<SelectListItem>)ViewBag.DeliveryStatus_Info, htmlAttributes: new { @class = "form-control" })
+                @Html.ValidationMessageFor(model => model.delivery_status_number, "", new { @class = "text-danger" })
+            </div>
+
+            <div class='col-xs-4'>
+
+                    <label class='control-label'>Tax Exempt*</label>
+                    @Html.DropDownList("tax_exempt", (IEnumerable<SelectListItem>)ViewBag.TaxExemptInfo, htmlAttributes: new { @class = "form-control" })
+                    @Html.ValidationMessageFor(model => model.tax_exempt, "", new { @class = "text-danger" })
+       
+            </div>
+
+            <div class='col-xs-4 '>
+                <label class="control-label" for="name">Phone Number</label>
+                @Html.EditorFor(model => model.phone_number, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.phone_number, "", new { @class = "text-danger" })
+            </div>
+            <div class='col-xs-4 '>
+                <label class="control-label" for="name">Phone Number2</label>
+                @Html.EditorFor(model => model.second_phone_number, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.second_phone_number, "", new { @class = "text-danger" })
+            </div>
+            <div class='col-xs-4 '>
+                <label class="control-label" for="name"> Email Address</label>
+                @Html.EditorFor(model => model.email, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.email, "", new { @class = "text-danger" })
+            </div>
+
+            <div class='col-xs-4 '>
+  
+                    <label class="control-label" for="name"> Note</label>
+                    @Html.EditorFor(model => model.note, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => model.note, "", new { @class = "text-danger" })
+
+            </div>
+
+            <div class='col-xs-4 '>
+                <label class='control-label'>In City? </label>
+                @Html.EditorFor(model => model.in_city)
+                @Html.ValidationMessageFor(model => model.in_city, "", new { @class = "text-danger" })
+            </div>
+
+
+            @*<div class='col-xs-4 '>
+                <label class='control-label'>Tax Exempt? </label>
+                @Html.EditorFor(model => model.tax_exempt)
+                @Html.ValidationMessageFor(model => model.tax_exempt, "", new { @class = "text-danger" })
+            </div>*@
+         
+            <div class="form-group">
+                <div class="col-md-offset-0 col-md-10">
+                    <br>
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+            </div>
+        </div>
+    }
+    <div>
+        @Html.ActionLink("Edit address info", "Edit", "Address", new { id = ViewBag.addressnumber,mode="l" }, new { @class = "btn btn-default", @style = "width: 140px" })
+    </div>
+    <div>
+        @Html.ActionLink("Back to List", "ListLead")
+    </div>
+</div>
+

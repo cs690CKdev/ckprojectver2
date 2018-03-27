@@ -1,0 +1,110 @@
+﻿@using PagedList;
+@using PagedList.Mvc;
+@model IPagedList<ck_project.lead_log_file>
+
+
+@Html.Partial("_AdminMenu")
+
+<div class="container">
+    <table>
+        <tr>
+            <td style="width:435px"><h2>Leads Logs</h2></td>
+            <td style="width:680px" align="right"></td>
+        </tr>
+        <tr>
+
+            <td>This page displays all updates on leads.</td>
+            <td rowspan="2">
+                @using (Html.BeginForm("ListLog", "Log", FormMethod.Get))
+                {
+                    <b>Project Name: </b>
+                    @Html.TextBox("Search", ViewData.TemplateInfo.FormattedModelValue, new { placeholder = "Type project name here", @class = "search_box" });
+                    <b>&nbsp;&nbsp;&nbsp;&nbsp;Salesperson:</b>
+                    @Html.DropDownList("Emp", (IEnumerable<SelectListItem>)ViewBag.EmpInfo, new { @class = "search_box" });
+                    <div style="float:left; padding-top:12px"><b>&nbsp;&nbsp;&nbsp;Update Date:&nbsp;</b></div>
+                    <div style="float:left; padding-right:10px; padding-top:4px"><input style="width:160px;" type="date" name="start" class="search_box" /></div>
+                    <div style="float:left; padding-right:20px; padding-top:4px"><input style="width:160px" type="date" name="end" class="search_box" /></div>
+                    <div style="padding-top:6px"><input type="submit" value="Search" class="btn btn-default" /></div>
+                }
+            </td>
+        </tr>
+
+    </table>
+    <div style="padding-top:15px"></div>
+
+    <table class="table table-striped">
+        <thead class="mdb-color darken-3">
+
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().lead.project_name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().emp_username)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().table_name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().column_name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().action_name)
+                </th>
+
+                <th>
+                    @Html.DisplayNameFor(model => model.First().prvious_value)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().new_value)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.First().update_date)
+                </th>
+
+                <th></th>
+            </tr>
+        </thead>
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+
+                        @Html.DisplayFor(modelItem => item.lead.project_name)
+                    </td>
+                    <td>
+
+                        @Html.DisplayFor(modelItem => item.emp_username)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.table_name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.column_name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.action_name)
+                    </td>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.prvious_value)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.new_value)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.update_date)
+                    </td>
+
+
+                </tr>
+            }
+        }
+    </table>
+
+    @Html.PagedListPager(Model, page => Url.Action("ListLog", new { page, search = Request.QueryString["Search"], Emp = Request.QueryString["Emp"], Start = Request.QueryString["start"], end = Request.QueryString["end"] }), new PagedListRenderOptions() { DisplayPageCountAndCurrentLocation = true })
+
+</div>
+

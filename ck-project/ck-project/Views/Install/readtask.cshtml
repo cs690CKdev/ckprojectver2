@@ -1,0 +1,63 @@
+﻿@model IEnumerable<ck_project.tasks_installation>
+@{
+    Layout = null;
+}
+@foreach (tasks_installation item in Model)
+{
+    using (Html.BeginForm("savetask", "Install", FormMethod.Post))
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-inline">
+            <hr />
+            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+            @Html.HiddenFor(model => item.tasks_installation_number)
+            <div class="form-group">
+                @Html.LabelFor(model => item.task_number, "Sub Category", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @ViewBag.taskname
+
+                    @Html.ValidationMessageFor(model => item.task_number, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="col-md-10">
+                    @ck_project.Helpers.installconvert.convert(item.task_number)
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => item.hours, "Work hour", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => item.hours, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => item.hours, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => item.m_cost, "Material Cost", htmlAttributes: new { @class = "control-label col-md-2" })
+                <div class="col-md-10">
+                    @Html.EditorFor(model => item.m_cost, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.ValidationMessageFor(model => item.m_cost, "", new { @class = "text-danger" })
+                </div>
+            </div>
+            @*<div class="form-group">
+                    @Html.LabelFor(model => item.labor_cost, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => item.labor_cost, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => item.labor_cost, "", new { @class = "text-danger" })
+                    </div>
+                </div>*@
+            <div class="form-group">
+                <div class="col-md-offset-2 col-md-10">
+                    <input type="submit" value="Save" class="btn btn-default" />
+                </div>
+                <div class="col-md-offset-2 col-md-10">
+                    @Html.ActionLink("Delete", "Delete", new { tin = item.tasks_installation_number, iid = item.installation_number },
+                     new { onclick = "return confirm('Are you sure you wish to delete the task?');", @class = "btn btn-default" })
+                </div>
+            </div>
+        </div>
+    }
+}
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}

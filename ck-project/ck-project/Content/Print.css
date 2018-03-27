@@ -1,0 +1,453 @@
+﻿.header {
+    text-align: center;
+    padding-bottom: 30px;
+}
+
+body {
+    font-size: 14px;
+    color: black;
+    margin-top: 7px;
+    margin-bottom: 7px;
+    margin-left: 40px;
+    margin-right: 10px;
+}
+
+.wrapper {
+    width: 95%;
+    word-wrap: break-word;
+    white-space: normal;
+    text-align: justify;
+    padding-left: 3%;
+}
+
+.pic2 {
+    padding-top: 7%;
+    padding-bottom: 5%;
+}
+
+.column {
+    float: left;
+    padding: 10px;
+}
+
+.row:after {
+    content: "";
+    display: table;
+    clear: both;
+}
+
+.pagebreak {
+    display: block;
+    clear: both;
+    page-break-after: always;
+}
+
+ul.a {
+    list-style-type: circle;
+    margin-left:5%;
+}
+
+li {
+    padding-top: 5px;
+}
+
+.signature {
+    border-top: 1px solid black;
+    font-size: 18px;
+    color: gray;
+    text-align:center;
+}
+
+/*Sold Job Notice section */
+.left_text {
+    width: 200px;
+    text-align: right;
+}
+
+.left_data {
+    padding-left: 7px;
+    border-bottom: 1px solid gray;
+    width: 300px;
+}
+
+.right_text {
+    width: 150px;
+    text-align: right;
+}
+
+.right_data {
+    padding-left: 7px;
+    border-bottom: 1px solid gray;
+    width: 250px;
+}
+
+/* Owner Product Agreement section*/
+#apa_list {
+    border: 1px solid black;
+    width: 90%;
+    margin-left: 5%;
+    empty-cells: show
+}
+
+.apa_list_th {
+    font-weight: bold;
+    border: 1px solid black;
+    text-align: center;
+    background-color:lightgray;
+}
+
+.apa_list_tr {
+    height: 20px;
+    border: 1px solid black;
+}
+
+.apa_list_cols {
+    width: 25%;
+}
+
+.apa_list_descCol {
+    width: 50%;
+}
+
+.apa_hcharge_cat {
+    width: 20%;
+    text-align:right;
+}
+
+.apa_hcharge_price {
+    width: 20%;
+    padding-left: 10px;
+    text-align:left;
+}
+
+/* Scope of Work*/
+#sow_header {
+    border-bottom: 1.5px solid black;
+    border-top: 1.5px solid black;
+    background-color: rgb(217,224,241);
+    text-align: center;
+}
+
+/* Installation Details - Installers Copy*/
+#idic_header {
+    border-bottom: 1.5px solid black;
+    border-top: 1.5px solid black;
+    background-color: black;
+    text-align: center;
+    color: white;
+}
+
+/* Installation Details - Internal*/
+#idi_header1 {
+    background-color: rgb(51,51,51);
+    padding-left:1px;
+    color: white;
+}
+
+#idi_header2 {
+    background-color: rgb(128,128,128);
+    padding-left: 3px;
+    font-weight:500;
+    font-size:25px;
+}
+
+.table5_border_left {
+    width: 30px;
+    background-color: rgb(166,166,166);
+    border-left: 1px solid black;
+}
+
+.table5_border_right {
+    width: 30px;
+    background-color: rgb(166,166,166);
+    border-right: 1px solid black;
+}
+
+.table5_col1 {
+    width: 100px;
+    border: 1px solid black;
+    padding-right: 3px;
+    text-align: right;
+}
+
+.table5_col2 {
+    width: 420px;
+    border: 1px solid black;
+    padding-left: 3px
+}
+
+.table5_col3 {
+    width: 410px;
+    border: 1px solid black;
+    padding-right: 3px;
+    text-align: right;
+}
+
+.table5_col4 {
+    width: 90px;
+    border: 1px solid black;
+    text-align: right;
+    padding-right: 3px;
+}
+
+.table5_col5 {
+    width: 150px;
+    border: 1px solid black;
+    text-align: right;
+    padding-right: 3px;
+}
+
+.table5_col6 {
+    width: 250px;
+    border: 1px solid black;
+    padding-left: 3px;
+}
+
+.table5_col3_4_combine {
+    background-color: rgb(166,166,166);
+}
+
+.table5_col4_1 {
+    width: 50px;
+    border: 1px solid black;
+    text-align: right;
+    padding-right: 3px;
+}
+
+.table5_col4_2 {
+    width: 50px;
+    background-color: rgb(166,166,166);
+}
+
+.item_price {
+    border: 1px solid gray;
+    text-align: right;
+    padding-right: 3px;
+    height: 19px;
+    width:100px;
+}
+
+.item_text {
+    border: 1px solid gray;
+    padding-left: 3px;
+    height: 19px;
+    width: 100px;
+}
+
+.item_price_subcattotal {
+    border: 1px solid gray;
+    text-align: right;
+    padding-right: 3px;
+    font-weight: bold;
+    height: 19px;
+    width: 100px;
+}
+
+.item_subcat {
+    padding-left: 3px;
+    font-weight: bold;
+    height: 19px;
+    width: 600px;
+}
+
+.item_cat {
+    padding-left: 3px;
+    font-weight: bolder;
+    height: 19px;
+    width: 100px;
+}
+
+/* Products and Materials Details - Internal*/
+.pam_cat_row_left {
+    font-weight: bolder;
+    padding-left: 3px;
+    border-right: 1px solid white;
+    font-size: 13px;
+}
+
+.pam_cat_row_right {
+    font-weight: bolder;
+    border-left: 1px solid black;
+    padding-left: 3px;
+    border-right: 1px solid black;
+    font-size: 13px;
+}
+
+.pam_total_col {
+    text-align: center;
+    border-bottom: 1px solid white;
+    border-right: 1px solid white;
+    font-size: 13px;
+}
+
+.pam_totalprice_col {
+    text-align: right;
+    padding-right: 3px;
+    border-bottom: 1px solid white;
+    border-right: 1px solid white;
+    font-size: 13px;
+}
+
+.pam_cat_row_color {
+    background-color: rgb(192,192,192);
+}
+
+.pamex_cat_row_color {
+    background-color: white;
+}
+
+.pam_item_text {
+    border: 1px solid gray;
+    padding-left: 3px;
+    font-size:13px;
+}
+
+.pam_item_text2 {
+    border: 1px solid gray;
+    border-left: 1px solid black;
+    padding-left: 3px;
+    font-size: 13px;
+}
+
+.pam_item_qty {
+    border: 1px solid white;
+    text-align: center;
+    font-size: 13px;
+}
+
+.pam_item_qty2 {
+    border: 1px solid gray;
+    border-left: 1px solid black;
+    text-align: center;
+    font-size: 13px;
+}
+
+.pam_item_price {
+    width: 150px;
+    border: 1px solid white;
+    text-align: right;
+    padding-right: 3px;
+    font-size: 13px;
+}
+
+.pam_item_nodata {
+    border: 1px solid white;
+    height: 19px;
+    font-size: 13px;
+}
+
+.pam_item_nodata2 {
+    border: 1px solid gray;
+    border-left: 1px solid black;
+    height: 19px;
+    font-size: 13px;
+}
+
+.pam_item_header {
+    color: gray;
+    text-align: center;
+}
+
+.pam_item_header2 {
+    border-left: 1px solid black;
+    color: gray;
+    text-align: center;
+}
+
+/* Lead Entry */
+.le_title {
+    width: 250px;
+    height: 35px;
+    text-align: right;
+}
+
+.le_data {
+    width: 400px;
+    padding-left: 10px;
+    font-weight: bolder;
+    height: 35px;
+}
+
+.le_section {
+    height: 60px;
+    font-weight: bolder;
+    font-size: 16px;
+    border-top: 1px solid gray;
+}
+
+
+
+/* Override bootstrap checkbox */
+input[type="checkbox"]:not(:checked),
+input[type="checkbox"]:checked {
+    position: relative;
+    left: -9999px;
+}
+
+input[type="checkbox"]:not(:checked) + label,
+input[type="checkbox"]:checked + label {
+position: relative;
+padding-left: 25px;
+cursor: pointer;
+}
+
+/* checkbox aspect */
+input[type="checkbox"]:not(:checked) + label:before,
+input[type="checkbox"]:checked + label:before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 2px;
+    width: 18px;
+    height: 18px;
+    border: 1px solid black;
+    background: #f8f8f8;
+    border-radius: 3px;
+    box-shadow: inset 0 1px 3px rgba(0,0,0,.3)
+}
+/* checked mark aspect */
+input[type="checkbox"]:not(:checked) + label:after,
+input[type="checkbox"]:checked + label:after {
+    content: '✔';
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    font-size: 14px;
+    color: black;
+    transition: all .2s;
+    -webkit-transition: all .2s;
+    -moz-transition: all .2s;
+    -ms-transition: all .2s;
+    -o-transition: all .2s;
+}
+
+/* checked mark aspect changes */
+input[type="checkbox"]:not(:checked) + label:after {
+    opacity: 0;
+    transform: scale(0);
+}
+
+input[type="checkbox"]:checked + label:after {
+    opacity: 1;
+    transform: scale(1);
+}
+/* disabled checkbox */
+input[type="checkbox"]:disabled:not(:checked) + label:before,
+input[type="checkbox"]:disabled:checked + label:before {
+    box-shadow: none;
+    border-color: #999999;
+    background-color: #ddd;
+}
+
+input[type="checkbox"]:disabled:checked + label:after {
+    color: #999;
+}
+
+input[type="checkbox"]:disabled + label {
+    color: #aaa;
+}
+/* accessibility */
+input[type="checkbox"]:checked:focus + label:before,
+input[type="checkbox"]:not(:checked):focus + label:before {
+    border: inherit;
+}

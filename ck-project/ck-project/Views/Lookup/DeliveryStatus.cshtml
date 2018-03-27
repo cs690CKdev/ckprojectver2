@@ -1,0 +1,40 @@
+﻿@model IEnumerable<ck_project.delivery_status>
+
+@{
+    ViewBag.Title = "Delivery Status";
+    Html.Partial("_AdminMenu");
+}
+
+<head>
+    <script type="text/javascript">
+        function del(id) {
+            if (confirm("sure?")) {
+                window.location = "/Lookup/DeliveryStatusDelete/" + id;
+            }
+        }
+
+
+    </script>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<h2>Delivery Status</h2>
+
+<body>
+    <table>
+        @if (ViewBag.delivery_status_list != null)
+        {
+            foreach (delivery_status a in ViewBag.delivery_status_list)
+            {
+                <tr>
+                    <td>@a.delivery_status_number</td>
+                    <td>@a.delivery_status_name</td>
+
+                    <td> <a href="javascript:del(@a.delivery_status_number)">Delete</a></td>
+                </tr>
+            }
+            <tr>
+                <td> <a href="/Lookup/DeliveryStatusAdd/">Add New</a></td>
+            </tr>      }
+    </table>
+</body>

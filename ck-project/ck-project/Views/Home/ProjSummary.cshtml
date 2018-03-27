@@ -1,0 +1,405 @@
+﻿@model ck_project.Models.ProjectSummary
+
+@{
+    <link href="~/Content/Tabs.css" rel="stylesheet" type="text/css" />
+
+    ViewBag.Title = "ProjSummary";
+
+    if (HttpContext.Current.User.IsInRole("Administrator"))
+    {
+        @Html.Partial("_AdminMenu")
+    }
+    else
+    {
+        @Html.Partial("_MainMenu")
+    }
+}
+
+<div class="container">
+     <table>
+        @{
+            if (Model.Lead != null && Model.Lead.project_status.project_status_name.Equals("Closed"))
+            {
+                <tr>
+                    <td colspan"5" style="width:1150px"><h2>Project Summary</h2></td>
+                    <td style="width:50px">
+                        <input type="button" value="Print" onclick="location.href='@Url.Action("ProjPrint", "Home", new { id = @Model.Lead.lead_number })'" class="btn btn-default" id="tabBtn" />
+                    </td>
+                </tr>
+            }
+            else
+            {
+                <tr>
+                    <td style="width:947px"><h2>Project Summary</h2></td>
+                    <td style="width:50px">
+                        <input type="button" value="Customer" onclick="location.href='@Url.Action("Edit", "Customers", new { id = @Model.Lead.customer_number })'" class="btn btn-default" id="tabBtn" />
+                    </td>
+                    <td style="width:50px">
+                        <input type="button" value="Lead" onclick="location.href='@Url.Action("Edit", "Lead", new { id = @Model.Lead.lead_number })'" class="btn btn-default" id="tabBtn" />
+                    </td>
+                    <td style="width:50px">
+                        <input type="button" value="Products" onclick="location.href='@Url.Action("View", "Product", new { id = @Model.Lead.lead_number })'" class="btn btn-default" id="tabBtn" />
+                    </td>
+                    <td style="width:100px">
+                        <input type="button" value="Installation" onclick="location.href='@Url.Action("Lis", "Install", new { lid = @Model.Lead.lead_number })'" class="btn btn-default" id="tabBtn" />
+                    </td>
+                    <td style="width:50px">
+                        <input type="button" value="Print" onclick="location.href='@Url.Action("ProjPrint", "Home", new { id = @Model.Lead.lead_number })'" class="btn btn-default" id="tabBtn" />
+                    </td>
+                </tr>
+            }
+        }
+    </table>
+    <hr />
+    <div align="center" style="padding-bottom:2%">
+        <h2>
+          @{
+              if (Model.Lead != null)
+              {
+                @Model.Lead.project_name
+              }
+            }
+         </h2>
+    </div>
+    <div class="panel-group" id="accordion1">
+        <div class="panel panel-default">
+            <div style="float: left; padding-left: 5px;"><h4><b>Customer Info</b></h4></div>
+            <div style="float: right; padding-right: 5px; padding-top: 5px">
+                <input type="button" value="Hide Details" onclick="return change(this);" class="btn btn-default sBtn" data-toggle="collapse" href="#collapse1" data-parent="#accordion1" />
+            </div>
+            <div style="clear:both; margin-left:4%">
+                <table>
+                    <tr>
+                        <td style="width:150px">Customer</td>
+                        <td class="item_data">
+                            @{
+                                if (Model.Customer != null)
+                                {
+                                    @Model.Customer.customer_firstname@:&nbsp;@Model.Customer.customer_lastname
+                                }
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:150px">Address</td>
+                        <td class="item_data">
+                            @{
+                                if (Model.Customer != null)
+                                {
+                                   @Model.Customer.address.address1@:&#44;&nbsp;@Model.Customer.address.city&#44;&nbsp;@Model.Customer.address.state&nbsp;@Model.Customer.address.zipcode
+                                }
+                            }
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div id="collapse1" class="panel-collapse collapse in">
+                <div class="panel-body">@Html.Partial("ProjSummary_CustomerDetails", Model)</div>
+            </div>
+        </div>
+    </div>
+    <div><hr style="border:solid 1px black"/></div>
+    <div class="panel-group" id="accordion2">
+        <div class="panel panel-default">
+            <div style="float: left; padding-left: 5px;"><h4><b>Lead Info</b></h4></div>
+            <div style="float: right; padding-right: 5px; padding-top: 5px">
+                <input type="button" value="Hide Details" onclick="return change(this);" class="btn btn-default sBtn" data-toggle="collapse" href="#collapse2" data-parent="#accordion2" />
+            </div>
+            <div style="clear: both; margin-left: 4%">
+                <table>
+                    <tr style="padding-bottom:20px">
+                        <td style="width:150px">Designer</td>
+                        <td class="item_data">
+                            @{
+                                if (Model.Lead != null)
+                                {
+                                    @Model.Lead.employee.emp_firstname@:&nbsp;@Model.Lead.employee.emp_lastname
+                                }
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:150px">Show room</td>
+                        <td class="item_data">
+                            @{
+                                if (Model.Lead != null)
+                                {
+                                    @Model.Lead.branch.address.address1@:&#44;&nbsp;@Model.Lead.branch.address.city&#44;&nbsp;@Model.Lead.branch.address.state&nbsp;@Model.Lead.branch.address.zipcode
+                                }
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:150px">Jobsite</td>
+                        <td class="item_data">
+                            @{
+                                if (Model.JobsiteAddress != null)
+                                {
+                                    @Model.JobsiteAddress.address1@:&#44;&nbsp;@Model.JobsiteAddress.city&#44;&nbsp;@Model.JobsiteAddress.state&nbsp;@Model.JobsiteAddress.zipcode
+                                }
+                            }
+                        </td>
+
+                    </tr>
+                </table>
+            </div>
+            <div id="collapse2" class="panel-collapse collapse in">
+                <div class="panel-body">@Html.Partial("ProjSummary_LeadDetails", Model)</div>
+            </div>
+        </div>
+    </div>
+    <hr style="border:solid 1px black" />
+    <div class="panel-group" id="accordion3">
+        <div class="panel panel-default">
+            <div style="float: left; padding-left: 5px;"><h4><b>Products Info</b></h4></div>
+            <div style="float: right; padding-right: 5px; padding-top: 5px">
+                <input type="button" value="Hide Details" onclick="return change(this);" class="btn btn-default sBtn" data-toggle="collapse" href="#collapse3" data-parent="#accordion3" />
+            </div>
+            <div style="clear: both; margin-left: 4%">
+                <table>
+                    @{
+                        double prodTotal = 0;
+                        foreach (string key in Model.ProductTotalMap.Keys)
+                        {
+                            double total = Model.ProductTotalMap[key];
+                            if (total != 0)
+                            {
+                                prodTotal += total;
+                                <tr style="padding-bottom:20px">
+                                    <td style="width: 750px">@key</td>
+                                    <td style="width: 100px" class="item_price">@String.Format("{0:C}", total)</td>
+                                </tr>
+                            }
+                        }
+
+                        if (prodTotal != 0)
+                        {
+                            <tr>
+                                <td></td>
+                                <td class="section_total">@String.Format("{0:C}", prodTotal)</td>
+                            </tr>
+                        }
+                    }
+                </table>
+            </div>
+            <div id="collapse3" class="panel-collapse collapse in">
+                <div class="panel-body">@Html.Partial("ProjSummary_ProductDetails", Model)</div>
+            </div>
+        </div>
+    </div>
+    <hr style="border:solid 1px black" />
+    <div class="panel-group" id="accordion4">
+        <div class="panel panel-default">
+            <div style="float: left; padding-left: 5px;"><h4><b>Installations Info</b></h4></div>
+            <div style="float: right; padding-right: 5px; padding-top: 5px">
+                <input type="button" value="Hide Details" onclick="return change(this);" class="btn btn-default sBtn" data-toggle="collapse" href="#collapse4" data-parent="#accordion4" />
+            </div>
+            <div style="clear: both; margin-left: 4%">
+                <table>
+                    <thead class="mdb-color darken-3">
+                        <tr>
+                            <th style="width:400px"></th>
+                            <th style="width:100px; text-align:center">Hours</th>
+                            <th style="width:100px; text-align:right">Labor Cost</th>
+                            <th style="width:150px; text-align:right">Mat. Retail Cost</th>
+                            <th style="width:100px; text-align:right">Total Cost</th>
+                        </tr>
+                    </thead>
+                    @{
+                        if (Model.InstallCategoryCostMap != null)
+                        {
+                            double installTotal = 0.00;
+                            double materialTotal = 0.00;
+                            double laborTotal = 0.00;
+                            foreach (var key in Model.InstallCategoryCostMap.Keys)
+                            {
+                                Dictionary<string, double> costList = Model.InstallCategoryCostMap[key];
+                                <tr style="padding-bottom:20px">
+                                    <td>@key</td>
+                                    <td class="item_price" style="text-align:center">@costList["Hours"]</td>
+                                    <td class="item_price">@String.Format("{0:C}", costList["Labor Cost"])</td>
+                                    <td class="item_price">@String.Format("{0:C}", costList["Material Retail"])</td>
+                                    <td class="item_price">@String.Format("{0:C}", costList["Total Cost"])</td>
+                                </tr>
+                                laborTotal += costList["Labor Cost"];
+                                materialTotal += costList["Material Retail"];
+                                installTotal += @costList["Total Cost"];
+                            }
+
+                            if (installTotal != 0)
+                            {
+                                <tr>
+                                    <td colspan="2"></td>
+                                    <td class="section_total">@String.Format("{0:C}", laborTotal)</td>
+                                    <td class="section_total">@String.Format("{0:C}", materialTotal)</td>
+                                    <td class="section_total">@String.Format("{0:C}", installTotal)</td>
+                                </tr>
+                            }
+                        }
+                    }
+                </table>
+            </div>
+            <div id="collapse4" class="panel-collapse collapse in">
+                <div class="panel-body">@Html.Partial("ProjSummary_InstallationDetails", Model)</div>
+            </div>
+        </div>
+    </div>
+    <hr style="border:solid 1px black" />
+    <div class="panel-group" id="accordion4">
+        <div class="panel panel-default">
+            <div style="float: left"><h4><b>Taxes and Fees</b></h4></div>
+            <div style="clear: both; margin-left: 4%">
+                <table>
+                    <tr style="padding-bottom:20px">
+                        <td style="width:750px">Travel Expense</td>
+                        <td style="width:100px" class="item_price">
+                            @{
+                                if (Model.Lead != null && Model.Lead.installations != null)
+                                {
+                                    foreach (var item in Model.Lead.installations)
+                                    {
+                                        @String.Format("{0:C}", item.total_travel_cost)
+                                    }
+                                }
+                                else
+                                {
+                                    @String.Format("{0:C}", 0)
+                                }
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:750px">Mileage Expense</td>
+                        <td style="width:100px" class="item_price">
+                            @{
+                                if (Model.Lead != null && Model.Lead.installations != null)
+                                {
+                                    foreach (var item in Model.Lead.installations)
+                                    {
+                                        @String.Format("{0:C}", item.mileage_expense)
+                                    }
+                                }
+                                else
+                                {
+                                    @String.Format("{0:C}", 0)
+                                }
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:750px">Hotel Expense</td>
+                        <td style="width:100px" class="item_price">
+                            @{
+                                if (Model.Lead != null && Model.Lead.installations != null)
+                                {
+                                    foreach (var item in Model.Lead.installations)
+                                    {
+                                        @String.Format("{0:C}", item.hotel_expense)
+                                    }
+                                }
+                                else
+                                {
+                                    @String.Format("{0:C}", 0)
+                                }
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:750px">Per Diem</td>
+                        <td style="width:100px" class="item_price">
+                            @{
+                                if (Model.Lead != null && Model.Lead.installations != null)
+                                {
+                                    foreach (var item in Model.Lead.installations)
+                                    {
+                                        @String.Format("{0:C}", item.total_per_diem_cost)
+                                    }
+                                }
+                                else
+                                {
+                                    @String.Format("{0:C}", 0)
+                                }
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:750px">Building Permits</td>
+                        <td style="width:100px" class="item_price">
+                            @{
+                                if (Model.TotalCost != null)
+                                {
+                                    @String.Format("{0:C}", Model.TotalCost.building_permit_cost)
+                                }
+                                else
+                                {
+                                    @String.Format("{0:C}", 0)
+                                }
+                            }
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="width:750px">Operational Expense</td>
+                        <td style="width:100px" class="item_price">@String.Format("{0:C}", Model.OperationalExp)</td>
+                    </tr>
+                    <tr>
+                        <td style="width:750px">Related Taxes, Permits and Fees</td>
+                        <td style="width:100px" class="item_price">
+                            @{
+                                if (Model.TotalCost != null && !Model.Lead.tax_exempt)
+                                {
+                                    @String.Format("{0:C}", Model.TotalCost.tax_cost)
+                                }
+                                else
+                                {
+                                    @String.Format("{0:C}", 0)
+                                }
+                            }
+                        </td>
+                    </tr>
+                </table>
+            </div>
+            <div>
+                <table>
+                    <tr style="height: 20px"></tr>
+                    <tr>
+                        <td style="width:795px"><h4><b>Project Total</b></h4></td>
+                        <td id="total">
+                            @{
+                                if (Model.TotalCost != null)
+                                {
+                                    @String.Format("{0:C}", Model.TotalCost.total_cost1)
+                                }
+                                else
+                                {
+                                    @String.Format("{0:C}", 0)
+                                }
+                            }
+                        </td>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div style="height: 40px"></div>
+</div>
+
+<script>
+    function change(elem) {
+        if (elem.value == "View Details") {
+            elem.value = "Hide Details";
+        } else {
+            elem.value = "View Details";
+        }
+    }
+</script>
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $(".navbar-nav li").removeClass("active");//this will remove the active class from
+            //previously active menu item
+            $('#lead').addClass('active');
+        });
+    </script>
+}

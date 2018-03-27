@@ -1,0 +1,93 @@
+﻿@model IEnumerable<ck_project.lead>
+
+@{
+    ViewBag.Title = "AdminMainPage";
+}
+
+@Html.Partial("_AdminMenu")
+
+<div class="container">
+    <table>
+        <tr>
+            <td style="width:1150px"><h2>Projects</h2></td>
+            <td style="width:50px">
+                <div data-toggle="modal" data-target="#myModal"><i class="fa fa-question-circle-o" style="font-size:15px; color: blue;"></i> Help</div>
+            </td>
+        </tr>
+    </table>
+    <div style="padding-bottom:10px"></div>
+    <table class="table table-striped">
+        <thead class="mdb-color darken-3">
+            <tr>
+                <th>Branch</th>
+                <th>Designer</th>
+                <th>@Html.ActionLink("Customer", "Sort", new { by = "cu" })</th>
+                <th>@Html.ActionLink("Project Name", "Sort", new { by = "pn" })</th>
+                <th>@Html.ActionLink("Project Type", "Sort", new { by = "pt" })</th>
+                <th>Project Status</th>
+                <th>@Html.ActionLink("Create Date", "Sort", new { by = "cd" })</th>
+                <th>@Html.ActionLink("Last Update Date", "Sort", new { by = "lmd" })</th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.branch.branch_name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.employee.emp_firstname)
+                        @Html.DisplayFor(modelItem => item.employee.emp_lastname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.customer.customer_firstname)
+                        @Html.DisplayFor(modelItem => item.customer.customer_lastname)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.project_name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.project_type.project_type_name)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.project_status.project_status_name)
+                    </td>
+                    <td>
+                        @item.lead_date.ToString("MM/dd/yyyy")
+                    </td>
+                    <td>
+                        @item.Last_update_date.ToString("MM/dd/yyyy")
+                    </td>
+                    <td>
+                        @Html.ActionLink("View", "ProjSummary", "Home", new { id = item.lead_number }, null) |
+                        @Html.ActionLink("Edit", "Edit", "Lead", new { id = item.lead_number }, null) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.lead_number }, new { onclick = "return confirm('Are you sure you wish to delete the lead?');" })
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" role="dialog">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Admin Page</h4>
+                </div>
+                <div class="modal-body">
+                    <ul>
+                        <li>"Closed" projects can only be found in Archived screen.</li>
+                        <li>To search for a specific project, please go to Lead Management --> View Lead.</li>
+                        <li>To search by designer or status, please use the search box.</li>
+                        <li>To return to a default search, please clear the search box.</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

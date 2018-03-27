@@ -1,0 +1,41 @@
+﻿@model IEnumerable<ck_project.lead_source>
+
+@{
+    ViewBag.Title = "Lead Source";
+    Html.Partial("_AdminMenu");
+}
+
+<head>
+    <script type="text/javascript">
+        function del(id) {
+            if (confirm("sure?")) {
+                window.location = "/Lookup/LeadSourceDelete/" + id;
+            }
+        }
+
+
+    </script>
+    <meta name="viewport" content="width=device-width" />
+    <title>Index</title>
+</head>
+<h2>Lead Source</h2>
+
+<body>
+    <table>
+        @if (ViewBag.lead_source_list != null)
+        {
+            foreach (lead_source a in ViewBag.lead_source_list)
+            {
+                <tr>
+                    <td>@a.source_number</td>
+                    <td>@a.source_name</td>
+
+                    <td> <a href="javascript:del(@a.source_number)">Delete</a></td>
+                </tr>
+            }
+            <tr>
+                <td> <a href="/Lookup/LeadSourceAdd/">Add New</a></td>
+            </tr>      }
+    </table>
+</body>
+

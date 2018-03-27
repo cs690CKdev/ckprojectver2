@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="d34145c653dc4b77abe4326d53566490" Name="Diagram1" ZoomLevel="59">
+        <AssociationConnector Association="CKsysdb.rates_installation" ManuallyRouted="false" />
+        <AssociationConnector Association="CKsysdb.taxes_leads" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="CKsysdb.address" Width="1.5" PointX="0.75" PointY="11.375" />
+        <EntityTypeShape EntityType="CKsysdb.branch" Width="1.5" PointX="3" PointY="9.625" />
+        <EntityTypeShape EntityType="CKsysdb.building_permit" Width="1.5" PointX="0.75" PointY="0.875" />
+        <EntityTypeShape EntityType="CKsysdb.customer" Width="1.5" PointX="3" PointY="13.125" />
+        <EntityTypeShape EntityType="CKsysdb.delivery_status" Width="1.5" PointX="5.25" PointY="14.5" />
+        <EntityTypeShape EntityType="CKsysdb.employee" Width="1.5" PointX="5.25" PointY="9.25" />
+        <EntityTypeShape EntityType="CKsysdb.installation" Width="1.5" PointX="9.75" PointY="7.5" />
+        <EntityTypeShape EntityType="CKsysdb.lead_log_file" Width="1.5" PointX="9.75" PointY="3.75" />
+        <EntityTypeShape EntityType="CKsysdb.lead_source" Width="1.5" PointX="5.25" PointY="5.875" />
+        <EntityTypeShape EntityType="CKsysdb.lead" Width="1.5" PointX="7.5" PointY="9.125" />
+        <EntityTypeShape EntityType="CKsysdb.product" Width="1.5" PointX="9.75" PointY="15" />
+        <EntityTypeShape EntityType="CKsysdb.project_class" Width="1.5" PointX="5.25" PointY="16.75" />
+        <EntityTypeShape EntityType="CKsysdb.project_status" Width="1.5" PointX="5.25" PointY="21.875" />
+        <EntityTypeShape EntityType="CKsysdb.project_type" Width="1.5" PointX="5.25" PointY="19.375" />
+        <EntityTypeShape EntityType="CKsysdb.rate" Width="1.5" PointX="2.75" PointY="0.875" />
+        <EntityTypeShape EntityType="CKsysdb.sysdiagram" Width="1.5" PointX="4.75" PointY="0.875" />
+        <EntityTypeShape EntityType="CKsysdb.task" Width="1.5" PointX="9.75" PointY="0.75" />
+        <EntityTypeShape EntityType="CKsysdb.tasks_installation" Width="1.5" PointX="12" PointY="9.5" />
+        <EntityTypeShape EntityType="CKsysdb.tax" Width="1.5" PointX="6.75" PointY="0.875" />
+        <EntityTypeShape EntityType="CKsysdb.total_cost" Width="1.5" PointX="9.75" PointY="19.25" />
+        <EntityTypeShape EntityType="CKsysdb.users_types" Width="1.5" PointX="3" PointY="6.125" />
+        <EntityTypeShape EntityType="CKsysdb.archive_leads" Width="1.5" PointX="11.75" PointY="0.875" />
+        <AssociationConnector Association="CKsysdb.fk_branches_to_addresses" />
+        <AssociationConnector Association="CKsysdb.fk_Customers_to_addresses" />
+        <AssociationConnector Association="CKsysdb.fk_employees_to_brancges" />
+        <AssociationConnector Association="CKsysdb.fk_leads_to_branches" />
+        <AssociationConnector Association="CKsysdb.fk_leads_to_customers" />
+        <AssociationConnector Association="CKsysdb.fk_leads_to_delivery_status" />
+        <AssociationConnector Association="CKsysdb.fk_employees_to_users_types" />
+        <AssociationConnector Association="CKsysdb.fk_leads_to_employees" />
+        <AssociationConnector Association="CKsysdb.fk_installation_to_leads" />
+        <AssociationConnector Association="CKsysdb.fk_tasks_installation_to_installation" />
+        <AssociationConnector Association="CKsysdb.fk_lead_log_file_to_Leads" />
+        <AssociationConnector Association="CKsysdb.fk_leads_to_lead_source" />
+        <AssociationConnector Association="CKsysdb.fk_leads_to_project_class" />
+        <AssociationConnector Association="CKsysdb.fk_leads_to_project_status" />
+        <AssociationConnector Association="CKsysdb.fk_leads_to_project_type" />
+        <AssociationConnector Association="CKsysdb.fk_products_to_leads" />
+        <AssociationConnector Association="CKsysdb.fk_total_cost_to_leads" />
+        <AssociationConnector Association="CKsysdb.fk_tasks_installation_to_tasks" />
+        </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

@@ -1,0 +1,107 @@
+﻿@model ck_project.Models.ProjectSummary
+
+@{
+    ViewBag.Title = "ScopeOfWork";
+    Layout = null;
+
+}
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    @*<meta name="viewport" content="initial-scale=1.0">*@
+    <title>Sale Contract Management System</title>
+    <link href="http://leadmanagealpha.apphb.com/Content/bootstrap.sandstone.css" rel="stylesheet" type="text/css" />
+    <link href="http://leadmanagealpha.apphb.com/Content/Print.css" rel="stylesheet" type="text/css" />
+</head>
+<body>
+    <div class="pic2" align="center"><img src="http://leadmanagealpha.apphb.com/Content/Images/proposal_pic2.png" /></div>
+    <div id="sow_header"><h2>SCOPE OF WORK (Exhibit B)</h2></div>
+    <div style="padding-bottom:10px"></div>
+    <table style="margin-left:3%">
+        <tr>
+            <td style="width:900px">
+                @{
+                    if (Model.Customer != null)
+                    {
+                        @Model.Customer.customer_firstname@:&nbsp;@Model.Customer.customer_lastname
+                    }
+                }
+            </td>
+            <td style="width:150px" align="right">Project Number:</td>
+            <td style="width:250px; padding-left:10px">
+                @{
+                    if (Model.Lead != null)
+                    {
+                        @Model.Lead.lead_number
+                    }
+                }
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @{
+                    if (Model.JobsiteAddress != null)
+                    {
+                        @Model.JobsiteAddress.address1
+                    }
+                }
+            </td>
+            <td align="right">Designer:</td>
+            <td style="padding-left:10px">
+                @{
+                    if (Model.Lead != null)
+                    {
+                        @Model.Lead.employee.emp_firstname@:&nbsp;@Model.Lead.employee.emp_lastname
+                    }
+                }
+            </td>
+        </tr>
+        <tr>
+            <td>
+                @{
+                    if (Model.JobsiteAddress != null)
+                    {
+                        @Model.JobsiteAddress.city@:&#44;&nbsp;@Model.JobsiteAddress.state&nbsp;@Model.JobsiteAddress.zipcode
+                    }
+                }
+            </td>
+            <td align="right">Date:</td>
+            <td style="padding-left:10px">@string.Format("{0:MMMM dd, yyyy}", DateTime.Now)</td>
+        </tr>
+    </table>
+    <div style="padding-top:5px; font-weight: bold; text-align:center">Contractor License #: WV002910</div>
+    <table style="margin-left:3%">
+        @{
+            if (Model.Lead != null && Model.Lead.installations != null)
+            {
+                foreach (var item in Model.Lead.installations)
+                {
+                    foreach (var task in item.tasks_installation)
+                    {
+                        <tr>
+                            <td>@task.task.task_name</td>
+                        </tr>
+                    }
+                }
+            }
+        }
+    </table>
+    <div style="padding-top:30px">
+        <p class="wrapper">
+            EXCLUSIONS: Any Electrical, Plumbing, Gas Lines, Drywall Work, Wallcoverings, Painting, Trim Work , Tile Work or any "Hidden" or unforeseen conditions
+            and/or other item or task not listed in this scope of work. Any Unforeseen conditions or work will be considered an "Add-On" and will be charged as Time
+            and Materials. An Add-On Ticket will be required with signatures of approval.
+        </p>
+    </div>
+    <div style="padding-top:10px; margin-left:3%">Please be aware that the following products and tasks will extend the completion of this project:</div>
+    <ul style="margin-left:6px; list-style-type:none">
+        <li>Custom Countertops will require templating after cabinet installation and additional days to fabricate.</li>
+        <li>Custom Shower Door(s) require final measurements after tile installation and additional days to fabricate.</li>
+        <li>Tile and Flooring installation and curing will cause a disruption or delay in completion of other tasks.</li>
+    </ul>
+</body>
+</html>
+
+

@@ -1,0 +1,7 @@
+﻿@{
+    var controller = HttpContext.Current.Request.RequestContext.RouteData.Values["Controller"].ToString();
+    if (controller != "Account")
+    {
+        Layout = "~/Views/Shared/_GeneralLayout.cshtml";
+    }
+}
